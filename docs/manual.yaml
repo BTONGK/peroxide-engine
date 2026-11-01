@@ -5,13 +5,17 @@ intro: >-
 steps:
   - title: 1. Describe the catalyst
     body: >-
-      Enter the first-order rate constant k of your catalyst at the run's temperature, in 1/s. If you know a half-life
-      instead, k = 0.693 / half-life. For a catalyst whose rate depends on its loading, use the k you measured at the
-      loading you plan to simulate.
+      Pick a catalyst. "A rate constant you supply" takes the first-order rate constant k of your catalyst at the
+      run's temperature, in 1/s; if you know a half-life instead, k = 0.693 / half-life, and for a catalyst whose rate
+      depends on its loading, use the k you measured at the loading you plan to simulate. "Dissolved iron(III) in
+      perchloric acid" computes the rate itself from the iron mechanism: enter the iron added (50–1000 µmol/L) and the
+      measured pH (1.0–3.2). The iron runs at 25.00 °C and ionic strength 0.1 M, the conditions the model was built
+      and checked at, and the pH stays fixed through the run, as in a buffered or strongly acidic solution.
   - title: 2. Describe the solution
     body: >-
-      Set the starting H2O2 in mmol/L (up to 1000), the temperature (5–55 °C) and the room's pressure. The liquid
-      starts saturated with air, as a solution open to the lab would be.
+      Set the starting H2O2 in mmol/L (up to 1000), the temperature (5–55 °C, or 25 °C for iron) and the room's
+      pressure. The liquid starts saturated with air, as a solution open to the lab would be. Set the run length: a
+      number of half-lives for a supplied k, or the share of the H2O2 to remove for iron, whose rate slows as it runs.
   - title: 3. Describe the apparatus
     body: >-
       Pick the gas arrangement: a gas burette at room pressure, a sealed vessel with a pressure gauge, or an open
@@ -21,7 +25,10 @@ steps:
     body: >-
       The readouts table lists each number with its units and how it was computed. The charts show the H2O2 left, the
       gas or pressure, the dissolved oxygen and (at 25 °C) the heat flow over time. The titration panel gives the
-      permanganate and thiosulfate volumes for an aliquot at any time. Download the full time series as CSV.
+      permanganate and thiosulfate volumes for an aliquot at any time. Download the full time series as CSV. For iron
+      the table adds k_obs over the first 20% of the H2O2 (the measure De Laat and Gallard report) with its range over
+      the one loosely known constant, the second-order constant kd, the share of iron bound to peroxide at the start
+      and the free acid.
   - title: 5. Check the accuracy
     body: >-
       The Model checks page shows each comparison with published measurements and its verdict; the Methodology page
@@ -34,6 +41,10 @@ glossary:
     meaning: Time for the H2O2 to fall to half its starting value.
   - term: Initial rate
     meaning: Slope of [H2O2] against time over the first 10% of the reaction, in mmol/L per second.
+  - term: kd
+    meaning: >-
+      Second-order constant for iron catalysis, k_obs divided by the total iron(III), in L/(mol·s); the number most
+      iron papers report.
   - term: kLa
     meaning: >-
       Oxygen transfer coefficient of the vessel, in 1/s; the rate oxygen leaves the liquid is kLa times its excess

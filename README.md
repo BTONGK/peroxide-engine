@@ -11,9 +11,10 @@ written down before the comparison (`experiments/<check>/PASS_RULE.md`).
 
 ## Status
 
-Phases 0 and 1 are built: thermochemistry from the NBS tables (with the heat of dilution at every strength), water
+Phases 0 to 2 are built: thermochemistry from the NBS tables (with the heat of dilution at every strength), water
 from the IAPWS equations, oxygen solubility from Benson, Krause and Peterson, the batch vessel (gas burette, sealed or
-open, oxygen in balance or crossing the surface at kLa), titrations and the lab's fits. Four checks pass:
+open, oxygen in balance or crossing the surface at kLa), titrations, the lab's fits, and dissolved iron(III) by the De
+Laat and Gallard mechanism (pH 1.0–3.2, 25 °C, perchlorate). Six checks pass and one is missed:
 
 | Check | Result |
 |---|---|
@@ -21,9 +22,12 @@ open, oxygen in balance or crossing the surface at kLa), titrations and the lab'
 | Heat of decomposition | Solvay's published heats for 35%, 50%, 70% and pure H2O2 within 0.1% |
 | Oxygen solubility | Battino's fifteen-source evaluation within 0.44% (5–55 °C); USGS air saturation within 0.07% |
 | Exact solutions | H2O2 within 2e-11 of the exact solution; oxygen conserved to 1e-14 |
+| Iron model as printed | Every printed hydrolysis constant and ten derived values reproduced (within 3.9%) |
+| Iron rates, fitted constant held out | All 22 of De Laat and Gallard's runs within a factor of 2 (largest gap 1.42) |
+| Iron, another laboratory (missed) | Barb et al.'s rates: 8 of 8 within a factor of 2, typical gap 1.18; their iron(II): typical gap 1.52, above the rule's 1.41, so iron(II) stays off the app |
 
-Today the catalyst enters as a first-order rate constant you supply. Mechanisms for dissolved iron, enzymes, iodide,
-copper, oxides and metals follow, each after it passes a check against measured rates (`docs/status.yaml`).
+The catalyst enters as dissolved iron(III) or as a first-order rate constant you supply. Mechanisms for enzymes,
+iodide, copper, oxides and metals follow, each after it passes a check against measured rates (`docs/status.yaml`).
 
 ## Use
 

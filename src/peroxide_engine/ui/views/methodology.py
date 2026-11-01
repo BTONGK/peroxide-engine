@@ -18,6 +18,8 @@ with tabs[0]:
             st.code(eq, language=None)
         if "uncertainty" in sec:
             st.markdown(f"**Uncertainty.** {sec['uncertainty']}")
+        if "checked" in sec:
+            st.markdown(f"**Checked.** {sec['checked']}")
 with tabs[1]:
     reg = sources.registry()
     consts = [r for r in reg.values() if r.kind == "constant"]

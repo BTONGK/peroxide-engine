@@ -1,0 +1,19 @@
+# Values printed by the two papers, for the engine to reproduce from its stored constants.
+group_a:  # Gallard, De Laat & Legube 1999 Table 1 (p. 2931); De Laat & Gallard 1999 Fig. 4 caption (p. 2729)
+  - {name: "K1,1 at I = 0.1 M", id: fe_hydrolysis_K11, I_M: 0.1, printed: "2.90e-3", where: "Gallard et al. Table 1"}
+  - {name: "K1,2 at I = 0.1 M", id: fe_hydrolysis_K12, I_M: 0.1, printed: "7.62e-7", where: "Gallard et al. Table 1"}
+  - {name: "K1,1 at I = 0.2 M", id: fe_hydrolysis_K11, I_M: 0.2, printed: "2.44e-3", where: "De Laat & Gallard Fig. 4 caption"}
+  - {name: "K1,2 at I = 0.2 M", id: fe_hydrolysis_K12, I_M: 0.2, printed: "6.47e-7", where: "De Laat & Gallard Fig. 4 caption"}
+group_b:
+  KI1_prime: {printed: "1.74e9", where: "Gallard et al. eq (23), p. 2935"}
+  KI2_prime: {printed: "1.12e8", where: "Gallard et al. eq (24), p. 2935"}
+  K_I1_I2: {printed: "1.8e-4", where: "Gallard et al. eq (25), p. 2935, and abstract"}
+  complexed_share_pH3: {printed: "0.27", pH: 3.0, h2o2_M: 0.5, fe_M: 5.0e-4, where: "Gallard et al. p. 2934"}
+  ki:  # De Laat & Gallard p. 2730, M-1 s-1
+    - {pH: 1.0, h2o2_M: 0.1, printed: "6.9e-5"}
+    - {pH: 2.0, h2o2_M: 0.1, printed: "5.6e-4"}
+    - {pH: 3.0, h2o2_M: 0.1, printed: "1.9e-3"}
+    - {pH: 3.0, h2o2_M: 1.0, printed: "1.2e-3"}
+  k10app_pH3: {printed: "1.3e6", where: "De Laat & Gallard p. 2731"}
+  k11app_pH3: {printed: "6.6e5", where: "De Laat & Gallard p. 2731"}
+kd_measured_pH3: {value: 0.47, plus_minus: 0.03, where: "De Laat & Gallard p. 2729"}

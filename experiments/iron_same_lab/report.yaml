@@ -1,0 +1,25 @@
+order: 6
+title: "Iron(III): rates across pH, iron and peroxide, with the fitted constant held out"
+question: >-
+  Does the iron model predict the decomposition rates De Laat and Gallard measured, when its one fitted constant is
+  set from a separate set of their runs?
+compared: >-
+  The pseudo-first-order constant kobs over the first 20% of the H2O2 for {n_runs} runs at 25 °C and ionic strength
+  0.1 M: six from pH 1.0 to 3.18 (their Table 3) and sixteen at pH 3.0 spanning iron 50 to 1000 µM and H2O2 0.2 to
+  955 mM (their Table 4). The model's one fitted constant, k6 (the rate the iron–peroxide complexes split into
+  Fe(II) and HO2), was set from one table and used to predict the other, in both directions; the published model,
+  with k6 = 2.7 × 10⁻³ per second, was also run on all {n_runs}.
+result: >-
+  The published model puts {published_within:.0%} of the runs within a factor of 2, with the largest difference a
+  factor of {published_max_factor:.2f}. Held out: k6 set from the pH series alone ({k6_from_table3:.2e} per second)
+  puts {t4_within:.0%} of the sixteen iron and peroxide runs within a factor of 2 (largest difference
+  {t4_max_factor:.2f}); k6 set from those sixteen alone ({k6_from_table4:.2e}) puts {t3_within:.0%} of the pH series
+  within a factor of 2 (largest difference {t3_max_factor:.2f}). k6 fitted to all {n_runs} runs is {k6_from_all:.2e}
+  per second, beside the published 2.70e-03. Each comparison was repeated with k11a, which the paper bounds below
+  2 × 10³ L/(mol·s), at 0 and at 2 × 10³, and every one meets the rule; the Numbers table lists every run. The
+  largest gaps sit at the ends of the range: at pH 1.0 the model runs 36% high (41% with k6 held out), and at 0.5 and
+  0.955 M H2O2 it runs 18% and 25% low (23% and 30% held out).
+why_it_matters: >-
+  The model predicts how the rate moves with pH, iron and peroxide from runs it was built apart from, so the app's
+  iron rates hold across the range of those runs: pH 1.0 to 3.2, iron 50 to 1000 µM, H2O2 0.2 mM to 1 M, at 25 °C in
+  perchlorate.

@@ -8,7 +8,8 @@ from streamlit.testing.v1 import AppTest
 from peroxide_engine import checks
 
 VERDICTS = {"transcription": "passed", "decomposition_heat": "passed", "oxygen_solubility": "passed",
-            "exact_solutions": "passed"}
+            "exact_solutions": "passed", "iron_transcription": "passed", "iron_same_lab": "passed",
+            "iron_other_lab": "missed"}
 
 
 def test_check_verdicts():

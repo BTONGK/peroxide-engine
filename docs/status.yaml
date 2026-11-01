@@ -1,19 +1,28 @@
 updated: 2026-10-31
 summary: >-
-  Phases 0 and 1 are built: the scaffold, constants with provenance, and the exact physics of the experiment (heat,
-  oxygen solubility, the vessel, assays and the lab's fits), with four checks passed. Phase 2, dissolved iron, starts
-  once its papers are in cache/papers/.
+  Phases 0 to 2 are built: the scaffold, constants with provenance, the exact physics of the experiment (heat, oxygen
+  solubility, the vessel, assays and the lab's fits), and dissolved iron(III) by the De Laat and Gallard mechanism.
+  Six checks pass. The seventh, against another laboratory, passes for rates and misses for iron(II), so the app shows
+  iron rates and keeps iron(II) in the Methodology limits.
 
 phases:
   - {n: 0, name: Scaffold, state: done, summary: "Repository, app, constants with sources, check framework, copy test, status page."}
   - {n: 1, name: Exact physics, state: done, summary: "Heat from the NBS tables, oxygen solubility, water, the vessel with burette, sealed and open arrangements, titrations, the lab's fits."}
-  - {n: 2, name: Dissolved iron, state: next, summary: "The De Laat and Gallard Fe(III) mechanism, its •OH yield, and a check against measured rates from other laboratories."}
+  - {n: 2, name: Dissolved iron, state: done, summary: "The De Laat and Gallard Fe(III) mechanism at 25 °C, pH 1.0–3.2, in perchlorate; rates checked against their 22 runs with k6 held out and against Barb et al. 1951. The •OH yield and iron(II) wait for a check."}
   - {n: 3, name: Catalase and enzymes, state: planned, summary: "Chance's scheme with inactivation; constants per enzyme from Switala and Loewen 2002."}
   - {n: 4, name: Iodide and copper, state: planned, summary: "Liebhafsky's rate law with the Bray-Liebhafsky steps; copper after Pham et al. 2013."}
   - {n: 5, name: Solid oxides, state: planned, summary: "Measured surface rate constants, then a UMA •OH descriptor if it passes its ranking check."}
   - {n: 6, name: Metals and vapor, state: planned, summary: "Metals from measured rates, then peroxide vapor over catalysts."}
 
 recent:
+  - date: 2026-10-31
+    text: >-
+      Added dissolved iron(III). The engine solves De Laat and Gallard's fifteen-step mechanism in time, with
+      hydrolysis and the two hydroperoxy complexes held at balance, and the Run page computes every readout from it.
+      Three checks: the constants and equations as printed (passed); the 22 measured rates across pH, iron and
+      peroxide with the one fitted constant set from a separate table (passed, every run within a factor of 2, largest
+      gap 1.42); Barb et al.'s 1951 rates and iron(II) (rates within a factor of 2, typical gap 1.18; iron(II) a
+      factor of 1.52 low, above the rule's 1.41, so missed and kept off the app).
   - date: 2026-10-31
     text: >-
       The app opens on the first free port from 8502 (or the one given with --port), so it runs beside the catalyst
@@ -27,9 +36,10 @@ recent:
       solutions with oxygen conserved to 1e-14.
 
 next:
-  - Phase 2, dissolved iron, using the papers listed below.
-  - Heat capacity of peroxide solutions (Giguère and Carmichael 1962), for heat at other temperatures and the temperature rise.
-  - Densities of peroxide solutions (Easton et al. 1952), for strengths by weight percent.
+  - Densities of peroxide solutions (Easton et al. 1952, now in cache/papers/), for strengths by weight percent, with a check.
+  - Heat capacity of peroxide solutions (Giguère and Carmichael 1962), for heat at other temperatures and the temperature rise. The PDF saved for it, jp9b01057.pdf, is Li and Buckin 2019 (oxygen in supersaturated solutions); the paper needed is doi 10.1021/je60015a024.
+  - A measured hydroxyl radical yield for iron (a benzoic acid or dimethyl sulfoxide trap), to check that output.
+  - Phase 3, catalase and the enzyme library.
 
 papers:
   intro: >-
@@ -48,6 +58,15 @@ papers:
     - {phase: 1, cite: "Easton, Mitchell & Wynne-Jones 1952, Trans. Faraday Soc. 48, 796", doi: 10.1039/TF9524800796, need: "Densities of H2O2-water solutions."}
 
 findings:
+  - >-
+    De Laat and Gallard's eq 24, as printed, drops the factor 2 that follows from their eqs 21 and 22. With it, kd at
+    pH 3 is 0.51 L/(mol·s), beside the 0.47 ± 0.03 they measured; as printed, 0.25.
+  - >-
+    The iron model, built in perchlorate at ionic strength 0.1 M, predicts Barb et al.'s 1951 rates in nitrate at
+    0.435 M within 20% typically. Its iron(II) runs a third below Barb's, and Barb's own rate with the Fenton constant
+    gives the same low value.
+  - >-
+    Fitting k6 to all 22 of De Laat and Gallard's runs gives 2.74e-3 per second, beside their published 2.7e-3.
   - >-
     Mixing H2O2 with water releases heat, so the heat of decomposition rises from 94.66 kJ/mol (dilute) to 95.0 (35%),
     95.4 (50%), 96.2 (70%) and 98.05 (pure); the NBS dilution series reproduces Solvay's published heats within 0.1%.

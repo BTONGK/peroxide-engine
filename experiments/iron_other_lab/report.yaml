@@ -1,0 +1,22 @@
+order: 7
+title: "Iron(III): another laboratory's rates and ferrous iron"
+question: Does the iron model, built in one laboratory, predict what another laboratory measured?
+compared: >-
+  The second-order constant kd that Barb, Baxendale, George and Hargrave measured in 1951 for four solutions at 25 °C
+  (eight values, by oxygen evolution and by titration), and the steady ferrous iron they measured in sixteen
+  mixtures, against the model exactly as De Laat and Gallard published it. Barb's solutions differ from the model's:
+  nitrate in place of perchlorate, ionic strength 0.435 M in place of 0.1 M, peroxide up to 1.4 M and iron up to
+  19.6 mM.
+result: >-
+  The rates agree: {kd_within_n} of {kd_n} kd values fall within a factor of 2, and the typical (median) difference
+  is a factor of {kd_median_factor:.2f}. The ferrous iron comes out low: {fe2_within_n} of {fe2_n} values fall within
+  a factor of 2, and the typical difference is a factor of {fe2_median_factor:.2f}, above the rule's 1.41, so the
+  check is missed. Barb's own numbers hold the same gap: their fitted rate at this acidity (kd = 0.042 L/(mol·s),
+  their eq ix with kd' = 1.16e-3 and KF = 2.1e-3) with the Fenton constant of 63 L/(mol·s) implies 1.6 µM ferrous
+  iron at 4.85 mM iron, where they measured 2.4 µM on average. From these ferrous iron values they derived a Fenton
+  constant of 42 L/(mol·s), beside the 53 they measured directly, and judged that as close as their method allowed
+  (p. 612).
+why_it_matters: >-
+  The model's rates carry to another laboratory's solutions within about 20%, even beyond the conditions it was
+  built on. Its ferrous iron runs about a third below Barb's measurement, so the app reports rates and leaves
+  ferrous iron to the Methodology page's limits.

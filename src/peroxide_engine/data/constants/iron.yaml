@@ -1,0 +1,336 @@
+# Dissolved iron: the Fe(III)-catalysed decomposition mechanism of De Laat & Gallard (1999), 25 °C, I = 0.1 M
+# (HClO4/NaClO4), with its equilibrium constants from Gallard, De Laat & Legube (1999). Every rate constant is the
+# value De Laat & Gallard used (their Table 2), because k6 was fitted with exactly these; where an evaluated
+# compilation selects another value, the note gives it.
+
+- kind: correlation
+  id: fe_hydrolysis_K11
+  name: "First hydrolysis constant of Fe(III), Fe3+ + H2O = FeOH2+ + H+"
+  equation: "log10 K = a + b sqrt(I) / (1 + c sqrt(I)) + d I, I in mol/L, K in mol/L"
+  coefficients: {a: -2.17, b: -2.04, c: 2.4, d: -0.01}
+  units: mol/L
+  valid: {I_min_M: 0.0, I_max_M: 0.2}
+  accuracy_note: >-
+    Gallard et al. computed the I = 0.1 M value from literature constants (Milburn & Vosburgh 1955; Knight & Sylva
+    1975; Turner et al. 1981) and confirmed it by matching measured Fe(III) spectra at pH 1 to 3 (their Fig. 2).
+    The printed constants carry log K rounded to three decimals and then K rounded to three figures, together up to
+    0.32% from the exact value; the iron transcription check repeats both roundings exactly.
+  transcribed_from: page image of Gallard, De Laat & Legube 1999, Table 1, p. 2931; I = 0.2 M value from the caption of De Laat & Gallard 1999, Fig. 4
+  check_values:
+    - {I_M: 0.1, value: 2.90e-3}
+    - {I_M: 0.2, value: 2.44e-3}
+  check_rel_tolerance: 3.5e-3
+  conditions: {T_K: 298.15, medium: HClO4/NaClO4}
+  source:
+    cite: Gallard, De Laat & Legube 1999
+    reference: "H. Gallard, J. De Laat, B. Legube, Spectrophotometric study of the formation of iron(III)-hydroperoxy complexes in homogeneous aqueous solutions, Water Res. 33, 2929 (1999)"
+    doi: 10.1016/S0043-1354(99)00007-X
+    locator: Table 1, p. 2931
+
+- kind: correlation
+  id: fe_hydrolysis_K12
+  name: "Second hydrolysis constant of Fe(III), Fe3+ + 2 H2O = Fe(OH)2+ + 2 H+"
+  equation: "log10 K = a + b sqrt(I) / (1 + c sqrt(I)) + d I, I in mol/L, K in (mol/L)^2"
+  coefficients: {a: -5.67, b: -3.066, c: 3.71, d: -0.016}
+  units: (mol/L)^2
+  valid: {I_min_M: 0.0, I_max_M: 0.2}
+  accuracy_note: >-
+    As for the first hydrolysis constant: computed by Gallard et al. from literature values and confirmed against
+    measured Fe(III) spectra. The printed constants carry log K rounded to three decimals and then K rounded to
+    three figures, together up to 0.32% from the exact value; the iron transcription check repeats both roundings.
+  transcribed_from: page image of Gallard, De Laat & Legube 1999, Table 1, p. 2931; I = 0.2 M value from the caption of De Laat & Gallard 1999, Fig. 4
+  check_values:
+    - {I_M: 0.1, value: 7.62e-7}
+    - {I_M: 0.2, value: 6.47e-7}
+  check_rel_tolerance: 3.5e-3
+  conditions: {T_K: 298.15, medium: HClO4/NaClO4}
+  source:
+    cite: Gallard, De Laat & Legube 1999
+    reference: "H. Gallard, J. De Laat, B. Legube, Spectrophotometric study of the formation of iron(III)-hydroperoxy complexes in homogeneous aqueous solutions, Water Res. 33, 2929 (1999)"
+    doi: 10.1016/S0043-1354(99)00007-X
+    locator: Table 1, p. 2931
+
+- kind: constant
+  id: fe_dimer_K22
+  name: "Dimer constant, 2 Fe3+ + 2 H2O = Fe2(OH)2 4+ + 2 H+"
+  value: 0.8e-3
+  units: mol/L
+  uncertainty: 0
+  uncertainty_note: >-
+    Printed as a single value for I = 0.1 M from Knight & Sylva 1975; the dimer holds a few percent of the iron at
+    1 mM Fe(III) and pH 3, so its uncertainty reaches the rates only at the highest iron loadings.
+  conditions: {T_K: 298.15, ionic_strength_M: 0.1, medium: HClO4/NaClO4}
+  source:
+    cite: Gallard, De Laat & Legube 1999
+    reference: "H. Gallard, J. De Laat, B. Legube, Water Res. 33, 2929 (1999), from R. J. Knight, R. N. Sylva, J. Inorg. Nucl. Chem. 37, 779 (1975)"
+    doi: 10.1016/S0043-1354(99)00007-X
+    locator: Table 1, p. 2931
+
+- kind: constant
+  id: fe_KI1
+  name: "Formation of FeIII(HO2)2+, Fe3+ + H2O2 = FeIII(HO2)2+ + H+"
+  value: 3.1e-3
+  units: dimensionless
+  uncertainty: 0.4e-3
+  uncertainty_note: Mean and spread of 30 values from absorbances at 430, 450 and 500 nm, pH 1 to 2 (Gallard et al. p. 2933).
+  conditions: {T_K: 298.15, ionic_strength_M: 0.1, medium: HClO4/NaClO4}
+  source:
+    cite: Gallard, De Laat & Legube 1999
+    reference: "H. Gallard, J. De Laat, B. Legube, Water Res. 33, 2929 (1999)"
+    doi: 10.1016/S0043-1354(99)00007-X
+    locator: p. 2933, eq. (8); De Laat & Gallard 1999 Table 2, reaction II.4
+
+- kind: constant
+  id: fe_KI2
+  name: "Formation of FeIII(OH)(HO2)+, FeOH2+ + H2O2 = FeIII(OH)(HO2)+ + H+"
+  value: 2.0e-4
+  units: dimensionless
+  uncertainty: 0.5e-4
+  uncertainty_note: Mean and spread of 30 values from absorbances at 430, 500 and 550 nm, pH 1 to 3 (Gallard et al. p. 2934).
+  conditions: {T_K: 298.15, ionic_strength_M: 0.1, medium: HClO4/NaClO4}
+  source:
+    cite: Gallard, De Laat & Legube 1999
+    reference: "H. Gallard, J. De Laat, B. Legube, Water Res. 33, 2929 (1999)"
+    doi: 10.1016/S0043-1354(99)00007-X
+    locator: p. 2934, eq. (15); De Laat & Gallard 1999 Table 2, reaction II.5
+
+- kind: constant
+  id: h2o2_pKa_gallard
+  name: Acid constant of H2O2 used by Gallard et al. for their derived constants
+  value: 11.75
+  units: pKa
+  uncertainty: 0
+  uncertainty_note: Stated by Gallard et al. as the value behind their eqs (23) to (25); the engine uses it only to reproduce those printed values.
+  source:
+    cite: Gallard, De Laat & Legube 1999
+    reference: "H. Gallard, J. De Laat, B. Legube, Water Res. 33, 2929 (1999)"
+    doi: 10.1016/S0043-1354(99)00007-X
+    locator: p. 2935, below eq. (25)
+
+- kind: constant
+  id: h_activity_0p1M
+  name: Activity coefficient of H+ at I = 0.1 M (NaClO4), used to convert measured pH to [H+]
+  value: 0.85
+  units: dimensionless
+  uncertainty: 0
+  uncertainty_note: >-
+    The value both papers used; it reproduces Gallard et al.'s pairs of [H+] and pH (0.1 M and pH 1.07, 0.0563 M
+    and pH 1.32, p. 2932). The model's constants were fitted with it, so the engine applies the same conversion.
+  conditions: {T_K: 298.15, ionic_strength_M: 0.1, medium: NaClO4}
+  source:
+    cite: Gallard, De Laat & Legube 1999
+    reference: "H. Gallard, J. De Laat, B. Legube, Water Res. 33, 2929 (1999); also J. De Laat, H. Gallard, Environ. Sci. Technol. 33, 2726 (1999), p. 2728"
+    doi: 10.1016/S0043-1354(99)00007-X
+    locator: p. 2932, spectrophotometric study at pH 2 and below
+
+- kind: constant
+  id: fe_k6
+  name: "Unimolecular decomposition of FeIII(HO2)2+ and FeIII(OH)(HO2)+ to Fe2+ + HO2"
+  value: 2.7e-3
+  units: s-1
+  uncertainty: 0
+  uncertainty_note: >-
+    Fitted by De Laat & Gallard to their runs below pH 3.2 and printed as a single value; the same-laboratory check
+    refits it to each half of their runs and predicts the other half (experiments/iron_same_lab).
+  conditions: {T_K: 298.15, ionic_strength_M: 0.1, medium: HClO4/NaClO4}
+  source:
+    cite: De Laat & Gallard 1999
+    reference: "J. De Laat, H. Gallard, Catalytic decomposition of hydrogen peroxide by Fe(III) in homogeneous aqueous solution: mechanism and kinetic modeling, Environ. Sci. Technol. 33, 2726 (1999)"
+    doi: 10.1021/es981171v
+    locator: Table 2, reactions II.6a and II.6b; p. 2729
+
+- kind: constant
+  id: fe_k7
+  name: "Fe2+ + H2O2 -> Fe3+ + OH + OH- (Fenton reaction)"
+  value: 63
+  units: M-1 s-1
+  uncertainty: 0
+  uncertainty_note: >-
+    Printed as a single value, fitted to Fe(II) oxidation at pH 1 to 3 and I = 1e-3 to 0.1 M in perchlorate (Gallard
+    et al. 1998, p. 265). Barb et al. measured 53 in nitrate at I = 0.435 M (1951, p. 612).
+  conditions: {T_K: 298.15, medium: HClO4/NaClO4}
+  source:
+    cite: Gallard, De Laat & Legube 1998
+    reference: "H. Gallard, J. De Laat, B. Legube, Influence du pH sur la vitesse d'oxydation de composés organiques par FeII/H2O2, New J. Chem. 22, 263 (1998); as used in De Laat & Gallard 1999, Table 2"
+    doi: 10.1039/a708335a
+    locator: Table 1, reaction 1a, p. 264; De Laat & Gallard 1999 Table 2, reaction II.7
+
+- kind: constant
+  id: fe_k8
+  name: "Fe2+ + OH -> Fe3+ + OH-"
+  value: 3.2e8
+  units: M-1 s-1
+  uncertainty: 0
+  uncertainty_note: >-
+    De Laat & Gallard's value (Stuglik & Zagorski 1981). Buxton et al. 1988 list 2.3e8 (pH 1, HClO4) to 4.3e8
+    (pH 3, their best value), Table 8 reaction 85, p. 682.
+  source:
+    cite: De Laat & Gallard 1999
+    reference: "J. De Laat, H. Gallard, Environ. Sci. Technol. 33, 2726 (1999), from Z. Stuglik, Z. P. Zagorski, Radiat. Phys. Chem. 17, 229 (1981); compare G. V. Buxton et al., J. Phys. Chem. Ref. Data 17, 513 (1988)"
+    doi: 10.1021/es981171v
+    locator: Table 2, reaction II.8
+
+- kind: constant
+  id: fe_k9
+  name: "OH + H2O2 -> HO2 + H2O"
+  value: 3.3e7
+  units: M-1 s-1
+  uncertainty: 0
+  uncertainty_note: >-
+    De Laat & Gallard's value (Christensen et al. 1982). Buxton et al. 1988 select 2.7e7 (Table 2, p. 518); Kwan &
+    Voelker 2002 list measurements from 1.2e7 to 4.5e7 (Table 2).
+  source:
+    cite: De Laat & Gallard 1999
+    reference: "J. De Laat, H. Gallard, Environ. Sci. Technol. 33, 2726 (1999), from H. Christensen, K. Sehested, H. Corfitzen, J. Phys. Chem. 86, 1588 (1982)"
+    doi: 10.1021/es981171v
+    locator: Table 2, reaction II.9
+
+- kind: constant
+  id: fe_k10a
+  name: "Fe2+ + HO2 -> FeIII(HO2)2+"
+  value: 1.2e6
+  units: M-1 s-1
+  uncertainty: 0.05e6
+  uncertainty_note: Pulse radiolysis in perchloric acid, Jayson et al. 1973, with the spread Gallard et al. 1999 quote on p. 2930.
+  source:
+    cite: De Laat & Gallard 1999
+    reference: "J. De Laat, H. Gallard, Environ. Sci. Technol. 33, 2726 (1999), from G. G. Jayson, B. J. Parsons, A. J. Swallow, J. Chem. Soc. Faraday Trans. 1 69, 236 (1973)"
+    doi: 10.1021/es981171v
+    locator: Table 2, reaction II.10a
+
+- kind: constant
+  id: fe_k10b
+  name: "Fe2+ + O2- + H+ -> FeIII(HO2)2+"
+  value: 1.0e7
+  units: M-1 s-1
+  uncertainty: 0
+  uncertainty_note: Printed as a single value (Rush & Bielski 1985); Gallard et al. 1998 used the same value (Table 1, reaction 9).
+  source:
+    cite: De Laat & Gallard 1999
+    reference: "J. De Laat, H. Gallard, Environ. Sci. Technol. 33, 2726 (1999), from J. D. Rush, B. H. J. Bielski, J. Phys. Chem. 89, 5062 (1985)"
+    doi: 10.1021/es981171v
+    locator: Table 2, reaction II.10b
+
+- kind: constant
+  id: fe_k11a
+  name: "Fe(III) + HO2 -> Fe2+ + O2 + H+"
+  value: 1.0e3
+  units: M-1 s-1
+  uncertainty: 1.0e3
+  uncertainty_note: >-
+    De Laat & Gallard print an upper bound, below 2e3 (Rush & Bielski 1985). The engine uses 1e3, the value the same
+    group used in 1998 (Gallard et al., Table 1, reaction 6), and its checks repeat every comparison at 0 and 2e3;
+    the uncertainty spans that range.
+  source:
+    cite: De Laat & Gallard 1999
+    reference: "J. De Laat, H. Gallard, Environ. Sci. Technol. 33, 2726 (1999); H. Gallard, J. De Laat, B. Legube, New J. Chem. 22, 263 (1998)"
+    doi: 10.1021/es981171v
+    locator: Table 2, reaction II.11a; Gallard et al. 1998 Table 1, reaction 6
+
+- kind: constant
+  id: fe_k11b
+  name: "Fe(III) + O2- -> Fe2+ + O2"
+  value: 5.0e7
+  units: M-1 s-1
+  uncertainty: 0
+  uncertainty_note: >-
+    De Laat & Gallard's value (Rothschild & Allen 1958). Gallard et al. 1998 used 1.5e8 (Table 1, reaction 10); the
+    engine keeps 5e7 because k6 was fitted with it.
+  source:
+    cite: De Laat & Gallard 1999
+    reference: "J. De Laat, H. Gallard, Environ. Sci. Technol. 33, 2726 (1999), from W. G. Rothschild, A. O. Allen, Radiat. Res. 8, 101 (1958)"
+    doi: 10.1021/es981171v
+    locator: Table 2, reaction II.11b
+
+- kind: constant
+  id: fe_k12a
+  name: "HO2 -> O2- + H+"
+  value: 1.58e5
+  units: s-1
+  uncertainty: 0
+  uncertainty_note: >-
+    With k12b this sets the HO2 acid constant at 1.58e-5 (pKa 4.80), matching Bielski et al.'s evaluated pKa of
+    4.8 ± 0.1 (p. 1045).
+  source:
+    cite: De Laat & Gallard 1999
+    reference: "J. De Laat, H. Gallard, Environ. Sci. Technol. 33, 2726 (1999), from B. H. J. Bielski, D. E. Cabelli, R. L. Arudi, A. B. Ross, J. Phys. Chem. Ref. Data 14, 1041 (1985)"
+    doi: 10.1021/es981171v
+    locator: Table 2, reaction II.12a
+
+- kind: constant
+  id: fe_k12b
+  name: "O2- + H+ -> HO2"
+  value: 1.0e10
+  units: M-1 s-1
+  uncertainty: 0
+  uncertainty_note: Printed as a single value; with k12a it reproduces Bielski et al.'s pKa of 4.8.
+  source:
+    cite: De Laat & Gallard 1999
+    reference: "J. De Laat, H. Gallard, Environ. Sci. Technol. 33, 2726 (1999), from B. H. J. Bielski et al., J. Phys. Chem. Ref. Data 14, 1041 (1985)"
+    doi: 10.1021/es981171v
+    locator: Table 2, reaction II.12b
+
+- kind: constant
+  id: fe_k13a
+  name: "HO2 + HO2 -> H2O2 + O2 (rate 2 k [HO2]^2 in HO2)"
+  value: 8.3e5
+  units: M-1 s-1
+  uncertainty: 0.7e5
+  uncertainty_note: Bielski et al.'s best average of several studies, ± 0.7e5 (p. 1045).
+  source:
+    cite: Bielski et al. 1985
+    reference: "B. H. J. Bielski, D. E. Cabelli, R. L. Arudi, A. B. Ross, Reactivity of HO2/O2- radicals in aqueous solution, J. Phys. Chem. Ref. Data 14, 1041 (1985); as used in De Laat & Gallard 1999, Table 2"
+    doi: 10.1063/1.555739
+    locator: p. 1045, k23; De Laat & Gallard Table 2, reaction II.13a
+
+- kind: constant
+  id: fe_k13b
+  name: "HO2 + O2- + H2O -> H2O2 + O2 + OH-"
+  value: 9.7e7
+  units: M-1 s-1
+  uncertainty: 0.6e7
+  uncertainty_note: Bielski et al.'s best average, ± 0.6e7 (p. 1045).
+  source:
+    cite: Bielski et al. 1985
+    reference: "B. H. J. Bielski et al., J. Phys. Chem. Ref. Data 14, 1041 (1985); as used in De Laat & Gallard 1999, Table 2"
+    doi: 10.1063/1.555739
+    locator: p. 1045, k24; De Laat & Gallard Table 2, reaction II.13b
+
+- kind: constant
+  id: fe_k14a
+  name: "OH + HO2 -> H2O + O2"
+  value: 0.71e10
+  units: M-1 s-1
+  uncertainty: 0
+  uncertainty_note: De Laat & Gallard's value (Sehested et al. 1968). Buxton et al. 1988 select 6e9 (Table 2, p. 518).
+  source:
+    cite: De Laat & Gallard 1999
+    reference: "J. De Laat, H. Gallard, Environ. Sci. Technol. 33, 2726 (1999), from K. Sehested, O. L. Rasmussen, H. Fricke, J. Phys. Chem. 72, 626 (1968)"
+    doi: 10.1021/es981171v
+    locator: Table 2, reaction II.14a
+
+- kind: constant
+  id: fe_k14b
+  name: "OH + O2- -> OH- + O2"
+  value: 1.01e10
+  units: M-1 s-1
+  uncertainty: 0
+  uncertainty_note: De Laat & Gallard's value (Sehested et al. 1968). Buxton et al. 1988 select 8e9 (Table 2, p. 518).
+  source:
+    cite: De Laat & Gallard 1999
+    reference: "J. De Laat, H. Gallard, Environ. Sci. Technol. 33, 2726 (1999), from K. Sehested et al., J. Phys. Chem. 72, 626 (1968)"
+    doi: 10.1021/es981171v
+    locator: Table 2, reaction II.14b
+
+- kind: constant
+  id: fe_k15
+  name: "OH + OH -> H2O2 (rate 2 k [OH]^2 in OH)"
+  value: 5.2e9
+  units: M-1 s-1
+  uncertainty: 0
+  uncertainty_note: De Laat & Gallard's value (Sehested et al. 1968). Buxton et al. 1988 select 2k = 1.1e10, k = 5.5e9 (Table 2, p. 518).
+  source:
+    cite: De Laat & Gallard 1999
+    reference: "J. De Laat, H. Gallard, Environ. Sci. Technol. 33, 2726 (1999), from K. Sehested et al., J. Phys. Chem. 72, 626 (1968)"
+    doi: 10.1021/es981171v
+    locator: Table 2, reaction II.15

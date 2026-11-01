@@ -12,7 +12,8 @@ with the gas (``kLa_per_s=None``, the default) or crosses the surface at the rat
 supersaturate as it does in a real vessel. Gases are treated as ideal (Benson and Krause's θ puts oxygen's departure at
 about 0.07% at 1 atm and 25 °C), and the liquid as water for oxygen solubility.
 
-The catalyst enters as a rate law; phase 1 offers a first-order rate constant that you supply.
+The catalyst enters as a first-order rate constant, as a rate law in [H2O2], or as a time course of [H2O2] and its
+rate computed by a mechanism (``course``), such as the dissolved-iron model.
 """
 
 from __future__ import annotations
@@ -40,7 +41,7 @@ HEAT_T_K = thermo.T_REF
 @dataclass
 class Setup:
     c0_M: float  # initial H2O2, mol/L
-    k_per_s: float  # first-order rate constant of the catalyst at the run temperature
+    k_per_s: float | None = None  # first-order rate constant of the catalyst at the run temperature
     liquid_mL: float = 50.0
     gas_mL: float = 50.0  # gas space above the liquid at the start (headspace and tubing)
     T_K: float = 298.15
@@ -58,7 +59,7 @@ class Setup:
         if not 0 < self.c0_M <= C0_MAX_M:
             out.append(f"Starting H2O2 must lie in (0, {C0_MAX_M}] mol/L, the range where the solution behaves as "
                        "dilute for heat and oxygen solubility.")
-        if self.k_per_s <= 0:
+        if self.k_per_s is not None and self.k_per_s <= 0:
             out.append("The rate constant must be positive.")
         if self.liquid_mL <= 0 or self.gas_mL <= 0:
             out.append("Liquid and gas volumes must be positive.")
@@ -84,10 +85,18 @@ def _gas(s: Setup):
     return X_O2_AIR * n_dry, (1 - X_O2_AIR) * n_dry, pw
 
 
-def simulate(s: Setup, rate: Callable[[np.ndarray], np.ndarray] | None = None) -> Run:
+Course = Callable[[np.ndarray], tuple[np.ndarray, np.ndarray]]
+
+
+def simulate(s: Setup, rate: Callable[[np.ndarray], np.ndarray] | None = None, course: Course | None = None) -> Run:
     """Run the experiment. ``rate`` maps H2O2 concentration (mol/L) to its rate of loss (mol/L/s); by default the
-    first-order law k c with ``s.k_per_s``."""
+    first-order law k c with ``s.k_per_s``. ``course`` maps times (s) to the H2O2 concentration and its rate of
+    loss computed elsewhere, by a mechanism; it needs ``s.t_end_s``."""
     problems = s.validate()
+    if course is None and s.k_per_s is None and rate is None:
+        problems.append("Give a rate constant, a rate law or a computed course for the H2O2.")
+    if course is not None and s.t_end_s is None:
+        problems.append("A computed course needs the run length t_end_s.")
     if problems:
         raise ValueError(" ".join(problems))
     T, VL = s.T_K, s.liquid_mL / 1000.0  # liquid in L
@@ -133,7 +142,9 @@ def simulate(s: Setup, rate: Callable[[np.ndarray], np.ndarray] | None = None) -
         return nG * R * T / VG_m3, P
 
     if s.kLa_per_s is None:
-        if custom_rate:
+        if course is not None:
+            c, r_course = (np.asarray(v, dtype=float) for v in course(t))
+        elif custom_rate:
             sol = solve_ivp(lambda _, y: [-rate(y[0])], (0, t_end), [s.c0_M], t_eval=t, method="Radau",
                             rtol=1e-10, atol=s.c0_M * 1e-13)
             if not sol.success:
@@ -146,16 +157,16 @@ def simulate(s: Setup, rate: Callable[[np.ndarray], np.ndarray] | None = None) -
         nG = np.array([x[0] for x in split])
         cL = np.array([x[1] for x in split])
         P = np.array([x[2] for x in split])
-        r = rate(c)
+        r = r_course if course is not None else rate(c)
         J = np.array([x[3] for x in split]) * 0.5 * r  # O2 leaving the liquid, mol/L/s
     else:
         kla = s.kLa_per_s
 
-        def rhs(_, y):
+        def rhs(tt, y):
             c, cl, ng = y
             pO2, Ptot = p_O2(ng)
             j = kla * (cl - henry(Ptot) * pO2)
-            rc = rate(c)
+            rc = float(course(np.array([tt]))[1][0]) if course is not None else rate(c)
             return [-rc, 0.5 * rc - j, j * VL]
 
         y0 = [s.c0_M, cL0, nO2_g0 if s.headspace != "open" else 0.0]
@@ -165,9 +176,12 @@ def simulate(s: Setup, rate: Callable[[np.ndarray], np.ndarray] | None = None) -
         if not sol.success:
             raise RuntimeError(sol.message)
         c, cL, nG = sol.y
+        if course is not None:  # the mechanism's own H2O2, so the series and the readouts share one curve
+            c, r = (np.asarray(v, dtype=float) for v in course(t))
+        else:
+            r = rate(c)
         pairs = [p_O2(n) for n in nG]
         P = np.array([p[1] for p in pairs])
-        r = rate(c)
         J = kla * (cL - np.array([henry(p[1]) * p[0] for p in pairs]))
 
     evolved = 0.5 * VL * (s.c0_M - c)  # mol O2 formed

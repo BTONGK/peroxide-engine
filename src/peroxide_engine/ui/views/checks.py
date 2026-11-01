@@ -14,7 +14,17 @@ LABELS = {
     "modes": "Each gas arrangement",
     "limit": "Fast transfer against equilibrium",
     "heat": "Heat against its bookkeeping",
+    "group_a": "Ionic-strength equations, as printed",
+    "group_b": "Values the papers derive and print",
+    "kd_rows": "Second-order constant kd (k11a = 1e3)",
+    "fe2_rows": "Ferrous iron (k11a = 1e3)",
 }
+
+
+def table(rows: list[dict]) -> pd.DataFrame:
+    """Rows as a frame, floats as text to six significant figures: 7.62e-07 keeps its digits (the grid would round it
+    to 0.0000007), float noise (49.99999999999999) reads as 50, and a column a row lacks stays blank."""
+    return pd.DataFrame(rows).map(lambda v: ("" if v != v else f"{v:.6g}") if isinstance(v, float) else v)
 
 
 class Fields(dict):
@@ -36,6 +46,6 @@ for c in checks.all_checks():
         with st.expander("Numbers"):
             for key, rows in tables.items():
                 st.markdown(f"**{LABELS.get(key, key)}**")
-                st.dataframe(pd.DataFrame(rows), hide_index=True, width="stretch")
+                st.dataframe(table(rows), hide_index=True, width="stretch")
         with st.expander("Pass rule"):
             st.markdown((checks.EXPERIMENTS / c["folder"] / "PASS_RULE.md").read_text())

@@ -1,0 +1,27 @@
+# De Laat & Gallard 1999, Environ. Sci. Technol. 33, 2726, doi:10.1021/es981171v. Read from the page image of p. 2728.
+# 25.0 °C, I = 0.1 M (HClO4/NaClO4). kobs over 0-20% H2O2 removal, in 1e-6 s-1; duplicates agree within 3%.
+source: De Laat & Gallard 1999, Tables 3 and 4, p. 2728
+table3:  # [Fe(III)]0 = 200 uM, [H2O2]0 = 10 mM; runs 7-9 (pH 3.25 and above) left aside: iron precipitated
+  - {run: 1, pH: 1.0, kobs_1e6: "1.38"}
+  - {run: 2, pH: 1.55, kobs_1e6: "6.20"}
+  - {run: 3, pH: 2.10, kobs_1e6: "23.6"}
+  - {run: 4, pH: 2.64, kobs_1e6: "60.0"}
+  - {run: 5, pH: 3.00, kobs_1e6: "89.3"}
+  - {run: 6, pH: 3.18, kobs_1e6: "93.0"}
+table4:  # pH 3.0
+  - {run: 1, fe_uM: 50, h2o2_mM: 2, kobs_1e6: "19.3"}
+  - {run: 2, fe_uM: 50, h2o2_mM: 50, kobs_1e6: "18.4"}
+  - {run: 3, fe_uM: 100, h2o2_mM: 50, kobs_1e6: "47.7"}
+  - {run: 4, fe_uM: 200, h2o2_mM: 2, kobs_1e6: "74.4"}
+  - {run: 5, fe_uM: 300, h2o2_mM: 2, kobs_1e6: "95.1"}
+  - {run: 6, fe_uM: 500, h2o2_mM: 50, kobs_1e6: "230.0"}
+  - {run: 7, fe_uM: 650, h2o2_mM: 2, kobs_1e6: "166.6"}
+  - {run: 8, fe_uM: 1000, h2o2_mM: 2, kobs_1e6: "212.0"}
+  - {run: 9, fe_uM: 1000, h2o2_mM: 100, kobs_1e6: "421.0"}
+  - {run: 10, fe_uM: 200, h2o2_mM: 0.2, kobs_1e6: "31.6"}
+  - {run: 11, fe_uM: 200, h2o2_mM: 1, kobs_1e6: "60.6"}
+  - {run: 12, fe_uM: 200, h2o2_mM: 10, kobs_1e6: "88.4"}
+  - {run: 13, fe_uM: 200, h2o2_mM: 50, kobs_1e6: "92.2"}
+  - {run: 14, fe_uM: 200, h2o2_mM: 100, kobs_1e6: "95.7"}
+  - {run: 15, fe_uM: 200, h2o2_mM: 500, kobs_1e6: "75.5"}
+  - {run: 16, fe_uM: 200, h2o2_mM: 955, kobs_1e6: "56.3"}

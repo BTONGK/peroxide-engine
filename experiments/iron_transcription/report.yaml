@@ -1,0 +1,20 @@
+order: 5
+title: "Iron(III) model: constants and equations as printed"
+question: Does the engine hold the iron model's constants and equations exactly as the two papers print them?
+compared: >-
+  The ionic-strength equations for iron(III) hydrolysis (Gallard, De Laat and Legube 1999, Table 1) at 0.1 and 0.2 M
+  against the constants the papers print, and ten values the papers derive from their constants (the complex
+  formation constants written with HO2-, the share of iron bound to peroxide at pH 3, the initiation constant at
+  pH 1, 2 and 3, and the HO2/O2- rate constants with iron at pH 3) against the engine's arithmetic.
+result: >-
+  All {group_a_within} hydrolysis constants reproduce the printed values exactly once log K is rounded to three
+  decimals and K to three figures, as the authors did; the first run of this check allowed for the first rounding
+  alone and reported one constant as missed, and the pass rule records both runs. All {group_b_within} of
+  {group_b_total} derived values agree within {group_b_max_relative_difference:.1%}; the
+  largest gap is the acid constant linking the two complexes, which the paper prints to two figures. De Laat and Gallard's eq 24, as
+  printed, drops the factor 2 that their eqs 21 and 22 carry: with the factor, kd at pH 3 comes to
+  {kd_eq21_22:.2f} L/(mol·s), close to the {kd_measured} ± {kd_measured_pm} they measured; as printed, eq 24 gives
+  {kd_eq24:.2f}.
+why_it_matters: >-
+  The engine computes with the published model digit for digit. Anyone using eq 24 as printed would predict half the
+  measured rate.

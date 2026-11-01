@@ -1,0 +1,134 @@
+{
+  "verdict": "passed",
+  "group_a_within": 4,
+  "group_a_total": 4,
+  "group_b_within": 10,
+  "group_b_total": 10,
+  "group_a_max_log_difference": 0.0005821132659695749,
+  "group_b_max_relative_difference": 0.03905745819744144,
+  "first_run": "The first run, with the tolerance of the first amendment (0.0005 in log K), reported K1,1 at I = 0.2 M missed by 0.00007; see PASS_RULE.md.",
+  "kd_eq21_22": 0.5087891397050801,
+  "kd_eq24": 0.25439456985254005,
+  "kd_measured": 0.47,
+  "kd_measured_pm": 0.03,
+  "group_a": [
+    {
+      "name": "K1,1 at I = 0.1 M",
+      "where": "Gallard et al. Table 1",
+      "printed": 0.0029,
+      "computed": 0.0028989703083708617,
+      "rounded_as_printed": 0.0029,
+      "log_difference": -0.00015423062147812416,
+      "within": true
+    },
+    {
+      "name": "K1,2 at I = 0.1 M",
+      "where": "Gallard et al. Table 1",
+      "printed": 7.62e-07,
+      "computed": 7.625348596805127e-07,
+      "rounded_as_printed": 7.62e-07,
+      "log_difference": 0.00030473113277107444,
+      "within": true
+    },
+    {
+      "name": "K1,1 at I = 0.2 M",
+      "where": "De Laat & Gallard Fig. 4 caption",
+      "printed": 0.00244,
+      "computed": 0.002443272684208171,
+      "rounded_as_printed": 0.00244,
+      "log_difference": 0.0005821132659695749,
+      "within": true
+    },
+    {
+      "name": "K1,2 at I = 0.2 M",
+      "where": "De Laat & Gallard Fig. 4 caption",
+      "printed": 6.47e-07,
+      "computed": 6.473887200413568e-07,
+      "rounded_as_printed": 6.47e-07,
+      "log_difference": 0.00026084741226117814,
+      "within": true
+    }
+  ],
+  "group_b": [
+    {
+      "name": "KI1 written with HO2-",
+      "where": "Gallard et al. eq (23), p. 2935",
+      "printed": 1740000000.0,
+      "computed": 1743258108.090082,
+      "relative_difference": 0.0018724759138402103,
+      "within": true
+    },
+    {
+      "name": "KI2 written with HO2-",
+      "where": "Gallard et al. eq (24), p. 2935",
+      "printed": 112000000.0,
+      "computed": 112468265.03806981,
+      "relative_difference": 0.004180937839909138,
+      "within": true
+    },
+    {
+      "name": "Acid constant linking the two complexes",
+      "where": "Gallard et al. eq (25), p. 2935, and abstract",
+      "printed": 0.00018,
+      "computed": 0.00018703034247553947,
+      "relative_difference": 0.03905745819744144,
+      "within": true
+    },
+    {
+      "name": "Share of Fe(III) in hydroperoxy complexes, pH 3, 0.5 M H2O2",
+      "where": "Gallard et al. p. 2934",
+      "printed": 0.27,
+      "computed": 0.27047071117852645,
+      "relative_difference": 0.0017433747352830764,
+      "within": true
+    },
+    {
+      "name": "ki at pH 1.0, 0.1 M H2O2",
+      "where": "De Laat & Gallard p. 2730",
+      "printed": 6.9e-05,
+      "computed": 6.936205481188657e-05,
+      "relative_difference": 0.005247171186762101,
+      "within": true
+    },
+    {
+      "name": "ki at pH 2.0, 0.1 M H2O2",
+      "where": "De Laat & Gallard p. 2730",
+      "printed": 0.00056,
+      "computed": 0.0005652346867800419,
+      "relative_difference": 0.009347654964360519,
+      "within": true
+    },
+    {
+      "name": "ki at pH 3.0, 0.1 M H2O2",
+      "where": "De Laat & Gallard p. 2730",
+      "printed": 0.0019,
+      "computed": 0.0019084910809298234,
+      "relative_difference": 0.004468989963064995,
+      "within": true
+    },
+    {
+      "name": "ki at pH 3.0, 1.0 M H2O2",
+      "where": "De Laat & Gallard p. 2730",
+      "printed": 0.0012,
+      "computed": 0.0011664426293925107,
+      "relative_difference": -0.027964475506240927,
+      "within": true
+    },
+    {
+      "name": "k10app at pH 3",
+      "where": "De Laat & Gallard p. 2731",
+      "printed": 1300000.0,
+      "computed": 1316617.8226419191,
+      "relative_difference": 0.012782940493784034,
+      "within": true
+    },
+    {
+      "name": "k11app at pH 3",
+      "where": "De Laat & Gallard p. 2731",
+      "printed": 660000.0,
+      "computed": 663588.0129856033,
+      "relative_difference": 0.005436383311520077,
+      "within": true
+    }
+  ]
+}

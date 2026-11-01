@@ -76,6 +76,7 @@ class Correlation(BaseModel):
     transcribed_from: str = Field(min_length=10, description="where the coefficients were read, e.g. a page image")
     check_values: list[dict[str, float]] = []
     check_rel_tolerance: float | None = Field(None, gt=0, description="largest |computed/printed - 1| allowed")
+    conditions: Conditions = Conditions()
     source: Source
 
     @model_validator(mode="after")

@@ -7,8 +7,9 @@ intro: >-
 sections:
   - title: What the engine computes today
     body: >-
-      You give a catalyst's first-order rate constant k (from your own measurement or a paper) and the conditions of
-      an experiment. The engine then computes what the instruments in a peroxide lab would read as the reaction runs:
+      You choose a catalyst: dissolved iron(III) in perchloric acid, whose rate the engine computes from its reaction
+      mechanism, or any catalyst whose first-order rate constant k you supply (from your own measurement or a paper).
+      With the conditions of an experiment, the engine then computes what the instruments in a peroxide lab would read as the reaction runs:
       the H2O2 left, the rate, the oxygen formed, the oxygen dissolved in the liquid, the gas collected in a burette or
       the pressure in a sealed vessel, the heat and heat flow a calorimeter records, and the titration volumes for
       permanganate and iodometric assays. It also applies the fits a lab applies (rate constant, half-life, initial
@@ -73,15 +74,67 @@ sections:
       runs at 25 °C, where the tables measure it, in the burette and sealed arrangements, whose energy accounting is
       complete.
 
+  - title: Dissolved iron(III)
+    body: >-
+      Iron(III) in acid decomposes peroxide by a chain of single-electron steps, measured and assembled by De Laat and
+      Gallard (1999). Iron(III) first binds peroxide as two hydroperoxy complexes, FeIII(HO2)2+ and FeIII(OH)(HO2)+,
+      whose formation constants Gallard, De Laat and Legube measured by their color (1999). Each complex splits slowly
+      into iron(II) and the HO2 radical, the one constant fitted to the decomposition runs (k6 = 2.7 × 10⁻³ per
+      second). Iron(II) then reacts with peroxide to give the hydroxyl radical (the Fenton reaction, 63 L/(mol·s)), and
+      the radicals HO2, O2⁻ and OH carry the chain: they turn iron(II) back into iron(III), iron(III) back into
+      iron(II), and peroxide into oxygen, until two radicals meet. The engine solves all fifteen steps in time, with
+      iron(III)'s reactions with water (hydrolysis to FeOH2+, Fe(OH)2+ and the dimer) and with peroxide held at
+      balance, as De Laat and Gallard did, because they form far faster than the peroxide decomposes. The radical
+      constants are pulse radiolysis measurements as De Laat and Gallard selected them; each constant's note compares
+      it with the compilations of Buxton et al. (1988) and Bielski et al. (1985), and every constant, with its source
+      and spread, is on the "every source value" tab. A run starts with iron(II) and the radicals at zero, so the rate
+      climbs over the first minute (at pH 3, 200 µM iron and 50 mM H2O2: 0.4% of its full value at the start, 92% at
+      30 seconds) before it follows the slow decline; on a run of hours the heat flow chart shows this as a step.
+    equations:
+      - "Fe3+ + H2O2 ⇌ FeIII(HO2)2+ + H+ (KI1 = 3.1 × 10⁻³); FeOH2+ + H2O2 ⇌ FeIII(OH)(HO2)+ + H+ (KI2 = 2.0 × 10⁻⁴)"
+      - "FeIII(HO2)2+ and FeIII(OH)(HO2)+ → Fe2+ + HO2 (k6 = 2.7 × 10⁻³ 1/s)"
+      - "Fe2+ + H2O2 → Fe3+ + OH⁻ + OH (k7 = 63 L/(mol·s))"
+      - "OH + H2O2 → HO2 + H2O (3.3 × 10⁷); Fe3+ + O2⁻ → Fe2+ + O2 (5.0 × 10⁷); HO2 ⇌ O2⁻ + H+ (pKa 4.8)"
+      - "Free acid [H+] = 10^-pH / 0.85, the activity coefficient at ionic strength 0.1 M"
+    uncertainty: >-
+      One constant is loosely known: k11a, iron(III) with HO2, which the paper bounds below 2 × 10³ L/(mol·s). The
+      engine uses 1 × 10³, the value the same group used in 1998, and shows k_obs at both ends of the bound beside the
+      result. The checks repeat every comparison at both ends too.
+    checked: >-
+      The Model checks page holds three iron checks. The engine reproduces the papers' printed constants and derived
+      values. It predicts De Laat and Gallard's twenty-two measured rates across pH, iron and peroxide with k6 set
+      from a separate set of their runs. Barb, Baxendale, George and Hargrave's 1951 rates in nitrate solution fall
+      within a factor of 2; their iron(II) misses the rule, as the "What comes later" tab explains.
+
 limits_intro: >-
   These parts of a full peroxide experiment join the app once each passes its check. Each line says what is needed.
 
 limits:
   - title: Catalysts by mechanism
     body: >-
-      Today you supply the rate constant. Next come dissolved iron (the De Laat and Gallard mechanism, checked against
-      measured rates from other laboratories), then catalase and other enzymes, iodide and copper, metal oxides with
-      their surface areas, and metals, one at a time as each reproduces measured rates within the declared rule.
+      Today the engine computes dissolved iron(III) and any catalyst whose rate constant you supply. Next come catalase
+      and other enzymes, iodide and copper, metal oxides with their surface areas, and metals, one at a time as each
+      reproduces measured rates within the declared rule.
+  - title: Iron(II) during an iron(III) run
+    body: >-
+      The mechanism computes the small amount of iron(II) present while iron(III) decomposes peroxide, and Barb et al.
+      measured it in 1951. The engine's values run about a third below theirs (typical gap a factor of 1.5, above the
+      rule's 1.41), so the app leaves iron(II) off the readouts. Barb's own rate with the Fenton constant gives the
+      engine's value, so the gap lies between their two measurements: from their iron(II) values they derived a
+      Fenton constant of 42 L/(mol·s), beside the 53 they measured directly. A newer measurement of iron(II) during
+      the reaction would settle it.
+  - title: Hydroxyl radicals from iron
+    body: >-
+      The mechanism also gives how many hydroxyl radicals form for each peroxide decomposed, the number that matters
+      for Fenton treatment of water. It joins the app once it is checked against a measured yield, for example by a
+      radical trap such as benzoic acid or dimethyl sulfoxide.
+  - title: Iron at other temperatures, salts and acidities
+    body: >-
+      The iron model holds for 25 °C, perchlorate at ionic strength 0.1 M and pH 1.0 to 3.2, where its constants were
+      measured. Its activation energy is open: Barb et al. measured 24 ± 4 kcal/mol for the overall rate and Walling
+      and Goosen about 30. Chloride and sulfate bind iron(III) and change the rate; above pH 3.2 iron(III) begins to
+      precipitate, and Kwan and Voelker's runs at pH 4 show the model's trend there only qualitatively. Each joins once
+      the constants are measured and a check passes.
   - title: Temperature
     body: >-
       The app runs from 5 to 55 °C. Above 55 °C the two best evaluations of oxygen solubility part by up to 2.6%.
@@ -123,6 +176,20 @@ audit:
   - >-
     Solvay's data sheet gives 23.4 kcal/mol for 70% H2O2, while its 852 Btu/lb for the same grade works out to 23.0
     kcal/mol, the engine's value. The engine follows the NBS tables.
+  - >-
+    De Laat and Gallard's eq 24, as printed, drops the factor 2 that follows from their eqs 21 and 22. With the factor,
+    kd at pH 3 is 0.51 L/(mol·s), beside the 0.47 ± 0.03 they measured; as printed it gives 0.25. The engine solves
+    the full mechanism in time, so its rates are independent of this formula.
+  - >-
+    Each iron constant was read from page images of De Laat and Gallard (1999), Gallard, De Laat and Legube (1999),
+    Gallard, De Laat and Legube (1998), Buxton et al. (1988) and Bielski et al. (1985). Where a compilation selects a
+    different value, the constant's note gives it. The five hydroxyl radical constants De Laat and Gallard chose lie
+    within 27% of Buxton's selections (Fe2+ + OH sits 26% below Buxton's best value and inside the range Buxton lists),
+    and the constants for HO2 and O2⁻ reacting with each other, and their acid constant, are Bielski's.
+  - >-
+    The ionic-strength equations for iron(III) hydrolysis reproduce the constants the paper prints once the authors'
+    own two roundings (log K to three decimals, then K to three figures) are applied; the check's pass rule records
+    how that rounding rule was settled.
   - >-
     NETZSCH Application Note 132 reports adiabatic steps for 8.6–35% H2O2, each covering part of the decomposition
     with an assumed heat capacity of 3.3 J/(g K), so it serves as a picture of runaway behavior rather than as a check

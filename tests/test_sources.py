@@ -5,6 +5,7 @@ import subprocess
 import pytest
 
 from peroxide_engine import checks, oxygen, sources, water
+from peroxide_engine.catalysts import iron
 
 
 def test_every_record_names_its_source():
@@ -23,7 +24,9 @@ def test_a_record_without_a_link_is_refused():
 
 
 FUNCS = {"iapws_vapor_pressure": water.vapor_pressure, "iapws_liquid_density": water.liquid_density,
-         "o2_mole_fraction_bkp1979": oxygen.mole_fraction_1atm}
+         "o2_mole_fraction_bkp1979": oxygen.mole_fraction_1atm,
+         "fe_hydrolysis_K11": lambda I: iron.hydrolysis("fe_hydrolysis_K11", I),
+         "fe_hydrolysis_K12": lambda I: iron.hydrolysis("fe_hydrolysis_K12", I)}
 
 
 def test_printed_check_values_are_reproduced():
@@ -31,7 +34,8 @@ def test_printed_check_values_are_reproduced():
     assert {r.id for r in with_checks} == set(FUNCS)
     for rec in with_checks:
         for cv in rec.check_values:
-            assert abs(float(FUNCS[rec.id](cv["T_K"])) / cv["value"] - 1) <= rec.check_rel_tolerance, (rec.id, cv)
+            arg = next(v for key, v in cv.items() if key != "value")  # the one input: T_K or I_M
+            assert abs(float(FUNCS[rec.id](arg)) / cv["value"] - 1) <= rec.check_rel_tolerance, (rec.id, cv)
 
 
 def test_last_digit_reads_the_printed_value():

@@ -1,4 +1,4 @@
-"""Run an experiment: a catalyst's rate constant and the apparatus in, what the instruments read out."""
+"""Run an experiment: a catalyst and the apparatus in, what the instruments read out."""
 
 import altair as alt
 import numpy as np
@@ -6,21 +6,36 @@ import pandas as pd
 import streamlit as st
 
 from peroxide_engine import assays, vessel
+from peroxide_engine.catalysts import iron
 from peroxide_engine.ui.common import sig
 
 T0 = 273.15
 ARRANGEMENTS = {"Gas burette": "burette", "Sealed vessel with a pressure gauge": "closed", "Open vessel": "open"}
+CATALYSTS = ["A rate constant you supply", "Dissolved iron(III) in perchloric acid"]
 
 st.title("Run an experiment")
-st.caption("Give your catalyst's rate constant and the apparatus; the engine computes what each instrument reads.")
+st.caption("Choose the catalyst and the apparatus; the engine computes what each instrument reads.")
+
+catalyst = st.radio("Catalyst", CATALYSTS, horizontal=True)
+is_iron = catalyst == CATALYSTS[1]
 
 c1, c2, c3 = st.columns(3)
 with c1:
     st.subheader("Catalyst and solution")
-    k = st.number_input("Rate constant k at the run temperature (1/s)", min_value=1e-9, max_value=10.0, value=1e-3,
-                        format="%.3e", help="First order in H2O2. From a half-life: k = 0.693 / half-life.")
-    c0_mM = st.number_input("Starting H2O2 (mmol/L)", min_value=0.001, max_value=1000.0, value=100.0, format="%.3f")
-    t_C = st.number_input("Temperature (°C)", min_value=5.0, max_value=55.0, value=25.0, step=0.5, format="%.2f")
+    if is_iron:
+        fe_uM = st.number_input("Fe(III) added (µmol/L)", min_value=50.0, max_value=1000.0, value=200.0,
+                                help="As ferric perchlorate; the measured runs span 50–1000 µM.")
+        pH = st.number_input("pH (measured)", min_value=1.0, max_value=3.2, value=3.0, step=0.05, format="%.2f",
+                             help="Held fixed through the run, as in the measured runs. Above pH 3.2 iron precipitates.")
+        c0_mM = st.number_input("Starting H2O2 (mmol/L)", min_value=0.2, max_value=1000.0, value=50.0, format="%.3f")
+        st.caption("25.00 °C and ionic strength 0.1 M (NaClO4), the conditions of De Laat and Gallard's runs.")
+        t_C = 25.0
+    else:
+        k = st.number_input("Rate constant k at the run temperature (1/s)", min_value=1e-9, max_value=10.0,
+                            value=1e-3, format="%.3e", help="First order in H2O2. From a half-life: k = 0.693 / half-life.")
+        c0_mM = st.number_input("Starting H2O2 (mmol/L)", min_value=0.001, max_value=1000.0, value=100.0,
+                                format="%.3f")
+        t_C = st.number_input("Temperature (°C)", min_value=5.0, max_value=55.0, value=25.0, step=0.5, format="%.2f")
 with c2:
     st.subheader("Apparatus")
     arrangement = st.radio("Gas arrangement", list(ARRANGEMENTS))
@@ -35,25 +50,56 @@ with c3:
     if transfer.startswith("Crosses"):
         kla = st.number_input("kLa (1/s)", min_value=1e-6, max_value=100.0, value=0.01, format="%.4f",
                               help="Your vessel's oxygen transfer coefficient, measured by the dynamic method.")
-    halves = st.slider("Run length (half-lives)", 1.0, 10.0, 5.0, 0.5)
+    if is_iron:
+        until = st.slider("Run until this share of the H2O2 is gone (%)", 20, 95, 80, 5)
+    else:
+        halves = st.slider("Run length (half-lives)", 1.0, 10.0, 5.0, 0.5)
 
-setup = vessel.Setup(c0_M=c0_mM / 1000, k_per_s=k, liquid_mL=liquid, gas_mL=gas, T_K=t_C + T0,
-                     pressure_Pa=p_kPa * 1000, headspace=ARRANGEMENTS[arrangement], kLa_per_s=kla,
-                     t_end_s=halves * np.log(2) / k)
-problems = setup.validate()
-if problems:
+extra = []
+if is_iron:
+    problems = iron.validate(c0_mM / 1000, fe_uM * 1e-6, pH)
     for p in problems:
         st.error(p)
-    st.stop()
+    if problems:
+        st.stop()
+
+    @st.cache_data(show_spinner="Solving the iron mechanism…")
+    def solve_iron(c0_M: float, fe_M: float, pH_: float, share: float):
+        return iron.run(c0_M, fe_M, pH_, until_removal=share)
+
+    outcome = solve_iron(c0_mM / 1000, fe_uM * 1e-6, pH, until / 100)
+    setup = vessel.Setup(c0_M=c0_mM / 1000, liquid_mL=liquid, gas_mL=gas, T_K=iron.T_K, pressure_Pa=p_kPa * 1000,
+                         headspace=ARRANGEMENTS[arrangement], kLa_per_s=kla, t_end_s=outcome.t_end_s)
+    lo, hi = outcome.kobs_band
+    extra = [
+        dict(name="k_obs, first 20% of the H2O2", value=outcome.kobs, units="1/s",
+             how="Slope of ln[H2O2] against time through the origin over the first 20% removed, De Laat and "
+                 f"Gallard's measure (eq 13). With k11a at the ends of its published bound: {sig(lo)}–{sig(hi)}."),
+        dict(name="Second-order constant kd = k_obs / [Fe(III)]", value=outcome.kobs / (fe_uM * 1e-6),
+             units="L/(mol·s)", how="The constant labs report for iron catalysis."),
+        dict(name="Fe(III) bound to H2O2 at the start", value=outcome.complexed_share * 100, units="%",
+             how="FeIII(HO2)2+ and FeIII(OH)(HO2)+ from the measured formation constants (Gallard et al. 1999)."),
+        dict(name="[H+] at I = 0.1 M", value=outcome.h * 1000, units="mmol/L",
+             how="10^-pH / 0.85, the activity coefficient both papers used."),
+    ]
+else:
+    setup = vessel.Setup(c0_M=c0_mM / 1000, k_per_s=k, liquid_mL=liquid, gas_mL=gas, T_K=t_C + T0,
+                         pressure_Pa=p_kPa * 1000, headspace=ARRANGEMENTS[arrangement], kLa_per_s=kla,
+                         t_end_s=halves * np.log(2) / k)
+    problems = setup.validate()
+    for p in problems:
+        st.error(p)
+    if problems:
+        st.stop()
 
 
 @st.cache_data(show_spinner="Computing the run…")
-def compute(s: vessel.Setup):
-    run = vessel.simulate(s)
+def compute(s: vessel.Setup, iron_key: tuple | None):
+    run = vessel.simulate(s, course=outcome.course if iron_key else None)
     return run.series, run.readouts, run.notes
 
 
-series, readouts, notes = compute(setup)
+series, readouts, notes = compute(setup, (c0_mM, fe_uM, pH, until) if is_iron else None)
 for n in notes:
     st.warning(n)
 
@@ -64,8 +110,11 @@ df["time"] = df["time_s"] / div
 
 st.subheader("Readouts")
 table = pd.DataFrame([{"Readout": r["name"], "Value": sig(float(r["value"])), "Units": r["units"],
-                       "How it is computed": r["how"]} for r in readouts])
+                       "How it is computed": r["how"]} for r in extra + readouts])
 st.dataframe(table, hide_index=True, width="stretch")
+if is_iron:
+    st.caption("Iron model: De Laat and Gallard 1999, checked against their own runs with its one fitted constant "
+               "held out, and against Barb et al.'s 1951 rates; the Model checks page shows both.")
 if "heat_flow_mW" not in series:
     st.caption("Heat appears for runs at 25.00 °C in the burette and sealed arrangements, where the tables measure it "
                "and the energy accounting is complete; the Methodology page explains.")
@@ -93,8 +142,7 @@ with st.expander("Titrations of an aliquot", icon=":material/science:"):
     aliquot = a1.number_input("Aliquot (mL)", min_value=0.01, value=1.00, format="%.2f")
     c_mn = a2.number_input("KMnO4 (mol/L)", min_value=1e-5, value=0.0200, format="%.4f")
     c_th = a3.number_input("Na2S2O3 (mol/L)", min_value=1e-5, value=0.1000, format="%.4f")
-    half = np.log(2) / k
-    times = [0.0, half, 2 * half, t_end]
+    times = [0.0, t_end / 4, t_end / 2, t_end]
     rows = []
     for tt in times:
         c = float(np.interp(tt, series["time_s"], series["H2O2_mM"])) / 1000

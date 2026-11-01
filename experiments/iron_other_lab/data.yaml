@@ -1,0 +1,35 @@
+# Barb, Baxendale, George & Hargrave 1951, Trans. Faraday Soc. 47, 591, doi:10.1039/TF9514700591.
+# Read from the page images of pp. 599 and 611. Nitrate medium (Fe(NO3)3, HNO3), I = 0.435 M (NaNO3), 25 °C.
+source: Barb et al. 1951, Table I (p. 599) and Table IV (p. 611)
+solutions:  # composition of Table I; [H+] is the nitric acid added
+  a: {acid_M: 0.204, fe_M: 19.6e-3}
+  b: {acid_M: 19.6e-3, fe_M: 3.92e-3}
+  c: {acid_M: 9.8e-3, fe_M: 1.96e-3}
+  d: {acid_M: 4.9e-3, fe_M: 0.98e-3}
+kd_25C:  # 1e3 kd, L mol-1 s-1
+  oxygen_evolution:  # initial peroxide 0.75 M
+    h2o2_M: 0.75
+    values: {a: "5.9", b: "50.5", c: "88.2", d: "136"}
+  titration:  # initial peroxide 1.4 M at 25 °C
+    h2o2_M: 1.4
+    values: {a: "5.7", b: "54.2", c: "92.5", d: "161"}
+fe2_25C:  # Table IV: acid 2.50e-2 M throughout; [Fe2+]s in 1e-6 M; about 1e-5 M Fe(II) added at the start
+  acid_M: 0.025
+  fe2_added_M: 1.0e-5
+  rows:
+    - {expt: 1, fe_mM: 4.85, h2o2_M: 0.10, fe2_uM: "2.6"}
+    - {expt: 2, fe_mM: 4.85, h2o2_M: 0.10, fe2_uM: "2.3"}
+    - {expt: 3, fe_mM: 4.85, h2o2_M: 0.10, fe2_uM: "2.0"}
+    - {expt: 4, fe_mM: 4.85, h2o2_M: 0.10, fe2_uM: "2.5"}
+    - {expt: 5, fe_mM: 4.85, h2o2_M: 0.05, fe2_uM: "2.1"}
+    - {expt: 6, fe_mM: 4.85, h2o2_M: 0.05, fe2_uM: "2.5"}
+    - {expt: 7, fe_mM: 4.85, h2o2_M: 0.05, fe2_uM: "2.5"}
+    - {expt: 8, fe_mM: 4.85, h2o2_M: 0.05, fe2_uM: "2.6"}
+    - {expt: 9, fe_mM: 4.85, h2o2_M: 0.025, fe2_uM: "2.3"}
+    - {expt: 10, fe_mM: 4.85, h2o2_M: 0.025, fe2_uM: "2.4"}
+    - {expt: 11, fe_mM: 4.85, h2o2_M: 0.15, fe2_uM: "2.4"}
+    - {expt: 12, fe_mM: 9.70, h2o2_M: 0.15, fe2_uM: "5.5"}
+    - {expt: 13, fe_mM: 9.70, h2o2_M: 0.15, fe2_uM: "5.2"}
+    - {expt: 14, fe_mM: 9.70, h2o2_M: 0.15, fe2_uM: "5.4"}
+    - {expt: 15, fe_mM: 9.70, h2o2_M: 0.10, fe2_uM: "5.2"}
+    - {expt: 16, fe_mM: 14.55, h2o2_M: 0.15, fe2_uM: "8.5"}
