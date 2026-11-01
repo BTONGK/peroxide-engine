@@ -9,7 +9,7 @@ from peroxide_engine import checks
 
 VERDICTS = {"transcription": "passed", "decomposition_heat": "passed", "oxygen_solubility": "passed",
             "exact_solutions": "passed", "iron_transcription": "passed", "iron_same_lab": "passed",
-            "iron_other_lab": "missed"}
+            "iron_other_lab": "missed", "library_consistency": "passed"}
 
 
 def test_check_verdicts():

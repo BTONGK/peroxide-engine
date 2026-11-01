@@ -39,7 +39,8 @@ def py_strings(path: Path):
 
 def hits():
     files = [*(ROOT / "docs").glob("*.yaml"), *(ROOT / "experiments").glob("*/report.yaml"),
-             *(ROOT / "src" / "peroxide_engine" / "data" / "constants").glob("*.yaml")]
+             *(ROOT / "src" / "peroxide_engine" / "data" / "constants").glob("*.yaml"),
+             *(ROOT / "src" / "peroxide_engine" / "data" / "library").glob("*.yaml")]
     out = []
     for f in files:
         for where, text in yaml_strings(yaml.safe_load(f.read_text())):

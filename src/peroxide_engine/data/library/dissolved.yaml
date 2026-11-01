@@ -1,0 +1,43 @@
+# Dissolved catalysts. Iron(III) runs through its checked mechanism (catalysts/iron.py).
+
+- id: iron_iii_de_laat
+  name: Iron(III) in perchloric acid
+  class: dissolved
+  material: "Ferric perchlorate, 50–1000 µM, pH 1.0–3.2, 25 °C, ionic strength 0.1 M"
+  status: ready
+  law:
+    kind: mechanism
+    module: iron
+    summary: >-
+      De Laat and Gallard's fifteen-step mechanism, checked against their 22 measured rates with its fitted constant
+      held out, and against Barb et al.'s 1951 rates; choose it on the Run page as "Dissolved iron(III) in perchloric
+      acid".
+  source:
+    cite: De Laat & Gallard 1999
+    reference: "J. De Laat, H. Gallard, Environ. Sci. Technol. 33, 2726 (1999)"
+    doi: 10.1021/es981171v
+    locator: Table 2 and Tables 3–4
+
+- id: iodide_liebhafsky
+  name: Iodide (with iodine)
+  class: dissolved
+  material: Iodide and iodine in water
+  status: awaiting
+  needs: Liebhafsky's papers for the rate constant at 25 °C and its change with temperature and acid.
+  source:
+    cite: Liebhafsky 1932
+    reference: "H. A. Liebhafsky, J. Am. Chem. Soc. 54, 1792 (1932); parts II and III, J. Am. Chem. Soc. 54, 3499 (1932), doi 10.1021/ja01348a003"
+    doi: 10.1021/ja01344a011
+    locator: the rate-constant tables
+
+- id: copper_pham
+  name: Copper(II)
+  class: dissolved
+  material: Dissolved copper(II) in water
+  status: awaiting
+  needs: The paper for the copper mechanism and its rate constants.
+  source:
+    cite: Pham et al. 2013
+    reference: "A. N. Pham, G. Xing, C. J. Miller, T. D. Waite, J. Catal. 301, 54 (2013)"
+    doi: 10.1016/j.jcat.2013.01.025
+    locator: the mechanism table

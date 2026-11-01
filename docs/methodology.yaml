@@ -8,7 +8,8 @@ sections:
   - title: What the engine computes today
     body: >-
       You choose a catalyst: dissolved iron(III) in perchloric acid, whose rate the engine computes from its reaction
-      mechanism, or any catalyst whose first-order rate constant k you supply (from your own measurement or a paper).
+      mechanism; a measured catalyst from the library, whose rate a laboratory measured; or any catalyst whose
+      first-order rate constant k you supply (from your own measurement or a paper).
       With the conditions of an experiment, the engine then computes what the instruments in a peroxide lab would read as the reaction runs:
       the H2O2 left, the rate, the oxygen formed, the oxygen dissolved in the liquid, the gas collected in a burette or
       the pressure in a sealed vessel, the heat and heat flow a calorimeter records, and the titration volumes for
@@ -106,15 +107,46 @@ sections:
       from a separate set of their runs. Barb, Baxendale, George and Hargrave's 1951 rates in nitrate solution fall
       within a factor of 2; their iron(II) misses the rule, as the "What comes later" tab explains.
 
+  - title: Measured catalysts
+    body: >-
+      The Catalyst library holds catalysts whose rate a laboratory measured, each with the values as printed and the
+      ranges of H2O2, temperature and catalyst amount the laboratory covered. The app runs a catalyst only inside
+      those ranges, so every number it shows rests on a measurement. For an oxide powder, the laboratory measured the
+      first-order rate constant at several loadings; its straight line against the surface area per volume gives the
+      rate at any loading in that span, and the measured activation energy carries it across the measured
+      temperatures. The surface area comes from the loading and the powder's measured B.E.T. area.
+    equations:
+      - "k_obs = (k2 × Sa/V + b) × exp(−Ea/R × (1/T − 1/298.15 K)), Sa/V = loading × B.E.T. area"
+      - "−d[H2O2]/dt = k_obs [H2O2], first order as measured"
+    uncertainty: >-
+      The readouts give k_obs at the ends of the printed uncertainties of k2, the intercept b and Ea. The
+      laboratory's own repeat measurements differ by up to 8% (ZrO2 at 25 °C: 6.15 and 5.67 × 10⁻⁵ per second at the
+      same loading).
+    checked: >-
+      The Model checks page holds the library's consistency check: every stored value matches its printed text, and
+      the values reproduce the other rates, temperatures and areas the same source prints.
+
 limits_intro: >-
   These parts of a full peroxide experiment join the app once each passes its check. Each line says what is needed.
 
 limits:
-  - title: Catalysts by mechanism
+  - title: Catalysts waiting for a paper
     body: >-
-      Today the engine computes dissolved iron(III) and any catalyst whose rate constant you supply. Next come catalase
-      and other enzymes, iodide and copper, metal oxides with their surface areas, and metals, one at a time as each
-      reproduces measured rates within the declared rule.
+      The Catalyst library lists every catalyst class: enzymes (catalases), dissolved catalysts (iodide, copper),
+      oxides (CeO2, CuO, Fe2O3, Gd2O3, TiO2, Y2O3, SiO2, Al2O3, MnO2, goethite) and metals (platinum and the platinum
+      group). Each joins the Run page once its paper is read and its values pass the consistency check; the library
+      page names the paper each one needs.
+  - title: Any oxide or metal by its formula
+    body: >-
+      Next after the library: an oxide or metal named by its formula, with its crystal from the Materials Project and
+      the binding of the hydroxyl radical to its surface computed by Meta's UMA model, the measure Lousada et al.
+      linked to the decomposition barrier. It joins the app once its ranking of the measured oxides passes a rule
+      written before the comparison.
+  - title: Rates as they change with conditions
+    body: >-
+      Mechanisms that let a catalyst's rate follow pH, temperature and loading beyond the measured points (catalase
+      with its loss of activity, iodide, copper) join one at a time as each reproduces measured rates within the
+      declared rule, as iron did.
   - title: Iron(II) during an iron(III) run
     body: >-
       The mechanism computes the small amount of iron(II) present while iron(III) decomposes peroxide, and Barb et al.
@@ -190,6 +222,15 @@ audit:
     The ionic-strength equations for iron(III) hydrolysis reproduce the constants the paper prints once the authors'
     own two roundings (log K to three decimals, then K to three figures) are applied; the check's pass rule records
     how that rounding rule was settled.
+  - >-
+    In Lousada's 2013 thesis, Table 3 (p. 42) gives the second-order constants of CeO2 and CuO exchanged: in Figure 16
+    the CuO points climb about 2.7 × 10⁻⁸ m/s and the CeO2 points about 1.2 × 10⁻⁹ m/s, and the k1 values the same
+    table prints follow the figure. The Fe2O3 k1 (2.1 × 10⁻⁴ per second at 4.5 m²) sits below the table's own line
+    (4.7 × 10⁻⁴ there), and the surface-normalized TiO2 and Y2O3 constants give rates far below their measured k0.
+    These oxides wait for the journal version (Lousada et al. 2012).
+  - >-
+    The platinum rate law of Serra-Maia et al. (2021) fits initial rates; its H2O2 and pH ranges are in the 2018
+    paper's Supporting Information, so platinum waits for that paper.
   - >-
     NETZSCH Application Note 132 reports adiabatic steps for 8.6–35% H2O2, each covering part of the decomposition
     with an assumed heat capacity of 3.3 J/(g K), so it serves as a picture of runaway behavior rather than as a check

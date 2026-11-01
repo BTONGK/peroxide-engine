@@ -1,0 +1,29 @@
+# Enzymes. Ready entries will carry measured kcat and apparent Km with the assay conditions.
+
+- id: catalases_switala
+  name: Catalases from sixteen organisms
+  class: enzyme
+  material: Purified catalases from all three catalase clades
+  status: awaiting
+  needs: >-
+    The paper for each enzyme's kcat and apparent Km and the assay conditions; the abstract gives turnover from
+    54,000 to 833,000 per second.
+  source:
+    cite: Switala & Loewen 2002
+    reference: "J. Switala, P. C. Loewen, Arch. Biochem. Biophys. 401, 145 (2002)"
+    doi: 10.1016/S0003-9861(02)00049-8
+    locator: the kinetic-constants table
+
+- id: catalase_bovine_liver
+  name: Bovine liver catalase
+  class: enzyme
+  material: Bovine liver catalase, the common commercial enzyme
+  status: awaiting
+  needs: >-
+    Aebi 1984 for the standard assay and its rate constant, Chance, Greenstein and Roughton 1952 for the step rate
+    constants, and Ogura 1955 for the loss of activity at high H2O2.
+  source:
+    cite: Aebi 1984
+    reference: "H. Aebi, Methods Enzymol. 105, 121 (1984); B. Chance, D. S. Greenstein, F. J. W. Roughton, Arch. Biochem. Biophys. 37, 301 (1952), doi 10.1016/0003-9861(52)90194-X; Y. Ogura, Arch. Biochem. Biophys. 57, 288 (1955), doi 10.1016/0003-9861(55)90291-5"
+    doi: 10.1016/S0076-6879(84)05016-3
+    locator: the assay section

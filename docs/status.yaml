@@ -3,18 +3,27 @@ summary: >-
   Phases 0 to 2 are built: the scaffold, constants with provenance, the exact physics of the experiment (heat, oxygen
   solubility, the vessel, assays and the lab's fits), and dissolved iron(III) by the De Laat and Gallard mechanism.
   Six checks pass. The seventh, against another laboratory, passes for rates and misses for iron(II), so the app shows
-  iron rates and keeps iron(II) in the Methodology limits.
+  iron rates and keeps iron(II) in the Methodology limits. Phase 3, the measured catalyst library, is under way: every
+  catalyst class is listed, ZrO2 and HfO2 run today, and the rest join as their papers arrive. Phase 4 brings any
+  oxide or metal by formula through the Materials Project and Meta's UMA model.
 
 phases:
   - {n: 0, name: Scaffold, state: done, summary: "Repository, app, constants with sources, check framework, copy test, status page."}
   - {n: 1, name: Exact physics, state: done, summary: "Heat from the NBS tables, oxygen solubility, water, the vessel with burette, sealed and open arrangements, titrations, the lab's fits."}
   - {n: 2, name: Dissolved iron, state: done, summary: "The De Laat and Gallard Fe(III) mechanism at 25 °C, pH 1.0–3.2, in perchlorate; rates checked against their 22 runs with k6 held out and against Barb et al. 1951. The •OH yield and iron(II) wait for a check."}
-  - {n: 3, name: Catalase and enzymes, state: planned, summary: "Chance's scheme with inactivation; constants per enzyme from Switala and Loewen 2002."}
-  - {n: 4, name: Iodide and copper, state: planned, summary: "Liebhafsky's rate law with the Bray-Liebhafsky steps; copper after Pham et al. 2013."}
-  - {n: 5, name: Solid oxides, state: planned, summary: "Measured surface rate constants, then a UMA •OH descriptor if it passes its ranking check."}
-  - {n: 6, name: Metals and vapor, state: planned, summary: "Metals from measured rates, then peroxide vapor over catalysts."}
+  - {n: 3, name: Measured catalyst library, state: next, summary: "Every class selectable on the Run page from measured rates inside their measured ranges: ZrO2 and HfO2 ready; catalases, iodide, copper, more oxides and platinum-group metals as their papers arrive."}
+  - {n: 4, name: Oxides and metals by formula, state: planned, summary: "Crystal from the Materials Project, •OH binding from Meta's UMA model, scored against the measured oxides; shown once its ranking passes."}
+  - {n: 5, name: Catalase and enzymes, state: planned, summary: "Chance's scheme with inactivation, so rates follow H2O2 and time; constants per enzyme from Switala and Loewen 2002."}
+  - {n: 6, name: Iodide and copper, state: planned, summary: "Liebhafsky's rate law with the Bray-Liebhafsky steps; copper after Pham et al. 2013."}
+  - {n: 7, name: Vapor, state: planned, summary: "Peroxide vapor over catalysts."}
 
 recent:
+  - date: 2026-10-31
+    text: >-
+      Started the measured catalyst library and its page. Every catalyst class is listed with its source; ZrO2 and
+      HfO2 powders run on the Run page inside the loadings, temperatures and H2O2 their laboratory measured, and
+      their values pass a consistency check against the thesis they come from. Twelve entries wait for papers, each
+      named on the Catalyst library page. Reading the thesis found its Table 3 exchanging the CeO2 and CuO constants.
   - date: 2026-10-31
     text: >-
       Added dissolved iron(III). The engine solves De Laat and Gallard's fifteen-step mechanism in time, with
@@ -36,8 +45,10 @@ recent:
       solutions with oxygen conserved to 1e-14.
 
 next:
+  - The library papers on the list below, catalyst by catalyst, each through the consistency check.
+  - Phase 4, any oxide or metal by formula, with the Materials Project and Meta's UMA model.
+  - Heat capacities from Giguère and Carmichael 1962 (now in cache/papers/), for heat at other temperatures and the temperature rise.
   - Densities of peroxide solutions (Easton et al. 1952, now in cache/papers/), for strengths by weight percent, with a check.
-  - Heat capacity of peroxide solutions (Giguère and Carmichael 1962), for heat at other temperatures and the temperature rise. The PDF saved for it, jp9b01057.pdf, is Li and Buckin 2019 (oxygen in supersaturated solutions); the paper needed is doi 10.1021/je60015a024.
   - A measured hydroxyl radical yield for iron (a benzoic acid or dimethyl sulfoxide trap), to check that output.
   - Phase 3, catalase and the enzyme library.
 
@@ -54,10 +65,26 @@ papers:
     - {phase: 2, cite: "Kwan & Voelker 2002, Environ. Sci. Technol. 36, 1467", doi: 10.1021/es011109p, need: "Measured decomposition rates with dissolved iron near neutral pH, for the check."}
     - {phase: 2, cite: "Buxton et al. 1988, J. Phys. Chem. Ref. Data 17, 513", doi: 10.1063/1.555805, need: "Rate constants for •OH with H2O2, HO2-, Fe(II) and organics."}
     - {phase: 2, cite: "Bielski et al. 1985, J. Phys. Chem. Ref. Data 14, 1041", doi: 10.1063/1.555739, need: "Rate constants and pKa of HO2•/O2•-."}
+    - {phase: 3, cite: "Switala & Loewen 2002, Arch. Biochem. Biophys. 401, 145", doi: 10.1016/S0003-9861(02)00049-8, need: "kcat and apparent Km of sixteen catalases, with the assay conditions."}
+    - {phase: 3, cite: "Aebi 1984, Methods Enzymol. 105, 121", doi: 10.1016/S0076-6879(84)05016-3, need: "The standard catalase assay and its first-order rate constant."}
+    - {phase: 3, cite: "Ogura 1955, Arch. Biochem. Biophys. 57, 288", doi: 10.1016/0003-9861(55)90291-5, need: "Catalase at high H2O2 and its loss of activity."}
+    - {phase: 3, cite: "Chance, Greenstein & Roughton 1952, Arch. Biochem. Biophys. 37, 301", doi: 10.1016/0003-9861(52)90194-X, need: "Catalase's step rate constants."}
+    - {phase: 3, cite: "Liebhafsky 1932, J. Am. Chem. Soc. 54, 1792", doi: 10.1021/ja01344a011, need: "Iodide-catalyzed rate at 25 °C."}
+    - {phase: 3, cite: "Liebhafsky 1932 (II and III), J. Am. Chem. Soc. 54, 3499", doi: 10.1021/ja01348a003, need: "Iodide: temperature and acid."}
+    - {phase: 3, cite: "Pham, Xing, Miller & Waite 2013, J. Catal. 301, 54", doi: 10.1016/j.jcat.2013.01.025, need: "Copper mechanism and rate constants."}
+    - {phase: 3, cite: "Lousada, Johansson, Brinck & Jonsson 2012, J. Phys. Chem. C 116, 9533", doi: 10.1021/jp300255h, need: "The journal values for CeO2, CuO, Fe2O3, Gd2O3, TiO2 and Y2O3."}
+    - {phase: 3, cite: "Hiroki & LaVerne 2005, J. Phys. Chem. B 109, 3364", doi: 10.1021/jp046405d, need: "SiO2, Al2O3, TiO2, CeO2 and ZrO2 nanoparticles."}
+    - {phase: 3, cite: "Do, Batchelor, Lee & Kong 2009, Chemosphere 75, 8", doi: 10.1016/j.chemosphere.2008.11.075, need: "MnO2 (pyrolusite) rate law and constants."}
+    - {phase: 3, cite: "Lin & Gurol 1998, Environ. Sci. Technol. 32, 1417", doi: 10.1021/es970648k, need: "Goethite rate law and constants."}
+    - {phase: 3, cite: "Serra-Maia et al. 2018, ACS Appl. Mater. Interfaces 10, 21224, with its Supporting Information", doi: 10.1021/acsami.8b02345, need: "Platinum rate data with their H2O2 and pH ranges."}
+    - {phase: 3, cite: "McKee 1969, J. Catal. 14, 355", doi: 10.1016/0021-9517(69)90326-1, need: "Platinum-group metals and alloys."}
     - {phase: 1, cite: "Giguère & Carmichael 1962, J. Chem. Eng. Data 7, 526", doi: 10.1021/je60015a024, need: "Heat capacities of H2O2-water solutions, 25-60 °C."}
     - {phase: 1, cite: "Easton, Mitchell & Wynne-Jones 1952, Trans. Faraday Soc. 48, 796", doi: 10.1039/TF9524800796, need: "Densities of H2O2-water solutions."}
 
 findings:
+  - >-
+    Lousada's 2013 thesis, Table 3, gives the CeO2 and CuO second-order constants exchanged; its Figure 16 and the
+    k1 values in the same table follow the other assignment.
   - >-
     De Laat and Gallard's eq 24, as printed, drops the factor 2 that follows from their eqs 21 and 22. With it, kd at
     pH 3 is 0.51 L/(mol·s), beside the 0.47 ± 0.03 they measured; as printed, 0.25.
@@ -77,6 +104,9 @@ findings:
     An initial rate measured over the first 10% of a first-order decay reads about 5% below k × [H2O2]0.
 
 decisions:
+  - >-
+    The measured catalyst library comes next, so every catalyst class is selectable, then any oxide or metal by
+    formula through the Materials Project and Meta's UMA model (your choice, 2026-10-31).
   - >-
     The app shows measured values and checked models only; the rest waits in experiments/ and in the Methodology
     page's limits (your choice, 2026-10-31).

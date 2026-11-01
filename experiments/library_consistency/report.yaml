@@ -1,0 +1,21 @@
+order: 8
+title: "Measured catalyst library: each catalyst against its own source"
+question: >-
+  Does every catalyst the library runs hold the values its source prints, and do those values reproduce the other
+  numbers the same source reports?
+compared: >-
+  The {n_ready} catalysts ready to run ({ready_names}) against their source, Lousada's 2013 thesis read from its page
+  images: each stored value against its printed text, the measured rate at a stated surface area against the
+  source's straight line, the rate at 80 °C from the rate at 25 °C through the activation energy, the
+  pre-exponential factor, and the surface area from the mass and the B.E.T. area.
+result: >-
+  All {transcription_within} of {transcription_total} stored values match their printed text, and all
+  {consistency_within} of {consistency_total} related numbers are reproduced within their printed precision. The
+  largest gap is ZrO2 at its standard 7.5 m² in 50 mL: the source's line gives 6.59 × 10⁻⁵ per second against the
+  printed 6.15 × 10⁻⁵, a gap of {largest_k1_gap:.0%}; the thesis's own two measurements at that amount, 6.15 and 5.67
+  × 10⁻⁵, differ by 8%, and the line's intercept is printed to one figure. The library lists {n_entries} entries in
+  all; {n_awaiting} wait for a paper, each named on the Catalyst library page.
+why_it_matters: >-
+  A measured catalyst runs on the app exactly as its laboratory measured it, inside the H2O2, temperature and
+  amount ranges the laboratory covered. While reading the thesis this check also found its Table 3 exchanging the
+  CeO2 and CuO constants, so those two wait for the journal version.

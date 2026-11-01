@@ -1,0 +1,29 @@
+# Metals. Ready entries carry the rate law a laboratory measured and the conditions it was measured over.
+
+- id: pt_serra_maia
+  name: Platinum black and platinum nanopowder
+  class: metal
+  material: "Platinum black (8.8 nm) and platinum nanopowder (19.9 nm), as received and after heating or peroxide treatment"
+  status: awaiting
+  needs: >-
+    The 2018 paper and its Supporting Information (Serra-Maia et al., ACS Appl. Mater. Interfaces 10, 21224), for the
+    H2O2 and pH ranges of the rate data. The 2021 rate law, R = 10^2.87 exp(−24.3 kJ/mol / RT) θ^0.828 C^0.920
+    a(H+)^0.037 in mol/(m² s), fits initial rates, and the surface oxygen θ changes as a run proceeds, so a full run
+    also needs the time course the 2018 data hold.
+  source:
+    cite: Serra-Maia et al. 2021
+    reference: "R. Serra-Maia, J. D. Rimstidt, F. M. Michel, Catal. Lett. 151, 138 (2021); data from R. Serra-Maia et al., ACS Appl. Mater. Interfaces 10, 21224 (2018)"
+    doi: 10.1007/s10562-020-03280-2
+    locator: "eq 6 and Table 3, pp. 141–143"
+
+- id: pt_group_mckee
+  name: Platinum-group metals and their alloys
+  class: metal
+  material: Metal surfaces of the platinum group
+  status: awaiting
+  needs: The paper for its measured rates, surface areas and temperatures.
+  source:
+    cite: McKee 1969
+    reference: "D. W. McKee, J. Catal. 14, 355 (1969)"
+    doi: 10.1016/0021-9517(69)90326-1
+    locator: the rate tables

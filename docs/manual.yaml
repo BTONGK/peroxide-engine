@@ -10,7 +10,10 @@ steps:
       depends on its loading, use the k you measured at the loading you plan to simulate. "Dissolved iron(III) in
       perchloric acid" computes the rate itself from the iron mechanism: enter the iron added (50–1000 µmol/L) and the
       measured pH (1.0–3.2). The iron runs at 25.00 °C and ionic strength 0.1 M, the conditions the model was built
-      and checked at, and the pH stays fixed through the run, as in a buffered or strongly acidic solution.
+      and checked at, and the pH stays fixed through the run, as in a buffered or strongly acidic solution. "A
+      measured catalyst from the library" runs a catalyst a laboratory measured, such as a ZrO2 or HfO2 powder: pick
+      it, then set the loading in g/L and the temperature, each inside the range the laboratory measured. The Catalyst
+      library page lists every catalyst with its source and ranges, and the paper each waiting catalyst needs.
   - title: 2. Describe the solution
     body: >-
       Set the starting H2O2 in mmol/L (up to 1000), the temperature (5–55 °C, or 25 °C for iron) and the room's

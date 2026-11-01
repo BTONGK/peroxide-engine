@@ -14,7 +14,8 @@ written down before the comparison (`experiments/<check>/PASS_RULE.md`).
 Phases 0 to 2 are built: thermochemistry from the NBS tables (with the heat of dilution at every strength), water
 from the IAPWS equations, oxygen solubility from Benson, Krause and Peterson, the batch vessel (gas burette, sealed or
 open, oxygen in balance or crossing the surface at kLa), titrations, the lab's fits, and dissolved iron(III) by the De
-Laat and Gallard mechanism (pH 1.0–3.2, 25 °C, perchlorate). Six checks pass and one is missed:
+Laat and Gallard mechanism (pH 1.0–3.2, 25 °C, perchlorate). Phase 3, the measured catalyst library, is under way.
+Seven checks pass and one is missed:
 
 | Check | Result |
 |---|---|
@@ -24,10 +25,13 @@ Laat and Gallard mechanism (pH 1.0–3.2, 25 °C, perchlorate). Six checks pass 
 | Exact solutions | H2O2 within 2e-11 of the exact solution; oxygen conserved to 1e-14 |
 | Iron model as printed | Every printed hydrolysis constant and ten derived values reproduced (within 3.9%) |
 | Iron rates, fitted constant held out | All 22 of De Laat and Gallard's runs within a factor of 2 (largest gap 1.42) |
+| Measured catalyst library | ZrO2 and HfO2: every stored value matches its printed text; every related rate, temperature and area the thesis prints is reproduced |
 | Iron, another laboratory (missed) | Barb et al.'s rates: 8 of 8 within a factor of 2, typical gap 1.18; their iron(II): typical gap 1.52, above the rule's 1.41, so iron(II) stays off the app |
 
-The catalyst enters as dissolved iron(III) or as a first-order rate constant you supply. Mechanisms for enzymes,
-iodide, copper, oxides and metals follow, each after it passes a check against measured rates (`docs/status.yaml`).
+The catalyst enters as dissolved iron(III), as a measured catalyst from the library (the Catalyst library page lists
+every class, with the paper each waiting catalyst needs), or as a first-order rate constant you supply. Next: any
+oxide or metal by formula through the Materials Project and Meta's UMA model, then mechanisms for enzymes, iodide
+and copper, each after it passes a check against measured rates (`docs/status.yaml`).
 
 ## Use
 

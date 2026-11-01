@@ -1,0 +1,15 @@
+# Numbers the sources print beside the stored values, for the consistency check. Read from the page images.
+zro2_lousada:
+  k1_at_area:
+    - {area_m2: 7.5, volume_L: 0.05, T_K: 298.15, value: 6.15e-5, uncertainty: 0.04e-5, printed: "(6.15 ± 0.04) x 10-5", locator: "Table 3, p. 42; p. 30"}
+  arrhenius:
+    - {T1_K: 298.15, k1: 5.670e-5, k1_uncertainty: 0.003e-5, T2_K: 353.15, value: 4.50e-4, uncertainty: 0.01e-4, printed: "(5.670 ± 0.003) x 10-5 s-1 to (4.50 ± 0.01) x 10-4 s-1", locator: "p. 31"}
+  A_at_area: {area_m2: 7.5, volume_L: 0.05, k1: 6.15e-5, k1_uncertainty: 0.04e-5, locator: "Table 3 and Table 4, pp. 42–43"}
+  mass_area:
+    - {mass_g: 1.5, area_m2: 7.5, locator: "p. 30, ZrO2 (1.5 g; Sa = 7.5 m2)"}
+hfo2_lousada:
+  k1_at_area:
+    - {area_m2: 7.5, volume_L: 0.05, T_K: 298.15, value: 4.3e-4, uncertainty: 0.9e-4, printed: "(4.3 ± 0.9) × 10-4", locator: "Table 3, p. 42"}
+  A_at_area: {area_m2: 7.5, volume_L: 0.05, k1: 4.3e-4, k1_uncertainty: 0.9e-4, locator: "Table 3 and Table 4, pp. 42–43"}
+  mass_area:
+    - {mass_g: 0.75, area_m2: 7.5, locator: "p. 23 (0.75 g, the upper mass) and Table 3 (Sa 7.5 m2)"}

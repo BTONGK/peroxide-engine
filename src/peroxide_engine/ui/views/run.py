@@ -6,18 +6,19 @@ import pandas as pd
 import streamlit as st
 
 from peroxide_engine import assays, vessel
-from peroxide_engine.catalysts import iron
+from peroxide_engine.catalysts import iron, library
 from peroxide_engine.ui.common import sig
 
 T0 = 273.15
 ARRANGEMENTS = {"Gas burette": "burette", "Sealed vessel with a pressure gauge": "closed", "Open vessel": "open"}
-CATALYSTS = ["A rate constant you supply", "Dissolved iron(III) in perchloric acid"]
+CATALYSTS = ["A rate constant you supply", "Dissolved iron(III) in perchloric acid", "A measured catalyst from the library"]
 
 st.title("Run an experiment")
 st.caption("Choose the catalyst and the apparatus; the engine computes what each instrument reads.")
 
 catalyst = st.radio("Catalyst", CATALYSTS, horizontal=True)
 is_iron = catalyst == CATALYSTS[1]
+is_lib = catalyst == CATALYSTS[2]
 
 c1, c2, c3 = st.columns(3)
 with c1:
@@ -30,6 +31,28 @@ with c1:
         c0_mM = st.number_input("Starting H2O2 (mmol/L)", min_value=0.2, max_value=1000.0, value=50.0, format="%.3f")
         st.caption("25.00 °C and ionic strength 0.1 M (NaClO4), the conditions of De Laat and Gallard's runs.")
         t_C = 25.0
+    elif is_lib:
+        ready = {e.id: e for e in library.runnable()}
+        entry = ready[st.selectbox("Measured catalyst", list(ready), format_func=lambda i: ready[i].name)]
+        law = entry.law
+        st.caption(f"{entry.material}. Measured in {law.medium}. Source: {entry.source.cite}.")
+        per_g = law.specific_area.value * 1e3  # Sa/V per g/L
+        m_lo, m_hi = (a / per_g for a in law.area_per_volume_per_m)
+        mass = st.number_input("Catalyst loading (g/L)", min_value=m_lo, max_value=m_hi, value=(m_lo + m_hi) / 2,
+                               format="%.3f", help="The range of loadings the source measured; the surface area "
+                                                   "follows from its B.E.T. specific surface area.")
+        av = law.area_per_volume(mass)
+        T_lo, T_hi = max(law.T_range_K[0] - T0, 5.0), min(law.T_range_K[1] - T0, 55.0)
+        t_C = st.number_input("Temperature (°C)", min_value=T_lo, max_value=T_hi, value=T_lo, step=0.5, format="%.2f",
+                              help="The source's measured range, within the app's 5–55 °C.")
+        c_lo, c_hi = (c * 1e3 for c in law.c0_M)
+        if c_lo == c_hi:
+            c0_mM = c_lo
+            st.caption(f"Starting H2O2: {c0_mM:g} mmol/L, the concentration every measured run started at.")
+        else:
+            c0_mM = st.number_input("Starting H2O2 (mmol/L)", min_value=c_lo, max_value=c_hi, value=c_lo,
+                                    format="%.3f")
+        k = law.k_obs(av, t_C + T0)
     else:
         k = st.number_input("Rate constant k at the run temperature (1/s)", min_value=1e-9, max_value=10.0,
                             value=1e-3, format="%.3e", help="First order in H2O2. From a half-life: k = 0.693 / half-life.")
@@ -52,6 +75,9 @@ with c3:
                               help="Your vessel's oxygen transfer coefficient, measured by the dynamic method.")
     if is_iron:
         until = st.slider("Run until this share of the H2O2 is gone (%)", 20, 95, 80, 5)
+    elif is_lib:
+        halves = st.slider("Run length (half-lives)", 1.0, 3.5, 3.0, 0.5,
+                           help="Up to 3.5 half-lives: the measured ZrO2 decay stays first order down to 8% of the start.")
     else:
         halves = st.slider("Run length (half-lives)", 1.0, 10.0, 5.0, 0.5)
 
@@ -86,11 +112,22 @@ else:
     setup = vessel.Setup(c0_M=c0_mM / 1000, k_per_s=k, liquid_mL=liquid, gas_mL=gas, T_K=t_C + T0,
                          pressure_Pa=p_kPa * 1000, headspace=ARRANGEMENTS[arrangement], kLa_per_s=kla,
                          t_end_s=halves * np.log(2) / k)
-    problems = setup.validate()
+    problems = setup.validate() + (law.check(av, c0_mM / 1000, t_C + T0) if is_lib else [])
     for p in problems:
         st.error(p)
     if problems:
         st.stop()
+    if is_lib:
+        lo, hi = law.k_band(av, t_C + T0)
+        extra = [
+            dict(name="k_obs from the measured line", value=k, units="1/s",
+                 how=f"k2 × Sa/V + b, carried to the run temperature by Ea = {law.Ea.printed} kJ/mol "
+                     f"({entry.source.cite}). With the printed uncertainties of k2, b and Ea: {sig(lo)}–{sig(hi)}."),
+            dict(name="Surface area per liter", value=av / 1e3, units="m²/L",
+                 how=f"Loading × the B.E.T. specific surface area, {law.specific_area.printed}."),
+            dict(name="Surface-normalized constant k2 at 25 °C", value=law.k2.value, units="m/s",
+                 how=f"Printed {law.k2.printed} m/s ({law.k2.locator})."),
+        ]
 
 
 @st.cache_data(show_spinner="Computing the run…")
@@ -115,6 +152,9 @@ st.dataframe(table, hide_index=True, width="stretch")
 if is_iron:
     st.caption("Iron model: De Laat and Gallard 1999, checked against their own runs with its one fitted constant "
                "held out, and against Barb et al.'s 1951 rates; the Model checks page shows both.")
+if is_lib:
+    st.caption(f"Measured catalyst: {entry.source.cite}. The Catalyst library page lists its measured ranges and "
+               "source; the Model checks page shows its consistency check.")
 if "heat_flow_mW" not in series:
     st.caption("Heat appears for runs at 25.00 °C in the burette and sealed arrangements, where the tables measure it "
                "and the energy accounting is complete; the Methodology page explains.")

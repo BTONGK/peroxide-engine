@@ -1,0 +1,142 @@
+{
+  "verdict": "passed",
+  "n_ready": 2,
+  "ready_names": "Zirconium dioxide (ZrO2) powder and Hafnium dioxide (HfO2) powder",
+  "n_entries": 15,
+  "n_awaiting": 12,
+  "transcription_within": 10,
+  "transcription_total": 10,
+  "consistency_within": 7,
+  "consistency_total": 7,
+  "largest_k1_gap": 0.07073170731707301,
+  "transcription": [
+    {
+      "catalyst": "zro2_lousada",
+      "value_name": "k2",
+      "printed": "(2.39 \u00b1 0.09) x 10-10",
+      "stored": 2.39e-10,
+      "within": true
+    },
+    {
+      "catalyst": "zro2_lousada",
+      "value_name": "intercept",
+      "printed": "3 \u00d7 10-5",
+      "stored": 3e-05,
+      "within": true
+    },
+    {
+      "catalyst": "zro2_lousada",
+      "value_name": "Ea",
+      "printed": "33 \u00b1 1",
+      "stored": 33.0,
+      "within": true
+    },
+    {
+      "catalyst": "zro2_lousada",
+      "value_name": "A",
+      "printed": "30",
+      "stored": 30.0,
+      "within": true
+    },
+    {
+      "catalyst": "zro2_lousada",
+      "value_name": "specific_area",
+      "printed": "5.0 \u00b1 0.2 m2\u00b7g-1",
+      "stored": 5.0,
+      "within": true
+    },
+    {
+      "catalyst": "hfo2_lousada",
+      "value_name": "k2",
+      "printed": "(2.78 \u00b1 0.02) \u00d7 10-9",
+      "stored": 2.78e-09,
+      "within": true
+    },
+    {
+      "catalyst": "hfo2_lousada",
+      "value_name": "intercept",
+      "printed": "1 \u00d7 10-5",
+      "stored": 1e-05,
+      "within": true
+    },
+    {
+      "catalyst": "hfo2_lousada",
+      "value_name": "Ea",
+      "printed": "60 \u00b1 1",
+      "stored": 60.0,
+      "within": true
+    },
+    {
+      "catalyst": "hfo2_lousada",
+      "value_name": "A",
+      "printed": "1.1 \u00d7 107",
+      "stored": 11000000.0,
+      "within": true
+    },
+    {
+      "catalyst": "hfo2_lousada",
+      "value_name": "specific_area",
+      "printed": "10.0 \u00b1 0.1 m2\u00b7g-1",
+      "stored": 10.0,
+      "within": true
+    }
+  ],
+  "consistency": [
+    {
+      "catalyst": "zro2_lousada",
+      "compared": "k1 at a stated surface area",
+      "printed": 6.15e-05,
+      "computed": 6.585e-05,
+      "allowed": 6.75e-06,
+      "within": true
+    },
+    {
+      "catalyst": "zro2_lousada",
+      "compared": "k1 at 353.15 K from k1 at 298.15 K",
+      "printed": 0.00045,
+      "computed": 0.00045079319050896587,
+      "allowed": 3.0416446817987003e-05,
+      "within": true
+    },
+    {
+      "catalyst": "zro2_lousada",
+      "compared": "A exp(-Ea/RT) at 298.15 K against k1",
+      "printed": 6.15e-05,
+      "computed": 4.963309799620428e-05,
+      "allowed": 4.1209271981521416e-05,
+      "within": true
+    },
+    {
+      "catalyst": "zro2_lousada",
+      "compared": "surface area from mass and B.E.T. area",
+      "printed": 7.5,
+      "computed": 7.5,
+      "allowed": 0.30000000000000004,
+      "within": true
+    },
+    {
+      "catalyst": "hfo2_lousada",
+      "compared": "k1 at a stated surface area",
+      "printed": 0.00043,
+      "computed": 0.000427,
+      "allowed": 9.800000000000001e-05,
+      "within": true
+    },
+    {
+      "catalyst": "hfo2_lousada",
+      "compared": "A exp(-Ea/RT) at 298.15 K against k1",
+      "printed": 0.00043,
+      "computed": 0.00033872516681744425,
+      "allowed": 0.00032321190905040104,
+      "within": true
+    },
+    {
+      "catalyst": "hfo2_lousada",
+      "compared": "surface area from mass and B.E.T. area",
+      "printed": 7.5,
+      "computed": 7.5,
+      "allowed": 0.07500000000000001,
+      "within": true
+    }
+  ]
+}

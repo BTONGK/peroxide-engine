@@ -1,0 +1,141 @@
+# Solid oxides. Ready entries carry the rate law a laboratory measured, the values as printed and the conditions they
+# were measured over. Values from Lousada's thesis were read from its page images; page numbers are the thesis's own
+# (the PDF page follows in brackets).
+
+- id: zro2_lousada
+  name: Zirconium dioxide (ZrO2) powder
+  class: oxide
+  material: "Aldrich 99%, particles below 5 µm, B.E.T. surface 5.0 ± 0.2 m²/g; monoclinic by XRD (thesis p. 22)"
+  status: ready
+  law:
+    kind: surface_first_order
+    k2: {value: 2.39e-10, uncertainty: 0.09e-10, units: m/s, printed: "(2.39 ± 0.09) x 10-10", locator: "Table 3, p. 42 [PDF 53]; also p. 31"}
+    intercept: {value: 3.0e-5, uncertainty: 0.5e-5, units: 1/s, printed: "3 × 10-5", locator: "Table 3, p. 42 [PDF 53], column b2", note: "printed to one figure; the uncertainty is half a unit of that figure"}
+    T_ref_K: 298.15
+    Ea: {value: 33, uncertainty: 1, units: kJ/mol, printed: "33 ± 1", locator: "Table 4, p. 43 [PDF 54]; p. 31"}
+    A: {value: 30, uncertainty: 5, units: 1/s, printed: "30", locator: "Table 4, p. 43 [PDF 54]", note: "pre-exponential factor of k1 at the standard 7.5 m² in 50 mL; half a unit of the last printed digit"}
+    specific_area: {value: 5.0, uncertainty: 0.2, units: m2/g, printed: "5.0 ± 0.2 m2·g-1", locator: "p. 23 [PDF 34]"}
+    T_range_K: [298.15, 353.15]
+    area_per_volume_per_m: [50000, 450000]
+    c0_M: [0.5e-3, 6.0e-3]
+    medium: "Pure water (Milli-Q) under flowing N2, stirred suspension, 50 mL"
+    ranges_from: >-
+      Temperature: the Arrhenius series, 298.15–353.15 K (p. 31). Amount: 0.5–4.5 g of ZrO2 in 50 mL (p. 23), which
+      with 5.0 m²/g is 50,000–450,000 m⁻¹. H2O2: first order from 0.5 to 6 mM (slope 0.98 ± 0.04, p. 30).
+  source:
+    cite: Lousada 2013
+    reference: "C. M. Lousada Patrício, Reactions of aqueous radiolysis products with oxide surfaces: an experimental and DFT study, PhD thesis, KTH Royal Institute of Technology, Stockholm (2013); the ZrO2 work also in C. M. Lousada, M. Jonsson, J. Phys. Chem. C 114, 11202 (2010)"
+    url: "https://www.skc.kth.se/polopoly_fs/1.469648!/Reactions%20of%20aqueous%20radiolysis%20products%20with%20oxide%20surfaces.pdf"
+    locator: "Table 3 (p. 42), Table 4 (p. 43), pp. 22–23 and 30–31"
+  notes: >-
+    The fitted line k1 = k2 × Sa/V + b reproduces the measured k1 over the measured amounts; the app uses the whole
+    line, intercept included, and runs it only over those amounts.
+
+- id: hfo2_lousada
+  name: Hafnium dioxide (HfO2) powder
+  class: oxide
+  material: "Alfa Aesar 99.95%, particles 44 µm, B.E.T. surface 10.0 ± 0.1 m²/g (thesis p. 23)"
+  status: ready
+  law:
+    kind: surface_first_order
+    k2: {value: 2.78e-9, uncertainty: 0.02e-9, units: m/s, printed: "(2.78 ± 0.02) × 10-9", locator: "Table 3, p. 42 [PDF 53]"}
+    intercept: {value: 1.0e-5, uncertainty: 0.5e-5, units: 1/s, printed: "1 × 10-5", locator: "Table 3, p. 42 [PDF 53], column b2", note: "printed to one figure; the uncertainty is half a unit of that figure"}
+    T_ref_K: 298.15
+    Ea: {value: 60, uncertainty: 1, units: kJ/mol, printed: "60 ± 1", locator: "Table 4, p. 43 [PDF 54]"}
+    A: {value: 1.1e7, uncertainty: 0.05e7, units: 1/s, printed: "1.1 × 107", locator: "Table 4, p. 43 [PDF 54]", note: "pre-exponential factor of k1 at the standard 7.5 m² in 50 mL; half a unit of the last printed digit"}
+    specific_area: {value: 10.0, uncertainty: 0.1, units: m2/g, printed: "10.0 ± 0.1 m2·g-1", locator: "p. 23 [PDF 34]"}
+    T_range_K: [298.15, 334.15]
+    area_per_volume_per_m: [20000, 150000]
+    c0_M: [0.5e-3, 0.5e-3]
+    medium: "Pure water (Milli-Q) under flowing N2, stirred suspension, 50 mL"
+    ranges_from: >-
+      Temperature: 298.15–334.15 K (p. 42). Amount: 0.1–0.75 g of HfO2 in 50 mL (p. 23, printed as [0.75–0.1] g),
+      which with 10.0 m²/g is 20,000–150,000 m⁻¹, the span of the HfO2 points in Figure 16 (p. 41). H2O2: every
+      HfO2 run started at 0.5 mM, and the decay is first order through most of each run (p. 41).
+  source:
+    cite: Lousada 2013
+    reference: "C. M. Lousada Patrício, Reactions of aqueous radiolysis products with oxide surfaces: an experimental and DFT study, PhD thesis, KTH Royal Institute of Technology, Stockholm (2013); the same work in C. M. Lousada, A. J. Johansson, T. Brinck, M. Jonsson, J. Phys. Chem. C 116, 9533 (2012)"
+    url: "https://www.skc.kth.se/polopoly_fs/1.469648!/Reactions%20of%20aqueous%20radiolysis%20products%20with%20oxide%20surfaces.pdf"
+    locator: "Table 3 (p. 42), Table 4 (p. 43), Figure 16 (p. 41), p. 23"
+  notes: >-
+    Measured at 0.5 mM H2O2 only, so the app starts every HfO2 run at 0.5 mM.
+
+- id: ceo2_cuo_lousada
+  name: Cerium dioxide, CeO2, and copper(II) oxide, CuO
+  class: oxide
+  material: "CeO2 Alfa Aesar 99.99%, 14 µm, 14.3 m²/g; CuO Aldrich 99.99%, below 50 nm, 15.3 m²/g (thesis p. 22–23)"
+  status: awaiting
+  needs: >-
+    The journal version, Lousada et al. 2012. In the thesis's Table 3 the second-order constants of CeO2 and CuO
+    read as exchanged: Figure 16's CuO points climb about 2.7 × 10⁻⁸ m/s and the CeO2 points about 1.2 × 10⁻⁹ m/s,
+    and the k1 values the table prints match the figure's assignment.
+  source:
+    cite: Lousada et al. 2012
+    reference: "C. M. Lousada, A. J. Johansson, T. Brinck, M. Jonsson, J. Phys. Chem. C 116, 9533 (2012)"
+    doi: 10.1021/jp300255h
+    locator: the kinetics table and the surface-area series
+
+- id: fe2o3_lousada
+  name: Iron(III) oxide, Fe2O3
+  class: oxide
+  material: "Aldrich 99%, below 5 µm, 9.0 m²/g (thesis p. 22–23)"
+  status: awaiting
+  needs: >-
+    The journal version, Lousada et al. 2012. The thesis prints k1 = 2.1 × 10⁻⁴ s⁻¹ at 4.5 m², while its own fitted line gives
+    4.7 × 10⁻⁴ there, and iron dissolved from the oxide adds a Fenton contribution in the solution.
+  source:
+    cite: Lousada et al. 2012
+    reference: "C. M. Lousada, A. J. Johansson, T. Brinck, M. Jonsson, J. Phys. Chem. C 116, 9533 (2012)"
+    doi: 10.1021/jp300255h
+    locator: the kinetics table and the surface-area series
+
+- id: gd2o3_tio2_y2o3_lousada
+  name: Gadolinium oxide Gd2O3, titanium dioxide TiO2 and yttrium oxide Y2O3
+  class: oxide
+  material: "Gd2O3 15 nm, 1.7 m²/g; TiO2 32 nm (88.5% anatase), 38.9 m²/g; Y2O3 below 10 µm, 4.48 m²/g (thesis p. 22–23)"
+  status: awaiting
+  needs: >-
+    The journal version, Lousada et al. 2012. Gd2O3 follows first order over a part of each run that the thesis leaves
+    unstated; for TiO2 and Y2O3 the decay after adsorption is zeroth order, and the surface-normalized constants in
+    Table 3 give rates far below the measured k0.
+  source:
+    cite: Lousada et al. 2012
+    reference: "C. M. Lousada, A. J. Johansson, T. Brinck, M. Jonsson, J. Phys. Chem. C 116, 9533 (2012)"
+    doi: 10.1021/jp300255h
+    locator: the kinetics table and the surface-area series
+
+- id: nano_oxides_hiroki
+  name: SiO2, Al2O3, TiO2, CeO2 and ZrO2 nanoparticles
+  class: oxide
+  material: Nanometer-sized powders in water
+  status: awaiting
+  needs: The paper for its first-order rate constants, surface areas and temperatures.
+  source:
+    cite: Hiroki & LaVerne 2005
+    reference: "A. Hiroki, J. A. LaVerne, J. Phys. Chem. B 109, 3364 (2005)"
+    doi: 10.1021/jp046405d
+    locator: the rate-constant table
+
+- id: mno2_do
+  name: Manganese dioxide, MnO2 (pyrolusite)
+  class: oxide
+  material: Pyrolusite powder
+  status: awaiting
+  needs: The paper for the rate law, its constants, the surface area and the pH range.
+  source:
+    cite: Do et al. 2009
+    reference: "S.-H. Do, B. Batchelor, H.-K. Lee, S.-H. Kong, Chemosphere 75, 8 (2009)"
+    doi: 10.1016/j.chemosphere.2008.11.075
+    locator: the kinetics section
+
+- id: goethite_lin
+  name: Iron oxide, goethite (α-FeOOH)
+  class: oxide
+  material: Granular goethite
+  status: awaiting
+  needs: The paper for the rate law, its constants and the conditions.
+  source:
+    cite: Lin & Gurol 1998
+    reference: "S.-S. Lin, M. D. Gurol, Environ. Sci. Technol. 32, 1417 (1998)"
+    doi: 10.1021/es970648k
+    locator: the kinetics section
