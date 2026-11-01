@@ -18,6 +18,7 @@ LABELS = {
     "group_b": "Values the papers derive and print",
     "kd_rows": "Second-order constant kd (k11a = 1e3)",
     "fe2_rows": "Ferrous iron (k11a = 1e3)",
+    "secondary_rows": "UMA-S 1.2.1, oxide mode (reported beside the verdict)",
 }
 
 

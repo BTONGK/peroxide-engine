@@ -1,23 +1,69 @@
-updated: 2026-10-31
+updated: 2026-11-01
 summary: >-
-  Phases 0 to 2 are built: the scaffold, constants with provenance, the exact physics of the experiment (heat, oxygen
-  solubility, the vessel, assays and the lab's fits), and dissolved iron(III) by the De Laat and Gallard mechanism.
-  Six checks pass. The seventh, against another laboratory, passes for rates and misses for iron(II), so the app shows
-  iron rates and keeps iron(II) in the Methodology limits. Phase 3, the measured catalyst library, is under way: every
-  catalyst class is listed, ZrO2 and HfO2 run today, and the rest join as their papers arrive. Phase 4 brings any
-  oxide or metal by formula through the Materials Project and Meta's UMA model.
+  Phases 0 to 3 are built: the scaffold, constants with provenance, the exact physics of the experiment (heat, oxygen
+  solubility, the vessel, assays and the lab's fits), dissolved iron(III) by the De Laat and Gallard mechanism, and a
+  measured catalyst library. Phase 4 is under way: the engine computes catalysts itself, from the crystal alone. It
+  takes a structure from the Materials Project, cuts every stable face, finds the face with the lowest surface energy
+  and computes how strongly the hydroxyl radical binds there with Meta's UMA model. The eight oxides Lousada measured
+  are the first test set, under a rule written before any energy was computed: the faces come out right, and the
+  first measure of activity, OH binding on the dry face, missed its ranking rule, so computed oxides stay off the app
+  until a better model passes. The pipeline runs from job folders, so the same code runs on this computer for checks
+  and on a GPU cluster for screens of millions of candidates.
 
 phases:
   - {n: 0, name: Scaffold, state: done, summary: "Repository, app, constants with sources, check framework, copy test, status page."}
   - {n: 1, name: Exact physics, state: done, summary: "Heat from the NBS tables, oxygen solubility, water, the vessel with burette, sealed and open arrangements, titrations, the lab's fits."}
   - {n: 2, name: Dissolved iron, state: done, summary: "The De Laat and Gallard Fe(III) mechanism at 25 °C, pH 1.0–3.2, in perchlorate; rates checked against their 22 runs with k6 held out and against Barb et al. 1951. The •OH yield and iron(II) wait for a check."}
-  - {n: 3, name: Measured catalyst library, state: next, summary: "Every class selectable on the Run page from measured rates inside their measured ranges: ZrO2 and HfO2 ready; catalases, iodide, copper, more oxides and platinum-group metals as their papers arrive."}
-  - {n: 4, name: Oxides and metals by formula, state: planned, summary: "Crystal from the Materials Project, •OH binding from Meta's UMA model, scored against the measured oxides; shown once its ranking passes."}
+  - {n: 3, name: Measured catalyst library, state: done, summary: "ZrO2 and HfO2 run on the Run page from their measured rates, inside their measured ranges; every class is listed. Its measurements now serve as test sets for computed catalysts and grow as papers arrive."}
+  - {n: 4, name: Computed catalysts, oxides first, state: next, summary: "Crystal from the Materials Project; every stoichiometric, nonpolar, symmetric face; the face of lowest surface energy; •OH binding from Meta's UMA model; scored against the eight measured oxides under a rule written first. Then metals, alloys, doped and mixed oxides, and the barrier itself."}
   - {n: 5, name: Catalase and enzymes, state: planned, summary: "Chance's scheme with inactivation, so rates follow H2O2 and time; constants per enzyme from Switala and Loewen 2002."}
   - {n: 6, name: Iodide and copper, state: planned, summary: "Liebhafsky's rate law with the Bray-Liebhafsky steps; copper after Pham et al. 2013."}
   - {n: 7, name: Vapor, state: planned, summary: "Peroxide vapor over catalysts."}
+  - {n: 8, name: Screening at scale, state: planned, summary: "Job folders run one per GPU on a cluster. A fast model trained on the UMA results ranks billions of generated compositions; UMA computes the leading hundred thousand; the barrier and a surface rate model the leading thousand; DFT the leading ten; each layer checked against the one above it and against measurement."}
+  - {n: 9, name: Closed loop, state: planned, summary: "Application profiles, a learned model with calibrated uncertainty, AI-chosen batches with random and reference places, lab results in a standard protocol, predictions frozen before each round and scored after, inside a safety envelope a person sets. The Methodology page sets out each step."}
 
 recent:
+  - date: 2026-11-01
+    text: >-
+      The Methodology page now sets out how catalysts are compared and how the search closes into a loop: an
+      application profile (conditions, the goal to make best, the rules every candidate meets); five steps per round
+      (propose, compute, predict, choose, test and learn) with the AI choosing each batch, predictions frozen before
+      measuring, and random and reference places in every batch; the safety envelope a person sets around the AI's
+      choices; the standard lab protocol; and how the loop proves its picks beat chance.
+  - date: 2026-11-01
+    text: >-
+      Two new pages. Compute a catalyst: search the Materials Project by formula or by elements, tick the crystals you
+      want and press Compute; runs wait in a queue, compute in the background one after another, and show every face,
+      surface energy and binding site, with the structures to download. A first run, rock-salt MgO, finished in 5
+      minutes: (100) at 0.74 J/m² against (110) at 2.14 J/m², the face MgO shows. Data collection: every computed
+      crystal, face and binding energy in one place, from app runs, command-line screens and the model checks, with
+      filters and CSV and JSON downloads, beside the measured values they are tested against.
+  - date: 2026-11-01
+    text: >-
+      Screens of many crystals at once: `pe screen` selects every Materials Project crystal that matches a filter
+      (elements, number of elements, atoms per cell, distance from the convex hull), cuts their faces in parallel and
+      splits them into job folders with a SLURM array script, one folder per GPU. The database holds 154,373
+      crystals; 8,357 oxides of up to three elements and 40 atoms lie within 0.05 eV per atom of the hull. A first
+      sample of 20 oxides prepared in 15 seconds; 18 had usable faces, and the 2 set aside (ReO3, UO3) are listed with
+      the reason.
+  - date: 2026-11-01
+    text: >-
+      First test of computed catalysts finished. For the eight oxides Lousada measured, the engine found each
+      crystal's faces and their surface energies with UMA (107 relaxations, about 30 minutes of this computer per
+      oxide) and picked the face the literature reports for seven of the eight. The energy of H2O2 → 2 OH* on that
+      face missed all three rules: ρ = −0.57 against the measured activation energies (the rule asks +0.6), ρ = +0.09
+      against the measured rates, 3 of 8 activation energies within 6 kJ/mol. Computed oxides stay off the app; the
+      Model checks page shows the check with every face, surface energy and site.
+  - date: 2026-11-01
+    text: >-
+      Started computing catalysts from the crystal alone, as you asked: the engine creates its own data, and measured
+      catalysts serve only to test it. New code in compute/: Materials Project lookup (the key travels only in the
+      request header), every stoichiometric, nonpolar, symmetric face up to Miller index 1 cut with pymatgen, and a
+      worker that relaxes each face with UMA, picks the face of lowest surface energy and binds OH on every site,
+      including a metal ion under an oxygen layer. The worker runs on a GPU when one is present and resumes after an
+      interruption, so it scales out to a cluster unchanged. First numbers: UMA gives CeO2(111) 0.67 J/m² and
+      CeO2(110) 0.99 J/m², in line with published DFT, so ceria's real face is chosen. The eight measured oxides are
+      running now against a rule written before any energy was computed.
   - date: 2026-10-31
     text: >-
       Started the measured catalyst library and its page. Every catalyst class is listed with its source; ZrO2 and
@@ -45,6 +91,13 @@ recent:
       solutions with oxygen conserved to 1e-14.
 
 next:
+  - "The closed loop's first pieces: application profiles and a lab results page in the protocol's format, so the
+    first lab round can start from computed candidates."
+  - A second model for computed oxides, under the same rule - faces covered with water and hydroxyl as in solution,
+    the barrier of H2O2 → 2 OH* by a nudged elastic band, and a surface rate model from those energies.
+  - More measured catalysts to test against, 30 to 50 under comparable conditions, so a ranking rests on more than
+    eight points.
+  - A benchmark of the worker on one rented GPU, for the measured cost per catalyst of a screen at scale.
   - The library papers on the list below, catalyst by catalyst, each through the consistency check.
   - Phase 4, any oxide or metal by formula, with the Materials Project and Meta's UMA model.
   - Heat capacities from Giguère and Carmichael 1962 (now in cache/papers/), for heat at other temperatures and the temperature rise.
@@ -83,6 +136,10 @@ papers:
 
 findings:
   - >-
+    On dry oxide faces computed with UMA, stronger OH binding sits beside higher measured barriers (ρ = −0.57 across
+    eight oxides), the reverse of the trend Lousada found on small hydroxylated clusters; Y2O3, Gd2O3 and CuO bind OH
+    most strongly on a surface oxygen.
+  - >-
     Lousada's 2013 thesis, Table 3, gives the CeO2 and CuO second-order constants exchanged; its Figure 16 and the
     k1 values in the same table follow the other assignment.
   - >-
@@ -105,8 +162,13 @@ findings:
 
 decisions:
   - >-
-    The measured catalyst library comes next, so every catalyst class is selectable, then any oxide or metal by
-    formula through the Materials Project and Meta's UMA model (your choice, 2026-10-31).
+    The engine computes catalysts from first principles and machine-learned potentials; measured data are its test
+    set. Compute scales out to GPU clusters, and accuracy stays the first rule: each layer of the screen is checked
+    against the layer above it and against measurement (your direction, 2026-11-01).
+  - >-
+    The measured catalyst library came first, so every catalyst class is selectable, then any oxide or metal by
+    formula through the Materials Project and Meta's UMA model (your choice, 2026-10-31; computed catalysts became
+    the priority on 2026-11-01).
   - >-
     The app shows measured values and checked models only; the rest waits in experiments/ and in the Methodology
     page's limits (your choice, 2026-10-31).

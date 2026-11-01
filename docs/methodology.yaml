@@ -126,6 +126,102 @@ sections:
       The Model checks page holds the library's consistency check: every stored value matches its printed text, and
       the values reproduce the other rates, temperatures and areas the same source prints.
 
+  - title: Comparing catalysts for an application
+    body: |
+      The right catalyst depends on the job, so each application is written down as a profile before any catalyst is
+      compared:
+
+      - **Conditions**: peroxide strength, temperature, pH, what else is in the water, and how much catalyst fits
+        (grams per liter, or a coated surface).
+      - **Goal**: the one number to make best, read from the engine's simulated experiment so it matches what a lab
+        measures. Examples: the time to remove 99% of the peroxide (wastewater, contact-lens cases, residue after
+        aseptic packaging); oxygen delivered per minute per gram (oxygen supply, propulsion); hydroxyl radicals made
+        per peroxide used (advanced oxidation, where the radicals do the cleaning); the lowest temperature that
+        reaches a set rate.
+      - **Rules every candidate meets**: metal dissolved into the liquid below a set limit, activity kept over
+        repeated use, cost, abundance and safety of its elements, and heat release inside the vessel's safe range.
+
+      Candidates that meet every rule are ranked on the goal, each with an uncertainty band. Two candidates whose
+      bands overlap count as tied until a lab measurement separates them. The ranking comes from the best model that
+      has passed its check for that kind of catalyst. Today the Data collection page sorts computed crystals by any
+      computed number (surface energy, binding energies); those are computed properties, and how they relate to
+      activity is the question the closed loop below answers.
+
+  - title: "The closed loop: compute, choose, test, learn"
+    body: |
+      Computing alone ranks catalysts only as well as its model. The loop turns every lab result into a better model,
+      round after round:
+
+      1. **Propose.** Candidates come from the Materials Project and from new crystals made by swapping or adding
+         elements to known ones (doped and mixed oxides, alloys). A fast first-pass model trained on computed results
+         narrows billions of candidates to the thousands worth computing in full.
+      2. **Compute.** UMA relaxes each candidate's faces and binds the reaction's intermediates (OH, O, OOH, H2O2);
+         later the barrier of each step and a surface rate model built from those energies.
+      3. **Predict.** A learned model maps the computed numbers, with each crystal's composition and structure, to
+         the application's goal, with an uncertainty for every prediction. It learns from lab measurements made under
+         the standard protocol below. Its uncertainty is calibrated: of the predictions given a 90% band, about 90%
+         land inside it, and the loop checks this every round.
+      4. **Choose.** The AI picks the next batch, 8 to 24 catalysts. Most places go to the best expected catalysts;
+         some go to the candidates the model is least sure about, because those teach it most; the batch spreads
+         across chemistries. Two places go to candidates drawn at random from the same pool, so each round measures
+         how much better the AI's picks are than chance. Every batch also carries a reference catalyst measured in
+         earlier rounds, a blank and a repeat of one earlier sample, to tie each lab day to the ones before.
+      5. **Test and learn.** Before anything is measured, the round's predictions are frozen with a time stamp. The
+         lab runs the protocol and returns the raw data. The frozen predictions are scored against the measurements,
+         the results join the Data collection, the model retrains, and the next round begins.
+
+      In the first rounds the model knows little, so its picks lean toward learning: spread and uncertainty. As
+      rounds pass and its frozen predictions hold up, the picks lean toward the best expected catalyst. A learned
+      model usually needs a few dozen consistent measurements before its picks beat chance; the eight measured
+      oxides are the seed.
+
+  - title: Who decides, and the limits around every decision
+    body: |
+      The AI decides what to test, in what order and under which conditions. Each choice is logged with its reasons:
+      the prediction, its uncertainty and the rule that picked it. People or lab robots carry out the tests.
+
+      A fixed safety envelope sits outside the AI's reach. A person writes it, and the software applies it to every
+      batch before it goes to the lab:
+
+      - ceilings on peroxide strength, temperature, liquid volume and catalyst amount for screening runs;
+      - the engine's own heat model computes the temperature rise of each planned run, and a run whose rise passes
+        the vessel's limit returns to the AI to change;
+      - every vessel vented, through a gas burette or a relief path, since the reaction releases oxygen;
+      - elements on a hazard list (highly toxic, radioactive) stay out of the candidate pool;
+      - a person signs off once on each new kind of catalyst or new range of conditions before its first lab run,
+        and can stop the loop at any time.
+
+      Inside that envelope the loop runs on its own, from choosing the batch to retraining the model.
+
+  - title: The standard lab protocol
+    body: |
+      Feedback is only as good as the measurement, so every tested sample gets the same treatment:
+
+      - **Identity**: crystal phase by X-ray diffraction, surface area by B.E.T., particle size. The result is linked
+        to the crystal actually tested; when the phase differs from the computed one, the record says so and the
+        result trains the model under the tested phase.
+      - **Rate**: peroxide over time (titration, or UV absorbance at 240 nm) and oxygen over time (gas burette or
+        pressure) at the profile's conditions; the first-order constant per surface area, fitted exactly as the
+        engine's analysis fits it.
+      - **Temperature**: three or more temperatures, for the activation energy.
+      - **The solid's share**: the hot filtration test (the solid is filtered out mid-run; a rate that continues
+        comes from metal dissolved in the liquid) and the dissolved metal measured by ICP.
+      - **Stability**: the rate over three or more cycles of reuse.
+      - **Repeats**: each catalyst twice. The lab's own scatter sets the best accuracy any model can reach, and each
+        model is judged against it.
+
+  - title: How the loop proves itself
+    body: |
+      Each round is a fair test: predictions frozen before measuring, scored after. A learned model ranks catalysts
+      on the app once its frozen predictions pass a rule written before the first round: a ranking with Spearman
+      ρ of 0.6 or more and exact p of 0.05 or less, and values within a factor of 2 for at least 80% of catalysts,
+      over all rounds so far. A model that later misses a round returns to "What comes later" until it passes again.
+
+      A Loop page will show each round: what was picked and why, predicted against measured, the share of tested
+      catalysts that beat the best one known before, the AI's picks against the random ones, and the best catalyst
+      found so far for each application. The measure of the whole loop is the best catalyst found per lab test,
+      against picking at random from the same pool.
+
 limits_intro: >-
   These parts of a full peroxide experiment join the app once each passes its check. Each line says what is needed.
 
@@ -138,10 +234,29 @@ limits:
       page names the paper each one needs.
   - title: Any oxide or metal by its formula
     body: >-
-      Next after the library: an oxide or metal named by its formula, with its crystal from the Materials Project and
-      the binding of the hydroxyl radical to its surface computed by Meta's UMA model, the measure Lousada et al.
-      linked to the decomposition barrier. It joins the app once its ranking of the measured oxides passes a rule
-      written before the comparison.
+      The engine computes a catalyst from its crystal alone: the structure from the Materials Project, every face whose
+      two sides match, whose composition is the bulk's and whose dipole across it is zero, each relaxed by Meta's UMA
+      model, and the face with the lowest surface energy, the one a powder mostly shows. That part works: for seven
+      of the eight oxides Lousada measured it picks the face the literature reports. The first measure of activity
+      missed its rule. How strongly a hydroxyl radical binds to the dry face ranks the measured activation energies
+      at ρ = −0.57, where the rule asks for +0.6 or more, and the rates per surface area at ρ = +0.09
+      (experiments/oxide_descriptor_check). Computed oxides join the app once a model passes that same rule; next
+      in line are faces covered with water and hydroxyl, as in solution, the barrier of H2O2 → 2 OH* computed
+      directly, and a surface rate model built from those energies.
+  - title: The closed loop
+    body: >-
+      Built: candidate search in the Materials Project, computing on demand (faces, surface energies, binding
+      energies), command-line screens for clusters, the Data collection, and the measured test set. Next, in order:
+      application profiles; the learned model with calibrated uncertainty; batch choice with random and reference
+      places; a lab results page in the protocol's format, linked to each computed crystal; the safety envelope
+      check; and the Loop page with each round's frozen predictions and scores.
+  - title: Crystals whose faces are all polar
+    body: >-
+      A screen keeps faces whose two sides match, whose composition is the bulk's and whose dipole is zero, so each
+      surface energy is clean. Crystals where every face up to Miller index 1 is polar (ReO3 and UO3 in a first sample
+      of 20 oxides) are listed in the screen's manifest.json and wait for a slab model with compensated terminations.
+      Metals screen the dipole with their own electrons, so for metals this filter will relax once a metal check
+      passes.
   - title: Rates as they change with conditions
     body: >-
       Mechanisms that let a catalyst's rate follow pH, temperature and loading beyond the measured points (catalase

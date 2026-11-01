@@ -12,6 +12,9 @@ dependencies = [
     "pandas>=2.2",
     "altair>=5.4",
     "streamlit>=1.50",
+    "pymatgen>=2025.1",
+    "requests>=2.32",
+    "ase>=3.23",
 ]
 
 [project.scripts]

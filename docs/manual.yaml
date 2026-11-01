@@ -37,6 +37,24 @@ steps:
       The Model checks page shows each comparison with published measurements and its verdict; the Methodology page
       lists every source, equation and limit.
 
+  - title: 6. Compute a catalyst from its crystal
+    body: >-
+      On Compute a catalyst, find crystals in the Materials Project by formula (MnO2, Fe2O3) or by the elements they
+      contain, with limits on the number of elements, the atoms in the cell and the energy above the convex hull
+      (0 is the most stable form, and crystals a few hundredths of an eV per atom above it are often made in a lab). Tick the crystals to
+      compute, pick the molecules to bind (OH by default) and press Compute. The engine cuts every face whose two
+      sides match and whose dipole is zero, relaxes each with Meta's UMA model, keeps the face of lowest surface
+      energy and binds each molecule on every site of it. Runs wait in a queue and compute one after another,
+      about 5–30 minutes per crystal on this computer, and keep going when the page closes; the Runs tab shows
+      progress, every face and site, and the structures as CIF files. Stop pauses a run, and Resume picks it up at
+      its last finished relaxation.
+  - title: 7. Find any number again
+    body: >-
+      Data collection holds every crystal, face and binding energy the engine has computed, from your runs, from
+      screens prepared on the command line (pe screen) and from the model checks, each with the model and run that
+      made it. Filter by formula, model or origin and download each table as CSV, or everything as JSON. Its
+      Measured tab lists the laboratory values the computed data are tested against, each with its source.
+
 glossary:
   - term: k_obs
     meaning: Rate constant fitted to ln[H2O2] against time, in 1/s.

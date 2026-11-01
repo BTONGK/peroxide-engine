@@ -29,9 +29,39 @@ Seven checks pass and one is missed:
 | Iron, another laboratory (missed) | Barb et al.'s rates: 8 of 8 within a factor of 2, typical gap 1.18; their iron(II): typical gap 1.52, above the rule's 1.41, so iron(II) stays off the app |
 
 The catalyst enters as dissolved iron(III), as a measured catalyst from the library (the Catalyst library page lists
-every class, with the paper each waiting catalyst needs), or as a first-order rate constant you supply. Next: any
-oxide or metal by formula through the Materials Project and Meta's UMA model, then mechanisms for enzymes, iodide
-and copper, each after it passes a check against measured rates (`docs/status.yaml`).
+every class, with the paper each waiting catalyst needs), or as a first-order rate constant you supply.
+
+Under way: catalysts computed from the crystal alone (`src/peroxide_engine/compute/`). The structure comes from the
+Materials Project; pymatgen cuts every stoichiometric, nonpolar, symmetric face; Meta's UMA model relaxes each, picks
+the face of lowest surface energy and binds the hydroxyl radical on every site. Measured catalysts are the test set:
+the eight oxides Lousada measured ran first, under `experiments/oxide_descriptor_check/PASS_RULE.md`. The faces came
+out right; OH binding on the dry face missed its ranking rule (ρ = −0.57 against the measured barriers), so computed
+activity stays off the app until a better model passes. The worker reads
+one job folder and writes one results file, runs on a GPU when present and resumes after an interruption, so a cluster
+runs one folder per GPU:
+
+In the app, Compute a catalyst searches the Materials Project by formula or elements, runs the crystals you tick
+through a background queue and shows each face, surface energy and binding site; Data collection gathers every
+computed number with the model and run that made it, beside the measured values they are tested against.
+
+From the command line, a screen selects crystals from the Materials Project by filter, as many as match, and splits them into job folders
+with a SLURM array script (`run_slurm.sh`, one folder per GPU):
+
+```
+uv run pe screen --count --max-elements 3                          # how many oxides match (8,357 at ≤ 40 atoms)
+uv run pe screen --max-elements 3 --per-job 50                     # data/screens/O-8357/shard-0000 ... and run_slurm.sh
+```
+
+The measured check runs the same way:
+
+```
+uv run python experiments/oxide_descriptor_check/prepare.py        # job folders, in this project's Python
+TORCHDYNAMO_DISABLE=1 python src/peroxide_engine/compute/worker.py <job folder>   # any Python with fairchem
+uv run python experiments/oxide_descriptor_check/check.py           # the verdict
+```
+
+Then mechanisms for enzymes, iodide and copper, each after it passes a check against measured rates
+(`docs/status.yaml`).
 
 ## Use
 

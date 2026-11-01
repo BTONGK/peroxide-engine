@@ -17,6 +17,8 @@ TITLES = {
     "manual": ("Manual", ":material/menu_book:"),
     "run": ("Run an experiment", ":material/experiment:"),
     "library": ("Catalyst library", ":material/inventory_2:"),
+    "compute": ("Compute a catalyst", ":material/deployed_code:"),
+    "data": ("Data collection", ":material/database:"),
     "checks": ("Model checks", ":material/fact_check:"),
     "methodology": ("Methodology", ":material/library_books:"),
     "status": ("Project status", ":material/dashboard:"),
@@ -27,6 +29,7 @@ def sections() -> dict[str, list[st.Page]]:
     return {
         "Start": [page("home"), page("manual")],
         "Experiment": [page("run"), page("library")],
+        "Compute": [page("compute"), page("data")],
         "Accuracy": [page("checks"), page("methodology")],
         "Project": [page("status")],
     }

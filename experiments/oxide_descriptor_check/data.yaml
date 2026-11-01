@@ -1,0 +1,16 @@
+# The oxides Lousada measured, the phase each was measured in, and the measured values the check ranks against.
+# Values as printed in C. M. Lousada Patrício, PhD thesis, KTH Stockholm (2013), read from its page images.
+# Ea: Table 4, p. 43 [PDF 54]. k2: Table 3, p. 42 [PDF 53], with CeO2 and CuO exchanged as Figure 16 (p. 41) and the
+# table's own k1 values show. Phases: thesis pp. 22-23 (ZrO2 monoclinic by XRD; TiO2 88.5% anatase); the rest are
+# each oxide's stable phase at room temperature.
+source: "C. M. Lousada Patrício, Reactions of aqueous radiolysis products with oxide surfaces: an experimental and DFT study, PhD thesis, KTH Royal Institute of Technology (2013)"
+url: "https://www.skc.kth.se/polopoly_fs/1.469648!/Reactions%20of%20aqueous%20radiolysis%20products%20with%20oxide%20surfaces.pdf"
+oxides:
+  - {formula: ZrO2, phase: monoclinic baddeleyite, space_group_number: 14, Ea_kJ: "33 ± 1", k2_m_s: "2.39e-10"}
+  - {formula: TiO2, phase: anatase, space_group_number: 141, Ea_kJ: "37 ± 1"}
+  - {formula: Y2O3, phase: cubic bixbyite, space_group_number: 206, Ea_kJ: "44 ± 5"}
+  - {formula: Fe2O3, phase: hematite, space_group_number: 167, Ea_kJ: "51 ± 1", k2_m_s: "3.0e-9"}
+  - {formula: CeO2, phase: fluorite, space_group_number: 225, Ea_kJ: "40 ± 1", k2_m_s: "1.23e-9", k2_note: "printed in Table 3 under CuO; Figure 16 and the table's own k1 values assign it to CeO2"}
+  - {formula: CuO, phase: tenorite, space_group_number: 15, Ea_kJ: "76 ± 1", k2_m_s: "2.80e-8", k2_note: "printed in Table 3 under CeO2; Figure 16 and the table's own k1 values assign it to CuO"}
+  - {formula: HfO2, phase: monoclinic, space_group_number: 14, Ea_kJ: "60 ± 1", k2_m_s: "2.78e-9"}
+  - {formula: Gd2O3, phase: cubic bixbyite, space_group_number: 206, Ea_kJ: "63 ± 1", k2_m_s: "9.4e-10"}

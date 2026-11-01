@@ -1,0 +1,29 @@
+order: 9
+title: "Computed catalysts: oxides ranked from the crystal alone"
+question: >-
+  Can the engine rank oxide catalysts from their crystal structure alone, before any experiment? It computes how
+  strongly a hydroxyl radical binds to each oxide's surface and asks whether that orders the activity Lousada
+  measured for eight oxides.
+compared: >-
+  For each of the eight oxides, the crystal of its measured phase from the Materials Project; every face up to Miller
+  index 1 whose two sides match, whose composition is the bulk's and whose dipole is zero, each relaxed by Meta's UMA
+  model (UMA-S 1.1, materials mode); the face with the lowest surface energy; and OH on every site of that face. The
+  energy of H2O2 → 2 OH* on that face is ranked against the measured activation energies (8 oxides) and the measured
+  rates per surface area (6 oxides), from Lousada's 2013 thesis.
+result: >-
+  Each oxide's face is the one the literature reports for that crystal in seven of eight cases (monoclinic indices in pymatgen's
+  standard cell: ZrO2, HfO2 and CuO (−111); anatase (101), CeO2, Y2O3 and Gd2O3 (111); hematite comes out on (110)), and CeO2's surface energies, 0.67
+  J/m² for (111) and 0.99 J/m² for (110), sit with published DFT. The binding energy misses all three rules.
+  Activation energy ranking: ρ = {rho_Ea:.2f} across {n} oxides, where the rule asks for 0.6 or more, so {verdict}.
+  The trend runs the other way, with stronger binding beside higher barriers, at p = {p_Ea_opposite:.2f} in that
+  direction, short of 0.05. Rate ranking: ρ = {rho_rate:.2f} across {n_rate} oxides, {rate_verdict}. Activation
+  energy as a number, each oxide from a line through the other seven: {loo_within_6} of 8 within 6 kJ/mol (median
+  gap {loo_median_abs_kJ:.1f} kJ/mol), {value_verdict}. UMA-S 1.2.1's oxide mode is held for a later model, since a
+  verdict rests on UMA-S 1.1 alone.
+why_it_matters: >-
+  The engine finds the right face of a crystal from its structure alone, and that part is ready to scale. One binding
+  energy on a dry face, though, leaves activity unranked, so a screen built on it would rank candidates by a number that
+  fails to track activity, and computed oxides stay off the app. Three oxides (Y2O3, Gd2O3, CuO) hold OH most strongly on a surface oxygen, a
+  different chemistry from the metal sites, and the measured pre-exponential factors span 30 to 10¹¹, so the barrier
+  alone sets only part of each rate. The next models face this same rule: faces covered with water and hydroxyl as in
+  solution, the barrier of H2O2 → 2 OH* computed directly, and a surface rate model built from those energies.
