@@ -1,0 +1,139 @@
+{
+  "verdict": "passed",
+  "exact_ok": true,
+  "balance_ok": true,
+  "limit_ok": true,
+  "heat_ok": true,
+  "fits_ok": true,
+  "worst_exact_rel_err": 1.9136470186253973e-11,
+  "worst_balance_rel_err": 5.725660436665983e-15,
+  "max_limit_rel_diff": 3.237416041679264e-05,
+  "max_heat_rel_diff": 1.824156489949047e-05,
+  "max_fit_rel_err": 9.992007221626409e-16,
+  "modes": [
+    {
+      "headspace": "burette",
+      "kLa": null,
+      "rate_function": false,
+      "exact_rel_err": 0.0,
+      "balance_rel_err": 0.0
+    },
+    {
+      "headspace": "burette",
+      "kLa": null,
+      "rate_function": true,
+      "exact_rel_err": 9.026113190202523e-12,
+      "balance_rel_err": 0.0
+    },
+    {
+      "headspace": "burette",
+      "kLa": 0.05,
+      "rate_function": false,
+      "exact_rel_err": 1.7484236281006815e-11,
+      "balance_rel_err": 3.982307199760815e-15
+    },
+    {
+      "headspace": "burette",
+      "kLa": 0.05,
+      "rate_function": true,
+      "exact_rel_err": 1.7484236281006815e-11,
+      "balance_rel_err": 3.982307199760815e-15
+    },
+    {
+      "headspace": "closed",
+      "kLa": null,
+      "rate_function": false,
+      "exact_rel_err": 0.0,
+      "balance_rel_err": 0.0
+    },
+    {
+      "headspace": "closed",
+      "kLa": 0.05,
+      "rate_function": false,
+      "exact_rel_err": 1.9136470186253973e-11,
+      "balance_rel_err": 5.5177393173133186e-15
+    },
+    {
+      "headspace": "closed",
+      "kLa": 0.05,
+      "rate_function": true,
+      "exact_rel_err": 1.9136470186253973e-11,
+      "balance_rel_err": 5.5177393173133186e-15
+    },
+    {
+      "headspace": "open",
+      "kLa": null,
+      "rate_function": false,
+      "exact_rel_err": 0.0,
+      "balance_rel_err": 0.0
+    },
+    {
+      "headspace": "open",
+      "kLa": 0.05,
+      "rate_function": false,
+      "exact_rel_err": 1.8609558338766874e-11,
+      "balance_rel_err": 5.725660436665983e-15
+    },
+    {
+      "headspace": "open",
+      "kLa": 0.05,
+      "rate_function": true,
+      "exact_rel_err": 1.8609558338766874e-11,
+      "balance_rel_err": 5.725660436665983e-15
+    }
+  ],
+  "limit": [
+    {
+      "headspace": "burette",
+      "readout": "gas_collected_mL",
+      "equilibrium": 121.45891403095011,
+      "fast_kLa": 121.45498190058322,
+      "rel_diff": -3.237416041679264e-05
+    },
+    {
+      "headspace": "closed",
+      "readout": "pressure_kPa",
+      "equilibrium": 334.230200200039,
+      "fast_kLa": 334.22290600906206,
+      "rel_diff": -2.182385365712136e-05
+    }
+  ],
+  "heat": [
+    {
+      "headspace": "burette",
+      "kLa": null,
+      "bookkeeping_J": 910.5983132642672,
+      "computed_J": 910.6040656354954,
+      "rel_diff": 6.317133630195926e-06
+    },
+    {
+      "headspace": "burette",
+      "kLa": 0.05,
+      "bookkeeping_J": 910.6854128551365,
+      "computed_J": 910.7020251821981,
+      "rel_diff": 1.824156489949047e-05
+    },
+    {
+      "headspace": "closed",
+      "kLa": null,
+      "bookkeeping_J": 918.7741602949783,
+      "computed_J": 918.7814279255359,
+      "rel_diff": 7.910138172917414e-06
+    },
+    {
+      "headspace": "closed",
+      "kLa": 0.05,
+      "bookkeeping_J": 918.8476471721145,
+      "computed_J": 918.8631470917289,
+      "rel_diff": 1.686886793694775e-05
+    }
+  ],
+  "fits": {
+    "k": 0.0,
+    "order1": 2.220446049250313e-16,
+    "order2": 2.220446049250313e-16,
+    "Ea": -9.992007221626409e-16,
+    "Vmax": 0.0,
+    "Km": 2.220446049250313e-16
+  }
+}

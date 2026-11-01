@@ -1,0 +1,150 @@
+{
+  "verdict": "passed",
+  "per_pound_within": 4,
+  "per_pound_total": 4,
+  "per_mole_within": 2,
+  "per_mole_total": 3,
+  "loo_max_kJ": 0.019209763304843364,
+  "dilute_dH": -94.66,
+  "pure_dH": -98.04999999999998,
+  "rows": [
+    {
+      "kind": "per pound",
+      "mass_fraction": 0.35,
+      "printed": 420.0,
+      "computed": 420.328602657863,
+      "difference": 0.32860265786297305,
+      "allowed": 4.038998668234355,
+      "within": true,
+      "units": "Btu/lb"
+    },
+    {
+      "kind": "per pound",
+      "mass_fraction": 0.5,
+      "printed": 603.0,
+      "computed": 603.02018838347,
+      "difference": 0.020188383469985638,
+      "allowed": 5.555712383191937,
+      "within": true,
+      "units": "Btu/lb"
+    },
+    {
+      "kind": "per pound",
+      "mass_fraction": 0.7,
+      "printed": 852.0,
+      "computed": 851.4946118021774,
+      "difference": -0.50538819782264,
+      "allowed": 7.5779973364687105,
+      "within": true,
+      "units": "Btu/lb"
+    },
+    {
+      "kind": "per pound",
+      "mass_fraction": 1.0,
+      "printed": 1240.0,
+      "computed": 1239.2814979299233,
+      "difference": -0.7185020700767382,
+      "allowed": 10.611424766383873,
+      "within": true,
+      "units": "Btu/lb"
+    },
+    {
+      "kind": "per mole",
+      "mass_fraction": 0.35,
+      "printed": 22.7,
+      "computed": 22.709462538019128,
+      "difference": 0.009462538019128885,
+      "allowed": 0.24120458891013385,
+      "within": true,
+      "units": "kcal/mol"
+    },
+    {
+      "kind": "per mole",
+      "mass_fraction": 0.5,
+      "printed": 22.8,
+      "computed": 22.80593089268614,
+      "difference": 0.005930892686137668,
+      "allowed": 0.24120458891013385,
+      "within": true,
+      "units": "kcal/mol"
+    },
+    {
+      "kind": "per mole",
+      "mass_fraction": 0.7,
+      "printed": 23.4,
+      "computed": 23.002223576712566,
+      "difference": -0.3977764232874321,
+      "allowed": 0.24120458891013385,
+      "within": false,
+      "units": "kcal/mol"
+    }
+  ],
+  "leave_one_out": [
+    {
+      "n_water": 0.1,
+      "tabulated": -188.134,
+      "predicted": -188.13339451102874,
+      "error": 0.0006054889712459044
+    },
+    {
+      "n_water": 0.49999999999999994,
+      "tabulated": -189.108,
+      "predicted": -189.12720976330485,
+      "error": -0.019209763304843364
+    },
+    {
+      "n_water": 1.0,
+      "tabulated": -189.807,
+      "predicted": -189.80255279173366,
+      "error": 0.004447208266327607
+    },
+    {
+      "n_water": 1.9999999999999998,
+      "tabulated": -190.456,
+      "predicted": -190.44454049156076,
+      "error": 0.011459508439230603
+    },
+    {
+      "n_water": 3.0,
+      "tabulated": -190.728,
+      "predicted": -190.73274615447949,
+      "error": -0.004746154479477127
+    },
+    {
+      "n_water": 4.000000000000001,
+      "tabulated": -190.874,
+      "predicted": -190.86923314960458,
+      "error": 0.004766850395412803
+    },
+    {
+      "n_water": 5.000000000000002,
+      "tabulated": -190.949,
+      "predicted": -190.9465751367575,
+      "error": 0.0024248632425099004
+    },
+    {
+      "n_water": 9.999999999999996,
+      "tabulated": -191.083,
+      "predicted": -191.08774100481148,
+      "error": -0.004741004811478433
+    },
+    {
+      "n_water": 15.0,
+      "tabulated": -191.129,
+      "predicted": -191.13117841516677,
+      "error": -0.002178415166781633
+    },
+    {
+      "n_water": 19.999999999999975,
+      "tabulated": -191.146,
+      "predicted": -191.1392174469426,
+      "error": 0.006782553057377072
+    },
+    {
+      "n_water": 49.99999999999989,
+      "tabulated": -191.154,
+      "predicted": -191.16458711371706,
+      "error": -0.010587113717065222
+    }
+  ]
+}

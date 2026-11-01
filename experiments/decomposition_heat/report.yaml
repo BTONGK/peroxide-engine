@@ -1,0 +1,17 @@
+order: 2
+title: Heat released by peroxide solutions
+question: Does the engine give the same heat of decomposition that published safety data give, at every strength?
+compared: >-
+  The heat released when a solution decomposes completely to water and oxygen gas at 25 °C, computed from the NBS
+  tables' dilution series, against every heat Solvay prints in its Hydrogen Peroxide Safety & Handling data sheet
+  (HH-2323, 08/2019, page 3): 35%, 50% and 70% solutions per pound of solution, pure H2O2 per pound, and the three
+  per-mole values.
+result: >-
+  All {per_pound_within} of {per_pound_total} per-pound heats agree, the largest difference being under 0.1%. The
+  per-mole heats agree for 35% and 50%. Solvay's 70% per-mole value, 23.4 kcal/mol, equals the value for pure H2O2;
+  Solvay's own per-pound value for 70% (852 Btu/lb) works out to 23.0 kcal/mol, which is what the engine gives, so
+  the table's 70% per-mole entry reads as a slip in the data sheet. The dilution series interpolates to within
+  {loo_max_kJ:.3f} kJ/mol of every tabulated point when that point is left out.
+why_it_matters: >-
+  Mixing peroxide with water releases heat, so a strong solution releases a little more per mole as it decomposes
+  (95.0 kJ/mol at 35%, 98.05 for pure H2O2) than a dilute one (94.66). The engine follows the measured series.

@@ -1,0 +1,48 @@
+# Water: IAPWS saturation equations (Wagner and Pruss form).
+
+- kind: correlation
+  id: iapws_vapor_pressure
+  name: Vapor pressure of water
+  equation: "ln(p/pc) = (Tc/T) (a1 τ + a2 τ^1.5 + a3 τ^3 + a4 τ^3.5 + a5 τ^4 + a6 τ^7.5), τ = 1 - T/Tc"
+  coefficients: {Tc: 647.096, pc: 22.064e6, a1: -7.85951783, a2: 1.84408259, a3: -11.7866497, a4: 22.6807411, a5: -15.9618719, a6: 1.80122502}
+  units: Pa
+  valid: {T_min_K: 273.16, T_max_K: 647.096}
+  accuracy_note: >-
+    IAPWS states that values from this equation carry the uncertainties of Table 3 of the IAPS Skeleton Tables 1985
+    (section 7 of the release) and endorses it from the triple point to the critical point (section 6).
+  transcribed_from: page images of IAPWS SR1-86(1992), section 3 (p. 3), eq. (1); check values Table 1 (p. 7)
+  check_values:
+    - {T_K: 273.16, value: 611.657}
+    - {T_K: 373.1243, value: 101325}
+    - {T_K: 647.096, value: 22.064e6}
+  check_rel_tolerance: 2.0e-6
+  source:
+    cite: IAPWS 1992 (Wagner & Pruss 1993)
+    reference: "IAPWS, Revised Supplementary Release on Saturation Properties of Ordinary Water Substance, SR1-86(1992), St. Petersburg, September 1992; W. Wagner, A. Pruss, J. Phys. Chem. Ref. Data 22, 783 (1993)"
+    doi: 10.1063/1.555926
+    url: https://iapws.org/technical-guidance/release/Supp-sat.download
+    locator: section 3, eq. (1), p. 3; check values Table 1, p. 7
+
+- kind: correlation
+  id: iapws_liquid_density
+  name: Density of liquid water at saturation
+  equation: "ρ/ρc = 1 + b1 τ^(1/3) + b2 τ^(2/3) + b3 τ^(5/3) + b4 τ^(16/3) + b5 τ^(43/3) + b6 τ^(110/3), τ = 1 - T/Tc"
+  coefficients: {Tc: 647.096, rhoc: 322, b1: 1.99274064, b2: 1.09965342, b3: -0.510839303, b4: -1.75493479, b5: -45.5170352, b6: -6.74694450e5}
+  units: kg m-3
+  valid: {T_min_K: 273.16, T_max_K: 647.096}
+  accuracy_note: >-
+    IAPWS states that values from this equation carry the uncertainties of Table 3 of the IAPS Skeleton Tables 1985
+    (section 7 of the release). It gives the liquid at its own vapor pressure; at 1 atm the liquid is slightly
+    compressed, which the engine treats as part of this uncertainty.
+  transcribed_from: page images of IAPWS SR1-86(1992), section 4.1 (p. 3), eq. (2); check values Table 1 (p. 7)
+  check_values:
+    - {T_K: 273.16, value: 999.789}
+    - {T_K: 373.1243, value: 958.365}
+    - {T_K: 647.096, value: 322}
+  check_rel_tolerance: 2.0e-6
+  source:
+    cite: IAPWS 1992 (Wagner & Pruss 1993)
+    reference: "IAPWS, Revised Supplementary Release on Saturation Properties of Ordinary Water Substance, SR1-86(1992), St. Petersburg, September 1992; W. Wagner, A. Pruss, J. Phys. Chem. Ref. Data 22, 783 (1993)"
+    doi: 10.1063/1.555926
+    url: https://iapws.org/technical-guidance/release/Supp-sat.download
+    locator: section 4.1, eq. (2), p. 3; check values Table 1, p. 7

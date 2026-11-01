@@ -1,0 +1,9 @@
+# Published papers and downloaded tables stay local (copyright); the repository holds digitized numbers and citations.
+cache/
+experiments/*/cache/
+data/runs/
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.DS_Store

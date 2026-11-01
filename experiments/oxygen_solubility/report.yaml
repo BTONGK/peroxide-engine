@@ -1,0 +1,16 @@
+order: 3
+title: Oxygen solubility in water
+question: Does the engine dissolve the right amount of oxygen at each temperature?
+compared: >-
+  Benson, Krause and Peterson's solubility (1979), which the engine uses, against two references: Battino, Rettich
+  and Tominaga's recommended values (1983), smoothed from 149 measurements in fifteen sources, and the USGS formula for
+  water saturated with air (Benson and Krause 1984, as adopted in USGS Technical Memorandum 2011.03).
+result: >-
+  From 5 to 55 °C the engine stays within {max_rel_diff_app_range:.2%} of the fifteen-source values, inside the 0.5%
+  allowed; above 55 °C the two part by up to {max_rel_diff_above:.1%}, so the app's temperature range ends at 55 °C.
+  For water saturated with air the engine matches the USGS formula within {max_rel_diff_air:.3%} from 0 to 40 °C
+  ({air_sat_25C_mg_L:.3f} mg/L at 25 °C). The enthalpy of solution from the temperature slope, {dH_solution_kJ:.2f}
+  kJ/mol, sits between Battino et al.'s {dH_battino_kJ} and the NBS tables' {dH_nbs_kJ}.
+why_it_matters: >-
+  Dissolved oxygen is what an oxygen electrode reads, and the oxygen that stays in the liquid is oxygen the gas burette
+  or pressure gauge misses.

@@ -1,0 +1,13 @@
+order: 1
+title: Every source value as written
+question: Did each number reach the engine exactly as its source prints it?
+compared: >-
+  The {nbs_values_compared} NBS values the engine uses, character for character, against NIST's digitized tables
+  (whose checksum matches the one NIST publishes), and every check value printed with an equation the engine uses
+  (IAPWS water vapor pressure and density, the oxygen solubility of Benson, Krause and Peterson).
+result: >-
+  All {nbs_values_compared} NBS values match, and all {equation_checks} printed check values are reproduced, the
+  largest difference being {max_equation_rel_diff:.1e} (relative), within one unit of the last printed digit.
+why_it_matters: >-
+  A single misread digit would carry into every result. Each value was also read against the scanned page it came
+  from, and the page is named beside the value on the Methodology page.

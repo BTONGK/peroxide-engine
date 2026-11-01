@@ -1,0 +1,27 @@
+# Battino, Rettich and Tominaga, J. Phys. Chem. Ref. Data 12, 163 (1983), doi:10.1063/1.555680.
+# Table 1 (p. 166), column b: recommended mole fractions of O2 in water at 101.325 kPa O2, smoothed from 149 points in
+# fifteen sources (the authors put them within about ±0.3%). Read from the page image.
+# Note: the printed eq. (11) repeats the coefficients of eq. (16) and reproduces column c, so this check uses the
+# tabulated column b directly.
+source:
+  cite: Battino, Rettich & Tominaga 1983
+  doi: 10.1063/1.555680
+  locator: Table 1, column b (10^5 x1), p. 166; Table 2 (enthalpy of solution), p. 166
+recommended_1e5_x:
+  273.15: 3.949
+  278.15: 3.460
+  283.15: 3.070
+  288.15: 2.756
+  293.15: 2.501
+  298.15: 2.293
+  303.15: 2.122
+  308.15: 1.982
+  313.15: 1.867
+  318.15: 1.773
+  323.15: 1.697
+  328.15: 1.635
+  333.15: 1.586
+  338.15: 1.549
+  343.15: 1.521
+  348.15: 1.502
+enthalpy_of_solution_298_kJ: -12.11   # Table 2, from the fifteen-source fit

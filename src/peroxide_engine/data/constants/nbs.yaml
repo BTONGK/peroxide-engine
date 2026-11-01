@@ -1,0 +1,51 @@
+# Rows of the NBS tables used by the engine. Values are strings exactly as printed, so the last digit (which sets the
+# uncertainty, see uncertainty_note) survives. Each row was compared with NIST's digitized CSV (data.nist.gov,
+# doi:10.18434/M32124, file NBS_Tables_with_ErratumValues.csv, SHA-256 cb8a8b8b...4b44) and with the scanned page;
+# experiments/thermo_tables/ repeats the CSV comparison whenever the CSV sits in cache/nbs/.
+
+- kind: table
+  id: nbs
+  name: NBS tables of chemical thermodynamic properties, rows for water, oxygen and hydrogen peroxide
+  columns:
+    M: g mol-1
+    dfH: kJ mol-1, enthalpy of formation at 298.15 K and 0.1 MPa
+    dfG: kJ mol-1, Gibbs energy of formation at 298.15 K and 0.1 MPa
+    S: J mol-1 K-1, entropy at 298.15 K and 0.1 MPa
+    Cp: J mol-1 K-1, heat capacity at 298.15 K and 0.1 MPa
+    n_water: moles of water per mole of H2O2 in the solution rows
+  conditions: {T_K: 298.15, p_Pa: 100000}
+  uncertainty_note: >-
+    Wagman et al. 1982, section 4.2 (p. 2-16): values are tabulated so that the overall uncertainty lies between 8 and
+    80 units of the last printed digit, on a scale analogous to two standard deviations. Within a dilution series all
+    digits are to be used, so differences between rows of the series (enthalpies of dilution) are more precise than
+    either row, and the inaccuracy of a series follows its least precise row. Correlated values, such as a compound
+    whose enthalpy was measured against water, carry the inaccuracy of one of them in a reaction, as the same section
+    advises.
+  source:
+    cite: Wagman et al. 1982 (NBS tables)
+    reference: "D. D. Wagman, W. H. Evans, V. B. Parker, R. H. Schumm, I. Halow, S. M. Bailey, K. L. Churney, R. L. Nuttall, The NBS tables of chemical thermodynamic properties. Selected values for inorganic and C1 and C2 organic substances in SI units, J. Phys. Chem. Ref. Data 11, Suppl. 2 (1982); erratum J. Phys. Chem. Ref. Data 18, 1807 (1989), doi:10.1063/1.555845; digitized by NIST, doi:10.18434/M32124"
+    doi: 10.18434/M32124
+    url: https://srd.nist.gov/JPCRD/jpcrdS2Vol11.pdf
+    locator: Table 1 (oxygen), p. 2-37, and Table 2 (hydrogen), p. 2-38
+  rows:
+    - {key: O2(g), M: "31.9988", dfH: "0", dfG: "0", S: "205.138", Cp: "29.355", locator: "Table 1, p. 2-37"}
+    - {key: O2(ao), M: "31.9988", dfH: "-11.7", dfG: "16.4", S: "110.9", Cp: "-", locator: "Table 1, p. 2-37"}
+    - {key: H+(ao), M: "1.0080", dfH: "0", dfG: "0", S: "0", Cp: "0", locator: "Table 2, p. 2-38"}
+    - {key: OH-(ao), M: "17.0074", dfH: "-229.994", dfG: "-157.244", S: "-10.75", Cp: "-148.5", locator: "Table 2, p. 2-38"}
+    - {key: HO2-(ao), M: "33.0068", dfH: "-160.33", dfG: "-67.3", S: "23.8", Cp: "-", locator: "Table 2, p. 2-38"}
+    - {key: H2O(l), M: "18.0154", dfH: "-285.830", dfG: "-237.129", S: "69.91", Cp: "75.291", locator: "Table 2, p. 2-38"}
+    - {key: H2O(g), M: "18.0154", dfH: "-241.818", dfG: "-228.572", S: "188.825", Cp: "33.577", locator: "Table 2, p. 2-38"}
+    - {key: H2O2(l), M: "34.0148", dfH: "-187.78", dfG: "-120.35", S: "109.6", Cp: "89.1", locator: "Table 2, p. 2-38"}
+    - {key: H2O2(g), M: "34.0148", dfH: "-136.31", dfG: "-105.57", S: "232.7", Cp: "43.1", locator: "Table 2, p. 2-38"}
+    - {key: H2O2(ao), M: "34.0148", dfH: "-191.17", dfG: "-134.03", S: "143.9", Cp: "-", locator: "Table 2, p. 2-38"}
+    - {key: H2O2(in 0.1 H2O), n_water: "0.1", M: "34.0148", dfH: "-188.134", locator: "Table 2, p. 2-38"}
+    - {key: H2O2(in 0.5 H2O), n_water: "0.5", M: "34.0148", dfH: "-189.108", locator: "Table 2, p. 2-38"}
+    - {key: H2O2(in 1.0 H2O), n_water: "1.0", M: "34.0148", dfH: "-189.807", locator: "Table 2, p. 2-38"}
+    - {key: H2O2(in 2.0 H2O), n_water: "2.0", M: "34.0148", dfH: "-190.456", locator: "Table 2, p. 2-38"}
+    - {key: H2O2(in 3.0 H2O), n_water: "3.0", M: "34.0148", dfH: "-190.728", locator: "Table 2, p. 2-38"}
+    - {key: H2O2(in 4.0 H2O), n_water: "4.0", M: "34.0148", dfH: "-190.874", locator: "Table 2, p. 2-38"}
+    - {key: H2O2(in 5.0 H2O), n_water: "5.0", M: "34.0148", dfH: "-190.949", locator: "Table 2, p. 2-38"}
+    - {key: H2O2(in 10 H2O), n_water: "10", M: "34.0148", dfH: "-191.083", locator: "Table 2, p. 2-38"}
+    - {key: H2O2(in 15 H2O), n_water: "15", M: "34.0148", dfH: "-191.129", locator: "Table 2, p. 2-38"}
+    - {key: H2O2(in 20 H2O), n_water: "20", M: "34.0148", dfH: "-191.146", locator: "Table 2, p. 2-38"}
+    - {key: H2O2(in 50 H2O), n_water: "50", M: "34.0148", dfH: "-191.154", locator: "Table 2, p. 2-38"}

@@ -1,0 +1,13 @@
+order: 4
+title: Exact solutions and conservation
+question: Does the experiment model do its arithmetic exactly?
+compared: >-
+  The vessel model in all six gas arrangements against the exact first-order solution, its oxygen inventory against
+  conservation, fast oxygen transfer against the equilibrium arrangement, its heat against a separate bookkeeping of
+  each step, and the lab fits against data with known answers.
+result: >-
+  H2O2 follows the exact solution within {worst_exact_rel_err:.0e}; oxygen is conserved within
+  {worst_balance_rel_err:.0e}; fast transfer reaches equilibrium within {max_limit_rel_diff:.0e}; the heat matches its
+  bookkeeping within {max_heat_rel_diff:.0e}; and the fits return the known answers within {max_fit_rel_err:.0e}.
+why_it_matters: >-
+  These confirm the arithmetic; the accuracy of the inputs comes from the other checks.

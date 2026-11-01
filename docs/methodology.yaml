@@ -1,0 +1,129 @@
+intro: >-
+  Every number on this app comes from a measurement with a named source, or from a model that reproduced
+  measurements it was built apart from. Each model passes a rule written down before its comparison; the rules and
+  results sit on the Model checks page. A model that has yet to pass stays off the app and appears below under
+  "What comes later".
+
+sections:
+  - title: What the engine computes today
+    body: >-
+      You give a catalyst's first-order rate constant k (from your own measurement or a paper) and the conditions of
+      an experiment. The engine then computes what the instruments in a peroxide lab would read as the reaction runs:
+      the H2O2 left, the rate, the oxygen formed, the oxygen dissolved in the liquid, the gas collected in a burette or
+      the pressure in a sealed vessel, the heat and heat flow a calorimeter records, and the titration volumes for
+      permanganate and iodometric assays. It also applies the fits a lab applies (rate constant, half-life, initial
+      rate), so you see the numbers as a lab would report them.
+
+  - title: The reaction and its energy
+    body: >-
+      Hydrogen peroxide breaks into water and oxygen: H2O2 → H2O + ½ O2. In dilute solution this releases 94.66 kJ
+      per mole of H2O2 when the oxygen leaves as gas, and 100.67 kJ when it stays dissolved; pure H2O2 releases
+      98.05 kJ. These come from the enthalpies of formation in the NBS tables (Wagman et al. 1982), which also give the
+      heat of mixing H2O2 with water at every strength, so the heat of a 35% solution (95.0 kJ/mol) is computed from
+      measurements too. The equilibrium constant, 10^18.06, places the reaction entirely on the side of water and
+      oxygen, so every catalyst only changes how fast it goes.
+    equations:
+      - "ΔrH = ΔfH(H2O, l) − ΔfH(H2O2 in n H2O), the NBS dilution series interpolated smoothly in n/(n+1)"
+      - "ΔrG = −103.10 kJ/mol (dilute), log10 K = −ΔrG / (RT ln 10) = 18.06 at 25 °C"
+      - "Heat to dissolved O2 = 94.66 + ½ × 12.01 kJ/mol, where 12.01 kJ/mol is oxygen's enthalpy of solution"
+    uncertainty: >-
+      The NBS tables give each value to a digit chosen so that its uncertainty lies between 8 and 80 units of the last
+      digit, on a two-standard-deviation scale. The engine quotes the upper end: 0.8 kJ/mol (0.85%) for the heat of
+      decomposition and 0.14 in log10 K.
+
+  - title: Water
+    body: >-
+      Water's vapor pressure and density come from the IAPWS saturation equations (1992), the international standard.
+      The vapor pressure sets how much of a burette's gas is water; the density converts between mole fraction and
+      concentration.
+
+  - title: Oxygen in the liquid and the gas
+    body: >-
+      Oxygen's solubility comes from Benson, Krause and Peterson (1979), the most precise gas solubility measured
+      (scatter 0.017%), which Battino and coworkers recommend as the reference for oxygen in water. The dissolved
+      oxygen at any partial pressure follows Henry's law with Benson and Krause's small correction for the gas's
+      departure from ideal behavior. The liquid starts saturated with air. During a run the dissolved oxygen either
+      stays in balance with the gas above it, or crosses the surface at the rate kLa (c − c*), where kLa is your
+      vessel's oxygen transfer coefficient and c* the saturation value; with a finite kLa the liquid supersaturates as
+      it does in a real flask.
+    equations:
+      - "−ln x = 3.71814 + 5596.17/T − 1049668/T², x at 101.325 kPa O2 (Benson, Krause and Peterson 1979)"
+      - "c* = x(T) × (p_O2 / 1 atm) × (1 − θP)/(1 − θ), converted to mol/L with the density of water"
+      - "Enthalpy of solution = R (B + 2C/T) = −12.01 kJ/mol at 25 °C, from the temperature slope"
+
+  - title: The experiment
+    body: >-
+      The vessel holds a stirred liquid at constant temperature under a gas space. Three arrangements match the usual
+      apparatus. A gas burette holds the room's pressure, and its volume grows as oxygen leaves the liquid. A sealed
+      vessel has a fixed gas volume, so its pressure climbs. An open vessel lets oxygen join the room air. Gases follow
+      the ideal gas law and the gas above the liquid stays saturated with water vapor. Oxygen is tracked atom by atom:
+      what the liquid and gas started with, plus what the reaction makes, equals what is in the liquid, the gas and the
+      room at every moment.
+    equations:
+      - "d[H2O2]/dt = −k [H2O2] (first order; the exact solution is used when oxygen stays in balance)"
+      - "d[O2]liq/dt = ½ k [H2O2] − kLa ([O2]liq − c*)"
+      - "Heat flow = V (rate × 100.67 kJ/mol − O2 transfer × (12.01 kJ/mol + water carried × 44.01 kJ/mol))"
+
+  - title: What the readouts mean
+    body: >-
+      The rate constant is fitted to the computed H2O2 curve by a straight line through ln[H2O2] against time, as a lab
+      fits its data. The initial rate is the slope over the first 10% of the reaction, so for a first-order reaction
+      it sits about 5% below k × [H2O2]0, exactly as a lab's would. The burette volume is the wet gas at the vessel's
+      temperature and the room's pressure; the dry volume at 0 °C and 1 atm removes the water vapor. Heat appears for
+      runs at 25 °C, where the tables measure it, in the burette and sealed arrangements, whose energy accounting is
+      complete.
+
+limits_intro: >-
+  These parts of a full peroxide experiment join the app once each passes its check. Each line says what is needed.
+
+limits:
+  - title: Catalysts by mechanism
+    body: >-
+      Today you supply the rate constant. Next come dissolved iron (the De Laat and Gallard mechanism, checked against
+      measured rates from other laboratories), then catalase and other enzymes, iodide and copper, metal oxides with
+      their surface areas, and metals, one at a time as each reproduces measured rates within the declared rule.
+  - title: Temperature
+    body: >-
+      The app runs from 5 to 55 °C. Above 55 °C the two best evaluations of oxygen solubility part by up to 2.6%.
+  - title: Heat at temperatures other than 25 °C, and temperature rise
+    body: >-
+      The tables give the heat at 25 °C. Its change with temperature, and the temperature rise of a vessel that keeps
+      its heat, both need the heat capacity of peroxide solutions, measured by Giguère and Carmichael (1962); the
+      engine adds them once that paper's numbers are in and checked.
+  - title: Strength by weight percent and solutions above 1 mol/L
+    body: >-
+      The app takes concentrations in mol/L up to 1 mol/L, where the solution behaves as dilute for heat and oxygen.
+      Conversion from weight percent needs the densities of peroxide solutions (Easton, Mitchell and Wynne-Jones 1952).
+  - title: Salts and peroxide in the liquid
+    body: >-
+      Oxygen's solubility is computed for pure water. Dissolved salts lower it (the Sechenov effect), by an amount the
+      engine adds once the coefficients for the relevant salts are taken from measurements.
+  - title: Absorbance assays
+    body: >-
+      UV absorbance at 240 nm, triiodide at 353 nm and titanium peroxo at 407 nm join once their molar absorption
+      coefficients are taken from the primary measurements, since published values differ between papers.
+  - title: Bubbles
+    body: >-
+      Oxygen leaves the liquid through its surface at the rate kLa. Bubbles that form on a catalyst speed this up; you
+      can stand for them with a larger kLa measured in your own vessel.
+
+audit:
+  - >-
+    Each NBS value was read against the scanned page of the 1982 tables (pp. 2-37, 2-38) and compared character by
+    character with NIST's digitized CSV, whose SHA-256 matches NIST's published checksum; all 72 values match.
+  - >-
+    The uncertainty rule (8 to 80 units of the last digit, two-standard-deviation scale) and the convention for
+    solutions "H2O2 in n H2O" were read from the tables' introduction (section 4.2, p. 2-16, and p. 2-22).
+  - >-
+    The IAPWS coefficients and check values, the Benson-Krause-Peterson equation, Battino et al.'s Table 1 and the
+    USGS memorandum's equations were each read from page images of the source.
+  - >-
+    Battino et al. print the same coefficients for their eq. (11) and eq. (16); since column b of their Table 1
+    differs from what eq. (16) gives, the oxygen check uses the tabulated column b directly.
+  - >-
+    Solvay's data sheet gives 23.4 kcal/mol for 70% H2O2, while its 852 Btu/lb for the same grade works out to 23.0
+    kcal/mol, the engine's value. The engine follows the NBS tables.
+  - >-
+    NETZSCH Application Note 132 reports adiabatic steps for 8.6–35% H2O2, each covering part of the decomposition
+    with an assumed heat capacity of 3.3 J/(g K), so it serves as a picture of runaway behavior rather than as a check
+    of total heat.

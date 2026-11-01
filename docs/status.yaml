@@ -1,0 +1,61 @@
+updated: 2026-10-31
+summary: >-
+  Phases 0 and 1 are built: the scaffold, constants with provenance, and the exact physics of the experiment (heat,
+  oxygen solubility, the vessel, assays and the lab's fits), with four checks passed. Phase 2, dissolved iron, starts
+  once its papers are in cache/papers/.
+
+phases:
+  - {n: 0, name: Scaffold, state: done, summary: "Repository, app, constants with sources, check framework, copy test, status page."}
+  - {n: 1, name: Exact physics, state: done, summary: "Heat from the NBS tables, oxygen solubility, water, the vessel with burette, sealed and open arrangements, titrations, the lab's fits."}
+  - {n: 2, name: Dissolved iron, state: next, summary: "The De Laat and Gallard Fe(III) mechanism, its •OH yield, and a check against measured rates from other laboratories."}
+  - {n: 3, name: Catalase and enzymes, state: planned, summary: "Chance's scheme with inactivation; constants per enzyme from Switala and Loewen 2002."}
+  - {n: 4, name: Iodide and copper, state: planned, summary: "Liebhafsky's rate law with the Bray-Liebhafsky steps; copper after Pham et al. 2013."}
+  - {n: 5, name: Solid oxides, state: planned, summary: "Measured surface rate constants, then a UMA •OH descriptor if it passes its ranking check."}
+  - {n: 6, name: Metals and vapor, state: planned, summary: "Metals from measured rates, then peroxide vapor over catalysts."}
+
+recent:
+  - date: 2026-10-31
+    text: >-
+      Built the engine's physics with every constant traced to a page: NBS tables (72 values, checked against NIST's
+      CSV and the scanned pages), IAPWS water, Benson-Krause-Peterson oxygen solubility. Four checks passed:
+      transcription, heat of decomposition against Solvay's safety data (within 0.1%), oxygen solubility against
+      Battino's fifteen-source evaluation (within 0.44% from 5 to 55 °C) and the USGS formula (within 0.07%), and exact
+      solutions with oxygen conserved to 1e-14.
+
+next:
+  - Phase 2, dissolved iron, using the papers listed below.
+  - Heat capacity of peroxide solutions (Giguère and Carmichael 1962), for heat at other temperatures and the temperature rise.
+  - Densities of peroxide solutions (Easton et al. 1952), for strengths by weight percent.
+
+papers:
+  intro: >-
+    Save each PDF to cache/papers/ (git-ignored). The engine takes from each the numbers named here; the repository
+    keeps only those numbers and the citation.
+  list:
+    - {phase: 2, cite: "De Laat & Gallard 1999, Environ. Sci. Technol. 33, 2726", doi: 10.1021/es981171v, need: "The Fe(III)/H2O2 mechanism: every step, rate constant and equilibrium constant, and their measured decomposition rates."}
+    - {phase: 2, cite: "Gallard, De Laat & Legube 1999, Water Res. 33, 2929", doi: 10.1016/S0043-1354(99)00007-X, need: "Formation constants of the Fe(III)-hydroperoxy complexes."}
+    - {phase: 2, cite: "Gallard, de Laat & Legube 1998, New J. Chem. 22, 263", doi: 10.1039/a708335a, need: "pH dependence of the Fe/H2O2 rates."}
+    - {phase: 2, cite: "Barb, Baxendale, George & Hargrave 1951, Trans. Faraday Soc. 47, 591", doi: 10.1039/TF9514700591, need: "Measured rates of Fe(III)-catalyzed decomposition from another laboratory, for the check."}
+    - {phase: 2, cite: "Walling & Goosen 1973, J. Am. Chem. Soc. 95, 2987", doi: 10.1021/ja00790a042, need: "A second independent set of measured Fe(III) decomposition rates."}
+    - {phase: 2, cite: "Kwan & Voelker 2002, Environ. Sci. Technol. 36, 1467", doi: 10.1021/es011109p, need: "Measured decomposition rates with dissolved iron near neutral pH, for the check."}
+    - {phase: 2, cite: "Buxton et al. 1988, J. Phys. Chem. Ref. Data 17, 513", doi: 10.1063/1.555805, need: "Rate constants for •OH with H2O2, HO2-, Fe(II) and organics."}
+    - {phase: 2, cite: "Bielski et al. 1985, J. Phys. Chem. Ref. Data 14, 1041", doi: 10.1063/1.555739, need: "Rate constants and pKa of HO2•/O2•-."}
+    - {phase: 1, cite: "Giguère & Carmichael 1962, J. Chem. Eng. Data 7, 526", doi: 10.1021/je60015a024, need: "Heat capacities of H2O2-water solutions, 25-60 °C."}
+    - {phase: 1, cite: "Easton, Mitchell & Wynne-Jones 1952, Trans. Faraday Soc. 48, 796", doi: 10.1039/TF9524800796, need: "Densities of H2O2-water solutions."}
+
+findings:
+  - >-
+    Mixing H2O2 with water releases heat, so the heat of decomposition rises from 94.66 kJ/mol (dilute) to 95.0 (35%),
+    95.4 (50%), 96.2 (70%) and 98.05 (pure); the NBS dilution series reproduces Solvay's published heats within 0.1%.
+  - >-
+    Where the oxygen ends up changes the heat a calorimeter sees by 6%: 100.67 kJ/mol while it stays dissolved, 94.66
+    once it leaves as gas, and less again at a burette, where the new gas carries water vapor away.
+  - >-
+    An initial rate measured over the first 10% of a first-order decay reads about 5% below k × [H2O2]0.
+
+decisions:
+  - >-
+    The app shows measured values and checked models only; the rest waits in experiments/ and in the Methodology
+    page's limits (your choice, 2026-10-31).
+  - Liquid-phase experiments come first; peroxide vapor follows in phase 6 (your choice, 2026-10-31).
+  - The repository is public; papers stay in the git-ignored cache/ (your choice, 2026-10-31).

@@ -1,0 +1,44 @@
+intro: >-
+  The peroxide engine computes what you would measure when hydrogen peroxide decomposes over a catalyst, from cited
+  constants and checked models. This page walks through a run.
+
+steps:
+  - title: 1. Describe the catalyst
+    body: >-
+      Enter the first-order rate constant k of your catalyst at the run's temperature, in 1/s. If you know a half-life
+      instead, k = 0.693 / half-life. For a catalyst whose rate depends on its loading, use the k you measured at the
+      loading you plan to simulate.
+  - title: 2. Describe the solution
+    body: >-
+      Set the starting H2O2 in mmol/L (up to 1000), the temperature (5–55 °C) and the room's pressure. The liquid
+      starts saturated with air, as a solution open to the lab would be.
+  - title: 3. Describe the apparatus
+    body: >-
+      Pick the gas arrangement: a gas burette at room pressure, a sealed vessel with a pressure gauge, or an open
+      vessel. Set the liquid volume and the gas space above it (include tubing for a burette). Leave oxygen transfer at
+      "in balance" for a well-stirred vessel, or enter your vessel's kLa to see the liquid supersaturate.
+  - title: 4. Read the results
+    body: >-
+      The readouts table lists each number with its units and how it was computed. The charts show the H2O2 left, the
+      gas or pressure, the dissolved oxygen and (at 25 °C) the heat flow over time. The titration panel gives the
+      permanganate and thiosulfate volumes for an aliquot at any time. Download the full time series as CSV.
+  - title: 5. Check the accuracy
+    body: >-
+      The Model checks page shows each comparison with published measurements and its verdict; the Methodology page
+      lists every source, equation and limit.
+
+glossary:
+  - term: k_obs
+    meaning: Rate constant fitted to ln[H2O2] against time, in 1/s.
+  - term: Half-life
+    meaning: Time for the H2O2 to fall to half its starting value.
+  - term: Initial rate
+    meaning: Slope of [H2O2] against time over the first 10% of the reaction, in mmol/L per second.
+  - term: kLa
+    meaning: >-
+      Oxygen transfer coefficient of the vessel, in 1/s; the rate oxygen leaves the liquid is kLa times its excess
+      over saturation.
+  - term: Air saturation
+    meaning: Dissolved oxygen in water at balance with room air; 8.27 mg/L at 25 °C and 1 atm.
+  - term: Dry gas at 0 °C and 1 atm
+    meaning: The burette volume with water vapor removed and corrected to 0 °C and 101.325 kPa.

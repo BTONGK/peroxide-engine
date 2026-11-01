@@ -1,0 +1,85 @@
+# Oxygen: solubility in water and gas non-ideality.
+
+- kind: correlation
+  id: o2_mole_fraction_bkp1979
+  name: Solubility of oxygen in water (mole fraction at 101.325 kPa oxygen)
+  equation: "-ln x = A + B/T + C/T^2, T in K"
+  coefficients: {A: 3.71814, B: 5596.17, C: -1049668}
+  units: mole fraction of O2 at 101.325 kPa partial pressure of O2
+  valid: {T_min_K: 273.15, T_max_K: 373.15}
+  accuracy_note: >-
+    Standard deviation of the measurements from the equation is 0.017% (Battino et al. 1983, p. 167), the most
+    precise gas solubility measured; Battino et al. recommend it as the reference for oxygen in water.
+  transcribed_from: page image of Battino, Rettich and Tominaga 1983, eq. (15), p. 167; check values Table 1 column c, p. 166
+  check_values:
+    - {T_K: 273.15, value: 3.958e-5}
+    - {T_K: 278.15, value: 3.465e-5}
+    - {T_K: 283.15, value: 3.075e-5}
+    - {T_K: 288.15, value: 2.761e-5}
+    - {T_K: 293.15, value: 2.508e-5}
+    - {T_K: 298.15, value: 2.301e-5}
+    - {T_K: 303.15, value: 2.131e-5}
+    - {T_K: 308.15, value: 1.991e-5}
+    - {T_K: 313.15, value: 1.874e-5}
+    - {T_K: 318.15, value: 1.778e-5}
+    - {T_K: 323.15, value: 1.697e-5}
+    - {T_K: 328.15, value: 1.631e-5}
+    - {T_K: 333.15, value: 1.575e-5}
+    - {T_K: 338.15, value: 1.530e-5}
+    - {T_K: 343.15, value: 1.493e-5}
+    - {T_K: 348.15, value: 1.463e-5}
+  check_rel_tolerance: 7.0e-4
+  source:
+    cite: Benson, Krause & Peterson 1979, via Battino et al. 1983
+    reference: "B. B. Benson, D. Krause, M. A. Peterson, The solubility and isotopic fractionation of gases in dilute aqueous solution. I. Oxygen, J. Solution Chem. 8, 655 (1979), doi:10.1007/BF01033696; equation as given by R. Battino, T. R. Rettich, T. Tominaga, The solubility of oxygen and ozone in liquids, J. Phys. Chem. Ref. Data 12, 163 (1983)"
+    doi: 10.1063/1.555680
+    locator: eq. (15), p. 167; smoothed values Table 1 column c, p. 166
+
+- kind: correlation
+  id: o2_virial_theta
+  name: Oxygen gas non-ideality θ (minus the second virial coefficient over RT)
+  equation: "θ = a + b t + c t^2, t in °C, θ in atm-1"
+  coefficients: {a: 0.000975, b: -1.426e-5, c: 6.436e-8}
+  units: atm-1
+  valid: {t_min_C: 0, t_max_C: 40}
+  accuracy_note: >-
+    Fitted by Benson and Krause for 0-40 °C; its effect on the engine's numbers is θ times the pressure in atm,
+    about 0.07% at 25 °C and 1 atm.
+  transcribed_from: page image of USGS OWQ Technical Memorandum 2011.03, attachment p. A4, eq. (10)
+  source:
+    cite: Benson & Krause 1984, via USGS 2011
+    reference: "B. B. Benson, D. Krause, The concentration and isotopic fractionation of oxygen dissolved in freshwater and seawater in equilibrium with the atmosphere, Limnol. Oceanogr. 29, 620 (1984); as given in U.S. Geological Survey Office of Water Quality Technical Memorandum 2011.03 (July 13, 2011), Change to solubility equations for oxygen in water"
+    doi: 10.4319/lo.1984.29.3.0620
+    url: https://water.usgs.gov/water-resources/memos/documents/WQ.2011.03.pdf
+    locator: USGS memorandum attachment p. A4, eq. (10)
+
+- kind: correlation
+  id: o2_air_saturation_bk1984
+  name: Oxygen in fresh water in equilibrium with moist air at 1 atm
+  equation: "DO = exp(c0 + c1/T + c2/T^2 + c3/T^3 + c4/T^4), T in K, DO in mg/L"
+  coefficients: {c0: -139.34411, c1: 1.575701e5, c2: -6.642308e7, c3: 1.243800e10, c4: -8.621949e11}
+  units: mg L-1
+  valid: {T_min_K: 273.15, T_max_K: 313.15}
+  accuracy_note: >-
+    Adopted by the USGS and cited by Standard Methods; the memorandum asks for accuracy within 0.01 mg/L for sensor
+    calibration and finds these equations meet it. The engine uses this only to cross-check its own solubility.
+  transcribed_from: page image of USGS OWQ Technical Memorandum 2011.03, attachment p. A4, eq. (7)
+  source:
+    cite: Benson & Krause 1984, via USGS 2011
+    reference: "B. B. Benson, D. Krause, Limnol. Oceanogr. 29, 620 (1984); as given in U.S. Geological Survey Office of Water Quality Technical Memorandum 2011.03 (July 13, 2011)"
+    doi: 10.4319/lo.1984.29.3.0620
+    url: https://water.usgs.gov/water-resources/memos/documents/WQ.2011.03.pdf
+    locator: USGS memorandum attachment p. A4, eq. (7)
+
+- kind: constant
+  id: o2_fraction_dry_air
+  name: Mole fraction of oxygen in dry air
+  value: 0.2094
+  units: mole fraction
+  uncertainty: 0.0001
+  uncertainty_note: One unit of the last printed digit; Battino et al. state the ratio as 20.94%.
+  source:
+    cite: Battino et al. 1983
+    reference: "R. Battino, T. R. Rettich, T. Tominaga, The solubility of oxygen and ozone in liquids, J. Phys. Chem. Ref. Data 12, 163 (1983)"
+    doi: 10.1063/1.555680
+    locator: section 4.1, text under eq. (10), p. 166

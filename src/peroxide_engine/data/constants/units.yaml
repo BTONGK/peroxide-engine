@@ -1,0 +1,72 @@
+# Defined constants and unit conversions. Each is exact by definition.
+
+- kind: constant
+  id: gas_constant
+  name: Molar gas constant R
+  value: 8.31446261815324
+  units: J mol-1 K-1
+  uncertainty: 0
+  exact: true
+  uncertainty_note: Exact since the 2019 SI redefinition, as the product of the exact Avogadro and Boltzmann constants.
+  source:
+    cite: Tiesinga et al. 2021 (CODATA 2018)
+    reference: "E. Tiesinga, P. J. Mohr, D. B. Newell, B. N. Taylor, CODATA recommended values of the fundamental physical constants: 2018, Rev. Mod. Phys. 93, 025010 (2021)"
+    doi: 10.1103/RevModPhys.93.025010
+    url: https://physics.nist.gov/cgi-bin/cuu/Value?r
+    locator: molar gas constant R, listed among the exact constants
+
+- kind: constant
+  id: standard_atmosphere
+  name: Standard atmosphere
+  value: 101325
+  units: Pa
+  uncertainty: 0
+  exact: true
+  uncertainty_note: Exact by definition of the standard atmosphere.
+  source:
+    cite: Thompson & Taylor 2008 (NIST SP 811)
+    reference: "A. Thompson, B. N. Taylor, Guide for the Use of the International System of Units (SI), NIST Special Publication 811, 2008 edition"
+    doi: 10.6028/NIST.SP.811e2008
+    locator: Appendix B.8, atmosphere, standard (atm)
+
+- kind: constant
+  id: celsius_zero
+  name: Kelvin temperature of 0 °C
+  value: 273.15
+  units: K
+  uncertainty: 0
+  exact: true
+  uncertainty_note: Exact by definition of the Celsius scale (t/°C = T/K - 273.15).
+  source:
+    cite: Thompson & Taylor 2008 (NIST SP 811)
+    reference: "A. Thompson, B. N. Taylor, Guide for the Use of the International System of Units (SI), NIST Special Publication 811, 2008 edition"
+    doi: 10.6028/NIST.SP.811e2008
+    locator: Section 4.2.1.1, Celsius temperature
+
+- kind: constant
+  id: thermochemical_calorie
+  name: Thermochemical calorie
+  value: 4.184
+  units: J
+  uncertainty: 0
+  exact: true
+  uncertainty_note: Exact by definition; the NBS tables convert calories to joules with this factor (Wagman et al. 1982, §6.2).
+  source:
+    cite: Thompson & Taylor 2008 (NIST SP 811)
+    reference: "A. Thompson, B. N. Taylor, Guide for the Use of the International System of Units (SI), NIST Special Publication 811, 2008 edition"
+    doi: 10.6028/NIST.SP.811e2008
+    locator: Appendix B.8, calorie (thermochemical)
+
+- kind: constant
+  id: btu_it_per_pound
+  name: International Table Btu per pound
+  value: 2326
+  units: J kg-1
+  uncertainty: 0
+  exact: true
+  uncertainty_note: Exact by definition of the International Table British thermal unit and the avoirdupois pound.
+  source:
+    cite: Thompson & Taylor 2008 (NIST SP 811)
+    reference: "A. Thompson, B. N. Taylor, Guide for the Use of the International System of Units (SI), NIST Special Publication 811, 2008 edition"
+    doi: 10.6028/NIST.SP.811e2008
+    locator: Appendix B.8, British thermal unit_IT per pound (Btu_IT/lb)
