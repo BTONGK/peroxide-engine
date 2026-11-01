@@ -18,7 +18,7 @@ oxygen, pressure, heat, titrations, the lab's fits) for any catalyst class. The 
 - **Papers stay local**: PDFs and downloaded tables go in the git-ignored `cache/` (`cache/papers/`, `cache/nbs/`);
   `tests/test_sources.py` fails if anything under `cache/` or any PDF is tracked. The repository is public.
 - Update `docs/status.yaml` (the Project status page) at the end of every piece of work.
-- The app: `uv run pe ui`; pages in `src/peroxide_engine/ui/views/`, registered in `ui/pages.py`. Use a private port
+- The app: `uv run pe ui` (first free port from 8502, so it runs beside catalyst-engine on 8501); pages in `src/peroxide_engine/ui/views/`, registered in `ui/pages.py`. Use a private port
   (e.g. 8778) for checks and stop the server afterwards.
 - Catalyst modules (iron, enzymes, iodide, copper, oxides, metals) plug into `vessel.simulate(setup, rate=...)` as rate
   laws or mechanisms; solids will reuse `/Users/bt/catalyst-engine` (Materials Project lookup, UMA worker, ranking

@@ -16,6 +16,10 @@ phases:
 recent:
   - date: 2026-10-31
     text: >-
+      The app opens on the first free port from 8502 (or the one given with --port), so it runs beside the catalyst
+      engine's app on 8501. The repository is public at github.com/BTONGK/peroxide-engine.
+  - date: 2026-10-31
+    text: >-
       Built the engine's physics with every constant traced to a page: NBS tables (72 values, checked against NIST's
       CSV and the scanned pages), IAPWS water, Benson-Krause-Peterson oxygen solubility. Four checks passed:
       transcription, heat of decomposition against Solvay's safety data (within 0.1%), oxygen solubility against

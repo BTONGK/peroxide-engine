@@ -29,7 +29,7 @@ copper, oxides and metals follow, each after it passes a check against measured 
 
 ```bash
 uv sync
-uv run pe ui            # the app
+uv run pe ui            # the app, on the first free port from 8502 (or --port)
 uv run pe checks        # rerun every model check
 uv run pytest
 ```
